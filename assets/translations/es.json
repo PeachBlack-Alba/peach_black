@@ -1,0 +1,82 @@
+{
+  "WELCOME": "Hola, mi nombre es",
+  "NAME": "Jeevanandham.",
+  "WHAT_I_DO": "Construyo cosas para móvil/web.",
+  "INTRO_ABOUT": "Soy un ingeniero de software especializado en construir (y ocasionalmente diseñar) experiencias digitales excepcionales. Actualmente, estoy enfocado en construir productos accesibles y centrados en el ser humano en ",
+  "CURRENT_ORG_NAME": "NetAccess.",
+  
+  "ABOUT_PARA1": "¡Hola! Soy Jeeva y disfruto creando cosas que viven en internet. Mi interés en el desarrollo móvil/web comenzó en 2019 cuando decidí clonar algunas aplicaciones, convirtiendo mi pasión en profesión.",
+  "ABOUT_PARA2": "Avanzando hasta hoy, he tenido el privilegio de trabajar para una buena organización, una empresa basada en productos, una gran corporación y un ambiente de trabajo dirigido por estudiantes. Mi enfoque principal estos días es construir productos accesibles e inclusivos y experiencias digitales en Netaccess para una variedad de clientes.",
+  "ABOUT_PARA3": "También trabajo como freelance para varios clientes en todo el mundo. Si tienes ideas sobre la creación de un proyecto o algo, ¡no dudes en contactarme!",
+  "TECH_INTRO": "Aquí hay algunas tecnologías con las que he estado trabajando recientemente:",
+  "TECH1": " Flutter",
+  "TECH2": " NodeJs",
+  "TECH3": " GraphQL",
+  "TECH4": " Swift",
+  
+  "EXP_COMP_NAME1": "Techno Kryon",
+  "EXP_DESIG1": "Desarrollador Android",
+  "EXP_DUR1": "Nov 2019 - Mar 2020",
+  "EXP_ABOUT1": "Para iniciar mi carrera en TI, me uní como pasante para obtener conocimientos y experiencia en la industria del software, Desarrollo de Aplicaciones Móviles.",
+  "EXP_ABOUT1_2": "Aprendí y exploré modelos de arquitectura Android nativos, llamadas de red y funcionalidad central.",
+  "EXP_ABOUT1_3": "Ha trabajado en varios proyectos en vivo en diferentes plataformas como comercio electrónico, ERP, aplicaciones CMS.",
+  
+  "EXP_COMP_NAME2": "Rax-Tech International",
+  "EXP_DESIG2": "Desarrollador de Aplicaciones Móviles",
+  "EXP_DUR2": "Ago 2020 - Jun 2022",
+  "EXP_ABOUT2": "Trabajé como desarrollador senior de aplicaciones móviles y mantuve un equipo de principiantes y pasantes para proporcionar una solución práctica.",
+  "EXP_ABOUT2_2": "Diseño y mantenimiento de las funciones clave de IoT (Internet de las cosas), Erp, CMS y aplicaciones innovadoras.",
+  "EXP_ABOUT2_3": "Experimentado en muchas tecnologías como wifi (TCP/UDP), BLE, MQTT, LIVE DATA, Google ML - Tensor Flow, GraphQL, etc.",
+  
+  "EXP_COMP_NAME3": "NetAccess India Ltd",
+  "EXP_DESIG3": "Ingeniero de Software Senior",
+  "EXP_DUR3": "Jun 2022 - Presente",
+  "EXP_ABOUT3": "Una entidad del conglomerado empresarial líder de la India, Grupo Murugappa de empresas.",
+  "EXP_ABOUT3_2": "Trabajó con un equipo de 5 ingenieros para crear aplicaciones de automatización de fuerza de campo, aplicaciones de negocio a negocio, etc.",
+  "EXP_ABOUT3_3": "Interfaz con clientes semanalmente, entregando experiencia tecnológica.",
+  
+  "END_TXT": "Aunque actualmente no estoy buscando nuevas oportunidades, mi bandeja de entrada siempre está abierta. Ya sea que tengas una pregunta o simplemente quieras saludar, ¡haré todo lo posible para responderte!",
+  
+  "SECTION_ABOUT": "Acerca de",
+  "SECTION_EXPERIENCE": "Experiencia",
+  "SECTION_WORK": "Trabajo",
+  "SECTION_GAMES": "Juegos",
+  "SECTION_CONTACT": "Contacto",
+  "RESUME": "Currículum",
+  
+  "WHATS_NEXT": "¿Qué sigue?",
+  "GET_IN_TOUCH": "Ponte en Contacto",
+  "SAY_HELLO": "¡Di Hola!",
+  "CHECK_OUT_WORK": "¡Mira mi Trabajo!",
+  
+  "CONTACT_ME": "¡Contáctame!",
+  "NAME_FIELD": "Nombre*",
+  "NAME_ERROR": "Hazme saber tu nombre (o simplemente ingresa anónimo)",
+  "CONTACT_INFO": "Información de Contacto (Opcional)",
+  "MESSAGE_FIELD": "Mensaje*",
+  "MESSAGE_ERROR": "¿En serio? ¿quieres enviarme un mensaje en blanco? :(",
+  "NOTE_TEXT": "Nota: Por favor, no envíes mensajes basura, al menos di hola :(",
+  "SEND": "Enviar",
+  "MESSAGE_SUCCESS": "Mensaje enviado con éxito",
+  "MESSAGE_FAILURE": "No se pudo enviar el mensaje, inténtalo de nuevo más tarde.",
+  "ERROR_OCCURRED": "Ocurrió un Error",
+  
+  "BUILT_BY": "Construido y Desarrollado por Jeevanandham",
+  "REF": "ref - Britney C",
+  
+  "MY_NOTEWORTHY_PROJECTS": "Mis Proyectos Destacados",
+  "VIEW_ARCHIVES": "ver los archivos",
+  "NOT_FOUND": "No Encontrado",
+  "PROJECT_NOT_FOUND": "Lo siento, el proyecto que solicitaste no se encuentra en el repositorio",
+  
+  "WARNING": "Advertencia",
+  "PLAY_AREA_WARNING": "El área de juego todavía está en desarrollo, puede tener algunos errores.\n¿Estás seguro de que quieres continuar?",
+  "CANCEL": "CANCELAR",
+  "CONFIRM": "CONFIRMAR",
+  "COMING_SOON": "Próximamente",
+  "ERROR": "error",
+  
+  "MOBILE_ONLY_MESSAGE": "¡Lo siento!, Actualmente esta sección solo está disponible en web (Escritorio)",
+  
+  "OKAY": "Aceptar"
+} 
