@@ -47,11 +47,13 @@ class _GooeyNavState extends ConsumerState<GooeyNav> with SingleTickerProviderSt
   late AnimationController _controller;
   late List<Particle> particles;
   int? lastActiveIndex;
+  bool hasInteracted = false;
 
   @override
   void initState() {
     super.initState();
-    activeIndex = 0;
+    // Initialize to -1 so no tab is active initially
+    activeIndex = -1;
     _controller = AnimationController(vsync: this, duration: widget.animationDuration);
     _generateParticles();
   }
@@ -80,6 +82,7 @@ class _GooeyNavState extends ConsumerState<GooeyNav> with SingleTickerProviderSt
       setState(() {
         lastActiveIndex = activeIndex;
         activeIndex = index;
+        hasInteracted = true;
       });
       _controller.forward(from: 0);
       widget.controller.scrollToIndex(widget.items[index].index, preferPosition: AutoScrollPosition.begin);
@@ -95,7 +98,7 @@ class _GooeyNavState extends ConsumerState<GooeyNav> with SingleTickerProviderSt
           builder: (context, ref, child) {
             String state = ref.watch(hoverProvider);
             bool isHovered = (state == widget.items[index].hoverKey);
-            bool isActive = activeIndex == index;
+            bool isActive = activeIndex == index && hasInteracted;
             
             return Stack(
               children: [
