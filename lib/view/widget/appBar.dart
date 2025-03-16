@@ -5,6 +5,7 @@ import 'package:peach_black/controller/generalController.dart';
 import 'package:peach_black/resource/app_localizations.dart';
 import 'package:peach_black/resource/appClass.dart';
 import 'package:peach_black/resource/colors.dart';
+import 'package:peach_black/view/widget/gooey_nav.dart';
 import 'package:peach_black/view/widget/language_selector.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
@@ -150,143 +151,43 @@ class _ActionBarState extends ConsumerState<ActionBar> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     /*Text(scrType.name),*/
-                    InkWell(
-                      onTap: () {
-                        widget.controller.scrollToIndex(1, preferPosition: AutoScrollPosition.begin);
-                      },
-                      onHover: (bol) {
-                        if (bol) {
-                          ref.read(hoverProvider.notifier).state = "aboutTitle";
-                        } else {
-                          ref.read(hoverProvider.notifier).state = "";
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 30.0),
-                        child: Row(
-                          children: [
-                            Text("01. ", style: TextStyle(color: AppColors().neonColor, fontSize: 13, fontFamily: 'sfmono')),
-                            Consumer(builder: (context, ref, child) {
-                              String state = ref.watch(hoverProvider);
-                              bool isHovered = (state == "aboutTitle");
-                              return Text(
-                                AppStrings.SECTION_ABOUT.localize(context),
-                                style: TextStyle(color: isHovered ? AppColors().neonColor : AppColors().textColor, fontSize: 13, fontFamily: 'sfmono')
-                              );
-                            }),
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        widget.controller.scrollToIndex(2, preferPosition: AutoScrollPosition.begin);
-                      },
-                      onHover: (bol) {
-                        if (bol) {
-                          ref.read(hoverProvider.notifier).state = "expTitle";
-                        } else {
-                          ref.read(hoverProvider.notifier).state = "";
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 30.0),
-                        child: Row(
-                          children: [
-                            Text("02. ", style: TextStyle(color: AppColors().neonColor, fontSize: 13, fontFamily: 'sfmono')),
-                            Consumer(builder: (context, ref, child) {
-                              String state = ref.watch(hoverProvider);
-                              bool isHovered = (state == "expTitle");
-                              return Text(
-                                AppStrings.SECTION_EXPERIENCE.localize(context),
-                                style: TextStyle(color: isHovered ? AppColors().neonColor : AppColors().textColor, fontSize: 13, fontFamily: 'sfmono')
-                              );
-                            }),
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        widget.controller.scrollToIndex(3, preferPosition: AutoScrollPosition.begin);
-                      },
-                      onHover: (bol) {
-                        if (bol) {
-                          ref.read(hoverProvider.notifier).state = "workTitle";
-                        } else {
-                          ref.read(hoverProvider.notifier).state = "";
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 30.0),
-                        child: Row(
-                          children: [
-                            Text("03. ", style: TextStyle(color: AppColors().neonColor, fontSize: 13, fontFamily: 'sfmono')),
-                            Consumer(builder: (context, ref, child) {
-                              String state = ref.watch(hoverProvider);
-                              bool isHovered = (state == "workTitle");
-
-                              return Text(
-                                AppStrings.SECTION_WORK.localize(context),
-                                style: TextStyle(color: isHovered ? AppColors().neonColor : AppColors().textColor, fontSize: 13, fontFamily: 'sfmono')
-                              );
-                            }),
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        widget.controller.scrollToIndex(4, preferPosition: AutoScrollPosition.begin);
-                      },
-                      onHover: (bol) {
-                        if (bol) {
-                          ref.read(hoverProvider.notifier).state = "gameTitle";
-                        } else {
-                          ref.read(hoverProvider.notifier).state = "";
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 30.0),
-                        child: Row(
-                          children: [
-                            Text("04.", style: TextStyle(color: AppColors().neonColor, fontSize: 13, fontFamily: 'sfmono')),
-                            Consumer(builder: (context, ref, child) {
-                              String state = ref.watch(hoverProvider);
-                              bool isHovered = (state == "gameTitle");
-                              return Text(
-                                AppStrings.SECTION_GAMES.localize(context),
-                                style: TextStyle(color: isHovered ? AppColors().neonColor : AppColors().textColor, fontSize: 13)
-                              );
-                            }),
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        widget.controller.scrollToIndex(5, preferPosition: AutoScrollPosition.begin);
-                      },
-                      onHover: (bol) {
-                        if (bol) {
-                          ref.read(hoverProvider.notifier).state = "contactTitle";
-                        } else {
-                          ref.read(hoverProvider.notifier).state = "";
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 30.0),
-                        child: Row(
-                          children: [
-                            Text("05.", style: TextStyle(color: AppColors().neonColor, fontSize: 13, fontFamily: 'sfmono')),
-                            Consumer(builder: (context, ref, child) {
-                              String state = ref.watch(hoverProvider);
-                              bool isHovered = (state == "contactTitle");
-                              return Text(
-                                AppStrings.SECTION_CONTACT.localize(context),
-                                style: TextStyle(color: isHovered ? AppColors().neonColor : AppColors().textColor, fontSize: 13)
-                              );
-                            }),
+                    Expanded(
+                      child: Container(
+                        height: 40,
+                        child: GooeyNav(
+                          controller: widget.controller,
+                          labelTranslator: (context) => "",
+                          items: [
+                            NavItem(
+                              label: AppStrings.SECTION_ABOUT.localize(context),
+                              prefix: "01. ",
+                              hoverKey: "aboutTitle",
+                              index: 1,
+                            ),
+                            NavItem(
+                              label: AppStrings.SECTION_EXPERIENCE.localize(context),
+                              prefix: "02. ",
+                              hoverKey: "expTitle",
+                              index: 2,
+                            ),
+                            NavItem(
+                              label: AppStrings.SECTION_WORK.localize(context),
+                              prefix: "03. ",
+                              hoverKey: "workTitle",
+                              index: 3,
+                            ),
+                            NavItem(
+                              label: AppStrings.SECTION_GAMES.localize(context),
+                              prefix: "04. ",
+                              hoverKey: "gameTitle",
+                              index: 4,
+                            ),
+                            NavItem(
+                              label: AppStrings.SECTION_CONTACT.localize(context),
+                              prefix: "05. ",
+                              hoverKey: "contactTitle",
+                              index: 5,
+                            ),
                           ],
                         ),
                       ),
