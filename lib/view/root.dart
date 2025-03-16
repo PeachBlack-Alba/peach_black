@@ -29,6 +29,7 @@ class _RootScreenState extends ConsumerState<RootScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.transparent,
         body: NotificationListener<UserScrollNotification>(
           onNotification: (notification) {
             final ScrollDirection direction = notification.direction;
@@ -40,7 +41,17 @@ class _RootScreenState extends ConsumerState<RootScreen> {
             return true;
           },
           child: Container(
-            decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [Color(0xff112240), Color(0xff0a192f), Color(0xff020c1b)])),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+                  Color(0xff112240).withOpacity(0.7),
+                  Color(0xff0a192f).withOpacity(0.6),
+                  Color(0xff020c1b).withOpacity(0.5)
+                ]
+              )
+            ),
             height: AppClass().getMqHeight(context),
             child: Column(
               children: [
