@@ -1,37 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:scroll_to_index/scroll_to_index.dart';
-
-import '../../resource/app_localizations.dart';
-import '../../resource/appClass.dart';
-import '../../resource/colors.dart';
-import '../../resource/strings.dart';
-
-class IntroWeb extends StatefulWidget {
-  AutoScrollController aScrollController;
-
-  IntroWeb(this.aScrollController, {Key? key}) : super(key: key);
-
-  @override
-  State<IntroWeb> createState() => _IntroWebState();
-}
-
-class _IntroWebState extends State<IntroWeb> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      margin: EdgeInsets.only(left: AppClass().getMqWidth(context) * 0.01, top: AppClass().getMqHeight(context) * 0.1),
-      child: Row(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
               Padding(
-                padding: const EdgeInsets.only(left: 8.0, top: 50),
+                padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
                   Strings.welcomeTxt,
-                  style: TextStyle(color: AppColors().neonColor, fontSize: 18, fontFamily: 'sfmono'),
+                  style: TextStyle(color: AppColors().neonColor, fontSize: 16, fontFamily: 'sfmono'),
                 ),
               ),
               Padding(
@@ -42,7 +13,7 @@ class _IntroWebState extends State<IntroWeb> {
                     color: AppColors().textColor,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 3,
-                    fontSize: 55,
+                    fontSize: 35,
                   ),
                 ),
               ),
@@ -56,7 +27,7 @@ class _IntroWebState extends State<IntroWeb> {
                       color: AppColors().textLight,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 3,
-                      fontSize: 55,
+                      fontSize: 35,
                     ),
                   ),
                 ),
@@ -73,7 +44,7 @@ class _IntroWebState extends State<IntroWeb> {
                                 color: AppColors().textColor,
                                 letterSpacing: 1,
                                 height: 1.5,
-                                fontSize: 20,
+                                fontSize: 16,
                               ),
                               children: <TextSpan>[
                             TextSpan(
@@ -82,7 +53,7 @@ class _IntroWebState extends State<IntroWeb> {
                                 color: AppColors().neonColor,
                                 letterSpacing: 1,
                                 height: 1.5,
-                                fontSize: 20,
+                                fontSize: 16,
                               ),
                             )
                           ])),
@@ -91,14 +62,14 @@ class _IntroWebState extends State<IntroWeb> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 50, bottom: 70),
+                padding: const EdgeInsets.only(top: 30.0, bottom: 50),
                 child: InkWell(
                   onTap: () {
                     widget.aScrollController.scrollToIndex(1, preferPosition: AutoScrollPosition.begin);
                   },
                   child: Container(
                     height: AppClass().getMqHeight(context) * 0.09,
-                    width: AppClass().getMqWidth(context) * 0.2,
+                    width: AppClass().getMqWidth(context) * 0.25,
                     decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.all(Radius.circular(3.0)), border: Border.all(color: AppColors().neonColor, width: 1.5)),
                     child: Center(
                       child: Text(
@@ -108,11 +79,4 @@ class _IntroWebState extends State<IntroWeb> {
                     ),
                   ),
                 ),
-              )
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
+              ) 

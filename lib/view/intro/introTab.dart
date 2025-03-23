@@ -5,6 +5,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../resource/appClass.dart';
 import '../../resource/colors.dart';
+import '../../resource/strings.dart';
 
 class IntroTab extends StatefulWidget {
   final AutoScrollController aScrollController;
@@ -34,14 +35,14 @@ class _IntroTabState extends State<IntroTab> {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    AppStrings.WELCOME.localize(context),
+                    Strings.welcomeTxt,
                     style: TextStyle(color: AppColors().neonColor, fontSize: AppClass().getMqWidth(context) * 0.025, fontFamily: 'sfmono'),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    AppStrings.NAME.localize(context),
+                    Strings.name,
                     style: GoogleFonts.robotoSlab(
                       color: AppColors().textColor,
                       fontWeight: FontWeight.bold,
@@ -55,7 +56,7 @@ class _IntroTabState extends State<IntroTab> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 5.0),
                     child: Text(
-                      AppStrings.WHAT_I_DO.localize(context),
+                      Strings.whatIdo,
                       style: GoogleFonts.robotoSlab(
                         color: AppColors().textLight,
                         fontWeight: FontWeight.bold,
@@ -72,16 +73,16 @@ class _IntroTabState extends State<IntroTab> {
                       Expanded(
                         child: RichText(
                             text: TextSpan(
-                                text: AppStrings.INTRO_DESC.localize(context),
+                                text: Strings.introAbout,
                                 style: GoogleFonts.roboto(
-                                  color: AppColors().textLight,
+                                  color: AppColors().textColor,
                                   letterSpacing: 1,
                                   height: 1.5,
                                   fontSize: AppClass().getMqWidth(context) * 0.025,
                                 ),
                                 children: <TextSpan>[
                               TextSpan(
-                                text: AppStrings.CURRENT_ORG_NAME.localize(context),
+                                text: Strings.currentOrgName,
                                 style: GoogleFonts.roboto(
                                   color: AppColors().neonColor,
                                   letterSpacing: 1,
@@ -106,7 +107,7 @@ class _IntroTabState extends State<IntroTab> {
                       decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.all(Radius.circular(3.0)), border: Border.all(color: AppColors().neonColor, width: 1.5)),
                       child: Center(
                         child: Text(
-                          AppStrings.CHECK_OUT_WORK.localize(context),
+                          "Check out my work!",
                           style: TextStyle(color: AppColors().neonColor, fontSize: 13, letterSpacing: 1, fontWeight: FontWeight.bold, fontFamily: 'sfmono')
                         ),
                       ),
