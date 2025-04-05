@@ -63,31 +63,31 @@ class _IntroWebState extends State<IntroWeb> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: RichText(
-                          text: TextSpan(
-                              text: Strings.introAbout,
-                              style: GoogleFonts.roboto(
-                                color: AppColors().textColor,
-                                letterSpacing: 1,
-                                height: 1.5,
-                                fontSize: 20,
-                              ),
-                              children: <TextSpan>[
-                            TextSpan(
-                              text: Strings.currentOrgName,
-                              style: GoogleFonts.roboto(
-                                color: AppColors().neonColor,
-                                letterSpacing: 1,
-                                height: 1.5,
-                                fontSize: 20,
-                              ),
-                            )
-                          ])),
-                    ),
-                  ],
+                width: AppClass().getMqWidth(context) * 0.75,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: Strings.introAbout,
+                        style: GoogleFonts.roboto(
+                          color: AppColors().textLight,
+                          letterSpacing: 1,
+                          height: 1.5,
+                          fontSize: 20,
+                        ),
+                      ),
+                      TextSpan(
+                        text: Strings.currentOrgName,
+                        style: GoogleFonts.roboto(
+                          color: AppColors().neonColor,
+                          letterSpacing: 1,
+                          height: 1.5,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Padding(

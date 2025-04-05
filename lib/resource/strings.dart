@@ -1,11 +1,10 @@
 class Strings {
   /* Intro screen contents */
   static final welcomeTxt = '''Hi, my name is''';
-  static final name = '''Alba.''';
-  static final whatIdo = '''I build things for the mobile and web.''';
-  static final introAbout =
-      '''I'm a software engineer specializing in building (and occasionally designing) exceptional digital experiences. Currently, I'm focused on product mindset,and I currently work at a FinTech called ''';
-  static final currentOrgName = '''SeQura.''';
+  static final name = '''Alba Torres Rodríguez.''';
+  static final whatIdo = '''I build things for the mobile/web.''';
+  static final introAbout = '''I'm a software engineer specializing in building (and occasionally designing) exceptional digital experiences. Currently, I'm focused on building accessible, human-centered products at ''';
+  static final currentOrgName = '''seQura.''';
 
   /* About screen contents */
   static final aboutPara1 =
