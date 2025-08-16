@@ -5,7 +5,6 @@ import 'package:peach_black/controller/generalController.dart';
 import 'package:peach_black/resource/appClass.dart';
 import 'package:peach_black/view/about/about.dart';
 import 'package:peach_black/view/experience/experience.dart';
-import 'package:peach_black/view/game/gameArea.dart';
 import 'package:peach_black/view/intro/intro.dart';
 import 'package:peach_black/view/widget/appBar.dart';
 import 'package:peach_black/view/widget/leftPane.dart';
@@ -91,7 +90,6 @@ class _RootScreenState extends ConsumerState<RootScreen> {
                   AutoScrollTag(key: ValueKey(1), controller: mScrollController, index: 1, child: About()),
                   AutoScrollTag(key: ValueKey(2), controller: mScrollController, index: 2, child: Experience()),
                   AutoScrollTag(key: ValueKey(3), controller: mScrollController, index: 3, child: Work()),
-                  AutoScrollTag(key: ValueKey(4), controller: mScrollController, index: 4, child: GameArea(mScrollController)),
                   AutoScrollTag(key: ValueKey(5), controller: mScrollController, index: 5, child: Contact())
                 ],
               );

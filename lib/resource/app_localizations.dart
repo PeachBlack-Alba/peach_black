@@ -114,7 +114,6 @@ class AppStrings {
   static const SECTION_ABOUT = "SECTION_ABOUT";
   static const SECTION_EXPERIENCE = "SECTION_EXPERIENCE";
   static const SECTION_WORK = "SECTION_WORK";
-  static const SECTION_GAMES = "SECTION_GAMES";
   static const SECTION_CONTACT = "SECTION_CONTACT";
   static const RESUME = "RESUME";
   
@@ -141,8 +140,7 @@ class AppStrings {
   
   // Footer
   static const BUILT_BY = "BUILT_BY";
-  static const REF = "REF";
-  
+
   // Projects
   static const MY_NOTEWORTHY_PROJECTS = "MY_NOTEWORTHY_PROJECTS";
   static const VIEW_ARCHIVES = "VIEW_ARCHIVES";

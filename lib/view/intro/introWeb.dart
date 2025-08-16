@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -5,7 +6,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../resource/app_localizations.dart';
 import '../../resource/appClass.dart';
 import '../../resource/colors.dart';
-import '../../resource/strings.dart';
+import '../../services/translation_service.dart';
 
 class IntroWeb extends StatefulWidget {
   AutoScrollController aScrollController;
@@ -21,7 +22,12 @@ class _IntroWebState extends State<IntroWeb> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.transparent,
-      margin: EdgeInsets.only(left: AppClass().getMqWidth(context) * 0.01, top: AppClass().getMqHeight(context) * 0.1),
+      margin: EdgeInsets.only(
+        left: AppClass().getMqWidth(context) * 0.03, 
+        right: AppClass().getMqWidth(context) * 0.03, 
+        top: AppClass().getMqHeight(context) * 0.1,
+        bottom: AppClass().getMqHeight(context) * 0.05
+      ),
       child: Row(
         children: [
           Column(
@@ -30,14 +36,14 @@ class _IntroWebState extends State<IntroWeb> {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, top: 50),
                 child: Text(
-                  Strings.welcomeTxt,
+                  'WELCOME'.tr,
                   style: TextStyle(color: AppColors().neonColor, fontSize: 18, fontFamily: 'sfmono'),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Text(
-                  Strings.name,
+                  'NAME'.tr,
                   style: GoogleFonts.robotoSlab(
                     color: AppColors().textColor,
                     fontWeight: FontWeight.bold,
@@ -51,7 +57,7 @@ class _IntroWebState extends State<IntroWeb> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: Text(
-                    Strings.whatIdo,
+                    'WHAT_I_DO'.tr,
                     style: GoogleFonts.robotoSlab(
                       color: AppColors().textLight,
                       fontWeight: FontWeight.bold,
@@ -68,7 +74,7 @@ class _IntroWebState extends State<IntroWeb> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: Strings.introAbout,
+                        text: 'INTRO_ABOUT'.tr,
                         style: GoogleFonts.roboto(
                           color: AppColors().textLight,
                           letterSpacing: 1,
@@ -77,7 +83,7 @@ class _IntroWebState extends State<IntroWeb> {
                         ),
                       ),
                       TextSpan(
-                        text: Strings.currentOrgName,
+                        text: 'CURRENT_ORG_NAME'.tr,
                         style: GoogleFonts.roboto(
                           color: AppColors().neonColor,
                           letterSpacing: 1,
@@ -102,7 +108,7 @@ class _IntroWebState extends State<IntroWeb> {
                     decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.all(Radius.circular(3.0)), border: Border.all(color: AppColors().neonColor, width: 1.5)),
                     child: Center(
                       child: Text(
-                        "Check out my work!",
+                        'CHECK_OUT_WORK'.tr,
                         style: TextStyle(color: AppColors().neonColor, fontSize: 13, letterSpacing: 1, fontWeight: FontWeight.bold, fontFamily: 'sfmono')
                       ),
                     ),

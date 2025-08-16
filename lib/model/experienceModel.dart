@@ -15,6 +15,7 @@ class WorkModel {
   String? tech1;
   String? tech2;
   String? tech3;
+  String? projectUrl;
 
-  WorkModel({this.projectTitle, this.projectContent, this.tech1, this.tech2, this.tech3});
+  WorkModel({this.projectTitle, this.projectContent, this.tech1, this.tech2, this.tech3, this.projectUrl});
 }

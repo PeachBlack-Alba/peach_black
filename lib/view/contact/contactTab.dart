@@ -5,7 +5,7 @@ import 'package:peach_black/resource/appClass.dart';
 
 import '../../controller/generalController.dart';
 import '../../resource/colors.dart';
-import '../../resource/strings.dart';
+import '../../services/translation_service.dart';
 
 class ContactTab extends ConsumerStatefulWidget {
   const ContactTab({Key? key}) : super(key: key);
@@ -18,10 +18,15 @@ class _ContactTabState extends ConsumerState<ContactTab> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppClass().getMqHeight(context) - 70,
-      padding: EdgeInsets.only(top: 30),
+      margin: EdgeInsets.only(
+        left: AppClass().getMqWidth(context) * 0.03,
+        right: AppClass().getMqWidth(context) * 0.03,
+        top: AppClass().getMqHeight(context) * 0.03,
+        bottom: AppClass().getMqHeight(context) * 0.05
+      ),
+      padding: EdgeInsets.only(top: 30, bottom: 40),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Column(
             children: [
@@ -33,7 +38,7 @@ class _ContactTabState extends ConsumerState<ContactTab> {
                     style: TextStyle(color: AppColors().neonColor, fontSize: 14, fontFamily: 'sfmono'),
                   ),
                   Text(
-                    ''' What's next?''',
+                    ' ${'WHATS_NEXT'.tr}',
                     style: TextStyle(color: AppColors().neonColor, fontSize: 16, fontFamily: 'sfmono'),
                   ),
                 ],
@@ -41,7 +46,7 @@ class _ContactTabState extends ConsumerState<ContactTab> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Text(
-                  'Get In Touch',
+                  'GET_IN_TOUCH'.tr,
                   style: GoogleFonts.robotoSlab(
                     color: AppColors().textColor,
                     fontWeight: FontWeight.bold,
@@ -55,7 +60,7 @@ class _ContactTabState extends ConsumerState<ContactTab> {
                 child: Container(
                   width: AppClass().getMqWidth(context) * 0.45,
                   child: Text(
-                    Strings.endTxt,
+                    'END_TXT'.tr,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.roboto(
                       color: AppColors().textLight,
@@ -77,7 +82,7 @@ class _ContactTabState extends ConsumerState<ContactTab> {
                     width: AppClass().getMqWidth(context) * 0.15,
                     decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.all(Radius.circular(3.0)), border: Border.all(color: AppColors().neonColor, width: 1.5)),
                     child: Center(
-                      child: Text('Say Hello!', style: TextStyle(color: AppColors().neonColor, fontSize: 13, letterSpacing: 1, fontWeight: FontWeight.bold, fontFamily: 'sfmono')),
+                      child: Text('SAY_HELLO'.tr, style: TextStyle(color: AppColors().neonColor, fontSize: 13, letterSpacing: 1, fontWeight: FontWeight.bold, fontFamily: 'sfmono')),
                     ),
                   ),
                 ),
@@ -87,13 +92,13 @@ class _ContactTabState extends ConsumerState<ContactTab> {
           Column(
             children: [
               Text(
-                '''Built & Developed by Jeevanandham''',
+                'BUILT_BY'.tr,
                 style: TextStyle(color: AppColors().textColor, fontSize: 12, fontFamily: 'sfmono'),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  '''ref - Britney C''',
+                  'REF'.tr,
                   style: TextStyle(color: AppColors().neonColor, fontSize: 12, fontFamily: 'sfmono'),
                 ),
               ),
@@ -118,7 +123,7 @@ class _ContactTabState extends ConsumerState<ContactTab> {
               backgroundColor: AppColors().primaryColor,
               titleTextStyle: TextStyle(color: AppColors().neonColor, fontSize: 18, fontFamily: 'sfmono'),
               title: Row(
-                children: [Expanded(flex: 9, child: Text('Contact Me!')), IconButton(onPressed: () => Navigator.pop(context), icon: Icon(Icons.close, color: AppColors().textColor))],
+                children: [Expanded(flex: 9, child: Text('CONTACT_ME'.tr)), IconButton(onPressed: () => Navigator.pop(context), icon: Icon(Icons.close, color: AppColors().textColor))],
               ),
               content: Consumer(builder: (context, ref, child) {
                 bool isLoading = ref.watch(progressProvider);
@@ -137,12 +142,12 @@ class _ContactTabState extends ConsumerState<ContactTab> {
                               controller: nameController,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Let me know your name (or just enter anonymous)';
+                                  return 'NAME_ERROR'.tr;
                                 }
                                 return null;
                               },
                               decoration: InputDecoration(
-                                hintText: 'Name*',
+                                hintText: 'NAME_FIELD'.tr,
                                 errorStyle: TextStyle(color: AppColors().neonColor),
                                 errorBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors().neonColor)),
                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
@@ -155,7 +160,7 @@ class _ContactTabState extends ConsumerState<ContactTab> {
                               child: TextField(
                                 controller: contactInfoController,
                                 decoration: InputDecoration(
-                                  hintText: 'Contact Info (Optional)',
+                                  hintText: 'CONTACT_INFO'.tr,
                                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
                                   border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
@@ -169,12 +174,12 @@ class _ContactTabState extends ConsumerState<ContactTab> {
                                 maxLines: 8,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Seriously? you want to send a blank message to me :(';
+                                    return 'MESSAGE_ERROR'.tr;
                                   }
                                   return null;
                                 },
                                 decoration: InputDecoration(
-                                  hintText: 'Message*',
+                                  hintText: 'MESSAGE_FIELD'.tr,
                                   errorStyle: TextStyle(color: AppColors().neonColor),
                                   errorBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors().neonColor)),
                                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
@@ -188,7 +193,7 @@ class _ContactTabState extends ConsumerState<ContactTab> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Note: Please don't send trash msgs, atleast say hi :(",
+                                    'NOTE_TEXT'.tr,
                                     style: TextStyle(fontSize: AppClass().getMqWidth(context) * 0.02, color: Colors.grey),
                                   ),
                                 ],
@@ -208,15 +213,15 @@ class _ContactTabState extends ConsumerState<ContactTab> {
                                           AppClass().sendEmail(nameController.text, contactInfoController.text, msgController.text).then((value) {
                                             if (value) {
                                               Navigator.pop(context);
-                                              AppClass().showSnackBar('Message sent successfully', context: context);
+                                              AppClass().showSnackBar('MESSAGE_SUCCESS'.tr, context: context);
                                             } else {
                                               Navigator.pop(context);
-                                              AppClass().showSnackBar('Failed to send message, please try again later.', context: context);
+                                              AppClass().showSnackBar('MESSAGE_FAILURE'.tr, context: context);
                                             }
                                             ref.read(progressProvider.notifier).state = false;
                                           }).onError((error, stackTrace) {
                                             Navigator.pop(context);
-                                            AppClass().showSnackBar('Error Occurred', context: context);
+                                            AppClass().showSnackBar('ERROR_OCCURRED'.tr, context: context);
                                           });
                                         }
                                       },
@@ -226,7 +231,7 @@ class _ContactTabState extends ConsumerState<ContactTab> {
                                         decoration: BoxDecoration(
                                             color: Colors.transparent, borderRadius: BorderRadius.all(Radius.circular(3.0)), border: Border.all(color: AppColors().neonColor, width: 1.5)),
                                         child: Center(
-                                          child: Text('Send', style: TextStyle(color: AppColors().neonColor, fontSize: 13, letterSpacing: 1, fontWeight: FontWeight.bold, fontFamily: 'sfmono')),
+                                          child: Text('SEND'.tr, style: TextStyle(color: AppColors().neonColor, fontSize: 13, letterSpacing: 1, fontWeight: FontWeight.bold, fontFamily: 'sfmono')),
                                         ),
                                       ),
                                     ),

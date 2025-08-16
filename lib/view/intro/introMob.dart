@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../resource/appClass.dart';
 import '../../resource/colors.dart';
-import '../../resource/strings.dart';
+import '../../services/translation_service.dart';
 
 class IntroMob extends StatefulWidget {
   final AutoScrollController aScrollController;
@@ -28,7 +28,7 @@ class _IntroMobState extends State<IntroMob> {
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: Text(
-              Strings.welcomeTxt,
+              'WELCOME'.tr,
               style: TextStyle(
                 color: AppColors().neonColor,
                 fontSize: 16,
@@ -39,7 +39,7 @@ class _IntroMobState extends State<IntroMob> {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
-              Strings.name,
+              'NAME'.tr,
               style: GoogleFonts.robotoSlab(
                 color: AppColors().textColor,
                 fontWeight: FontWeight.bold,
@@ -53,7 +53,7 @@ class _IntroMobState extends State<IntroMob> {
             child: Padding(
               padding: const EdgeInsets.only(top: 5.0),
               child: Text(
-                Strings.whatIdo,
+                'WHAT_I_DO'.tr,
                 style: GoogleFonts.robotoSlab(
                   color: AppColors().textLight,
                   fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ class _IntroMobState extends State<IntroMob> {
             width: AppClass().getMqWidth(context) * 0.8,
             child: RichText(
               text: TextSpan(
-                text: Strings.introAbout,
+                text: 'INTRO_ABOUT'.tr,
                 style: GoogleFonts.roboto(
                   color: AppColors().textColor,
                   letterSpacing: 1,
@@ -77,7 +77,7 @@ class _IntroMobState extends State<IntroMob> {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: Strings.currentOrgName,
+                    text: 'CURRENT_ORG_NAME'.tr,
                     style: GoogleFonts.roboto(
                       color: AppColors().neonColor,
                       letterSpacing: 1,
@@ -110,7 +110,7 @@ class _IntroMobState extends State<IntroMob> {
                 ),
                 child: Center(
                   child: Text(
-                    "Check out my work!",
+                    'CHECK_OUT_WORK'.tr,
                     style: TextStyle(
                       color: AppColors().neonColor,
                       fontSize: 13,

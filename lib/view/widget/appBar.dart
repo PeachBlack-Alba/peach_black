@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:peach_black/controller/generalController.dart';
-import 'package:peach_black/resource/app_localizations.dart';
+import 'package:peach_black/services/translation_service.dart';
 import 'package:peach_black/resource/appClass.dart';
 import 'package:peach_black/resource/colors.dart';
 import 'package:peach_black/view/widget/gooey_nav.dart';
@@ -59,7 +59,7 @@ class _ActionBarState extends ConsumerState<ActionBar> {
                                       Padding(
                                         padding: const EdgeInsets.only(left: 10.0),
                                         child: Text(
-                                          AppStrings.SECTION_ABOUT.localize(context),
+                                          'SECTION_ABOUT'.tr,
                                           style: GoogleFonts.roboto(),
                                         ),
                                       ),
@@ -74,7 +74,7 @@ class _ActionBarState extends ConsumerState<ActionBar> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10.0),
                                     child: Text(
-                                      AppStrings.SECTION_EXPERIENCE.localize(context),
+                                      'SECTION_EXPERIENCE'.tr,
                                       style: GoogleFonts.roboto(),
                                     ),
                                   ),
@@ -89,7 +89,7 @@ class _ActionBarState extends ConsumerState<ActionBar> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10.0),
                                     child: Text(
-                                      AppStrings.SECTION_WORK.localize(context),
+                                      'SECTION_WORK'.tr,
                                       style: GoogleFonts.roboto(),
                                     ),
                                   ),
@@ -100,26 +100,11 @@ class _ActionBarState extends ConsumerState<ActionBar> {
                               onTap: () => mOnTab(4),
                               child: Row(
                                 children: [
-                                  Icon(Icons.games, size: 18),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Text(
-                                      AppStrings.SECTION_GAMES.localize(context),
-                                      style: GoogleFonts.roboto(),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            PopupMenuItem(
-                              onTap: () => mOnTab(5),
-                              child: Row(
-                                children: [
                                   Icon(Icons.phone_rounded, size: 18),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10.0),
                                     child: Text(
-                                      AppStrings.SECTION_CONTACT.localize(context),
+                                      'SECTION_CONTACT'.tr,
                                       style: GoogleFonts.roboto(),
                                     ),
                                   ),
@@ -159,34 +144,28 @@ class _ActionBarState extends ConsumerState<ActionBar> {
                           labelTranslator: (context) => "",
                           items: [
                             NavItem(
-                              label: AppStrings.SECTION_ABOUT.localize(context),
+                              label: 'SECTION_ABOUT'.tr,
                               prefix: "01. ",
                               hoverKey: "aboutTitle",
                               index: 1,
                             ),
                             NavItem(
-                              label: AppStrings.SECTION_EXPERIENCE.localize(context),
+                              label: 'SECTION_EXPERIENCE'.tr,
                               prefix: "02. ",
                               hoverKey: "expTitle",
                               index: 2,
                             ),
                             NavItem(
-                              label: AppStrings.SECTION_WORK.localize(context),
+                              label: 'SECTION_WORK'.tr,
                               prefix: "03. ",
                               hoverKey: "workTitle",
                               index: 3,
                             ),
                             NavItem(
-                              label: AppStrings.SECTION_GAMES.localize(context),
-                              prefix: "04. ",
-                              hoverKey: "gameTitle",
-                              index: 4,
-                            ),
-                            NavItem(
-                              label: AppStrings.SECTION_CONTACT.localize(context),
+                              label: 'SECTION_CONTACT'.tr,
                               prefix: "05. ",
                               hoverKey: "contactTitle",
-                              index: 5,
+                              index: 4,
                             ),
                           ],
                         ),
@@ -204,7 +183,7 @@ class _ActionBarState extends ConsumerState<ActionBar> {
                         decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.all(Radius.circular(3.0)), border: Border.all(color: AppColors().neonColor, width: 1.5)),
                         child: Center(
                           child: Text(
-                            AppStrings.RESUME.localize(context),
+                            'RESUME'.tr,
                             style: TextStyle(color: AppColors().neonColor, fontSize: 13, letterSpacing: 1, fontWeight: FontWeight.bold, fontFamily: 'sfmono')
                           ),
                         ),

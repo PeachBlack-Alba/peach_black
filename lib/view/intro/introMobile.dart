@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-import '../../resource/app_localizations.dart';
+import '../../services/translation_service.dart';
 import '../../resource/appClass.dart';
 import '../../resource/colors.dart';
 
@@ -30,13 +30,13 @@ class _IntroMobileState extends State<IntroMobile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppStrings.WELCOME.localize(context),
+                'WELCOME'.tr,
                 style: TextStyle(color: AppColors().neonColor, fontSize: AppClass().getMqWidth(context) * 0.045, fontFamily: 'sfmono'),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Text(
-                  AppStrings.NAME.localize(context),
+                  'NAME'.tr,
                   style: GoogleFonts.robotoSlab(
                     color: AppColors().textColor,
                     fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class _IntroMobileState extends State<IntroMobile> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: Text(
-                    AppStrings.WHAT_I_DO.localize(context),
+                    'WHAT_I_DO'.tr,
                     style: GoogleFonts.robotoSlab(
                       color: AppColors().textLight,
                       fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class _IntroMobileState extends State<IntroMobile> {
                 child: Container(
                   child: RichText(
                       text: TextSpan(
-                          text: AppStrings.INTRO_DESC.localize(context),
+                          text: 'INTRO_ABOUT'.tr,
                           style: GoogleFonts.roboto(
                             color: AppColors().textLight,
                             letterSpacing: 1,
@@ -73,7 +73,7 @@ class _IntroMobileState extends State<IntroMobile> {
                           ),
                           children: <TextSpan>[
                         TextSpan(
-                          text: AppStrings.CURRENT_ORG_NAME.localize(context),
+                          text: 'CURRENT_ORG_NAME'.tr,
                           style: GoogleFonts.roboto(
                             color: AppColors().neonColor,
                             letterSpacing: 1,
@@ -97,7 +97,7 @@ class _IntroMobileState extends State<IntroMobile> {
                     decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.all(Radius.circular(3.0)), border: Border.all(color: AppColors().neonColor, width: 1.5)),
                     child: Center(
                       child: Text(
-                        AppStrings.CHECK_OUT_WORK.localize(context),
+                        'CHECK_OUT_WORK'.tr,
                         style: TextStyle(color: AppColors().neonColor, fontSize: 13, letterSpacing: 1, fontWeight: FontWeight.bold, fontFamily: 'sfmono')
                       ),
                     ),

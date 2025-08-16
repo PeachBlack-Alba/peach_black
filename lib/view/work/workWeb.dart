@@ -8,6 +8,7 @@ import 'package:peach_black/resource/appClass.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../resource/colors.dart';
+import '../../services/translation_service.dart';
 
 class WorkWeb extends ConsumerStatefulWidget {
   const WorkWeb({Key? key}) : super(key: key);
@@ -19,12 +20,19 @@ class WorkWeb extends ConsumerStatefulWidget {
 class _WorkWebState extends ConsumerState<WorkWeb> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return Container(
+      margin: EdgeInsets.only(
+        left: AppClass().getMqWidth(context) * 0.03,
+        right: AppClass().getMqWidth(context) * 0.03,
+        top: AppClass().getMqHeight(context) * 0.03,
+        bottom: AppClass().getMqHeight(context) * 0.03
+      ),
+      child: Column(
+        children: [
         RichText(
           text: TextSpan(text: "03.", style: TextStyle(color: AppColors().neonColor, fontSize: 20, fontFamily: 'sfmono'), children: <TextSpan>[
             TextSpan(
-              text: ' My Noteworthy Projects',
+              text: ' ${'MY_NOTEWORTHY_PROJECTS'.tr}',
               style: GoogleFonts.roboto(color: AppColors().textColor, letterSpacing: 1, fontWeight: FontWeight.bold, fontSize: 25),
             )
           ]),
@@ -32,12 +40,12 @@ class _WorkWebState extends ConsumerState<WorkWeb> {
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
-            'view the archives',
+            'VIEW_ARCHIVES'.tr,
             style: TextStyle(color: AppColors().neonColor, fontSize: 15, fontFamily: 'sfmono'),
           ),
         ),
         Container(
-          padding: EdgeInsets.only(top: 30.0, bottom: 70.0),
+          padding: EdgeInsets.only(top: 30.0, bottom: 30.0),
           child: StaggeredGrid.count(
             crossAxisCount: 3,
             mainAxisSpacing: 4,
@@ -77,36 +85,18 @@ class _WorkWebState extends ConsumerState<WorkWeb> {
           ),
         ),
       ],
+      ),
     );
   }
 
   getTile({required int index}) {
     return InkWell(
       onTap: () async {
-        switch (index) {
-          case 0:
-            await launchUrl(Uri.parse(AppClass.gitSafeC19));
-            break;
-
-          case 1:
-            AppClass().alertDialog(context, 'Not Found', 'Sorry the project you requested not found in the repository');
-            break;
-
-          case 2:
-            await launchUrl(Uri.parse(AppClass.gitWtIot));
-            break;
-
-          case 3:
-            await launchUrl(Uri.parse(AppClass.gitAutoStabilizer));
-            break;
-
-          case 4:
-            await launchUrl(Uri.parse(AppClass.gitPAT));
-            break;
-
-          case 5:
-            AppClass().alertDialog(context, 'Not Found', 'Sorry the project you requested not found in the repository');
-            break;
+        final projectUrl = AppClass().projectList[index].projectUrl;
+        if (projectUrl != null && projectUrl.isNotEmpty) {
+          await launchUrl(Uri.parse(projectUrl));
+        } else {
+          AppClass().alertDialog(context, 'Not Found', 'Sorry the project you requested not found in the repository');
         }
       },
       onHover: (bool) {

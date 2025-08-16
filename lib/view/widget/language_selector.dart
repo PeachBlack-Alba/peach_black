@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:peach_black/controller/language_controller.dart';
+import 'package:peach_black/providers/language_provider.dart';
 import 'package:peach_black/resource/colors.dart';
 
 class LanguageSelector extends ConsumerWidget {
@@ -8,8 +8,8 @@ class LanguageSelector extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentLocale = ref.watch(localeProvider);
-    final languageController = LanguageController(ref);
+    final currentLanguage = ref.watch(languageProvider);
+    final languageNotifier = ref.read(languageProvider.notifier);
 
     return Container(
       decoration: BoxDecoration(
@@ -19,13 +19,13 @@ class LanguageSelector extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          value: currentLocale.languageCode,
+          value: currentLanguage,
           icon: Icon(Icons.language, color: AppColors().neonColor, size: 16),
           dropdownColor: AppColors().cardColor,
           style: TextStyle(color: AppColors().textColor, fontSize: 12),
           onChanged: (String? newValue) {
             if (newValue != null) {
-              languageController.changeLanguage(newValue);
+              languageNotifier.changeLanguage(newValue);
             }
           },
           items: [

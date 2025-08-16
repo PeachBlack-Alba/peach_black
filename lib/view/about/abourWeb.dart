@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../controller/generalController.dart';
-import '../../resource/app_localizations.dart';
+import '../../services/translation_service.dart';
 import '../../resource/appClass.dart';
 import '../../resource/colors.dart';
 
@@ -18,7 +18,11 @@ class _AboutWebState extends ConsumerState<AboutWeb> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: AppClass().getMqWidth(context) * 0.03, right: AppClass().getMqWidth(context) * 0.03),
+      margin: EdgeInsets.only(
+        left: AppClass().getMqWidth(context) * 0.03, 
+        right: AppClass().getMqWidth(context) * 0.03,
+        top: AppClass().getMqHeight(context) * 0.02
+      ),
       padding: EdgeInsets.only(bottom: 40),
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -30,7 +34,7 @@ class _AboutWebState extends ConsumerState<AboutWeb> {
               RichText(
                 text: TextSpan(text: "01.", style: TextStyle(color: AppColors().neonColor, fontSize: 20, fontFamily: 'sfmono'), children: <TextSpan>[
                   TextSpan(
-                    text: ' ${AppStrings.SECTION_ABOUT.localize(context)}',
+                    text: ' ${'SECTION_ABOUT'.tr}',
                     style: GoogleFonts.robotoSlab(color: Colors.white, letterSpacing: 1, fontWeight: FontWeight.bold, fontSize: 25),
                   )
                 ]),
@@ -53,7 +57,7 @@ class _AboutWebState extends ConsumerState<AboutWeb> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40.0),
                       child: Text(
-                        AppStrings.ABOUT_PARA1.localize(context),
+                        'ABOUT_PARA1'.tr,
                         style: GoogleFonts.roboto(
                           color: AppColors().textLight,
                           letterSpacing: 1,
@@ -65,7 +69,7 @@ class _AboutWebState extends ConsumerState<AboutWeb> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: Text(
-                        AppStrings.ABOUT_PARA2.localize(context),
+                        'ABOUT_PARA2'.tr,
                         style: GoogleFonts.roboto(
                           color: AppColors().textLight,
                           letterSpacing: 1,
@@ -77,7 +81,7 @@ class _AboutWebState extends ConsumerState<AboutWeb> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: Text(
-                        AppStrings.ABOUT_PARA3.localize(context),
+                        'ABOUT_PARA3'.tr,
                         style: GoogleFonts.roboto(
                           color: AppColors().textLight,
                           letterSpacing: 1,
@@ -89,7 +93,7 @@ class _AboutWebState extends ConsumerState<AboutWeb> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: Text(
-                        AppStrings.TECH_INTRO.localize(context),
+                        'TECH_INTRO'.tr,
                         style: GoogleFonts.roboto(
                           color: AppColors().textLight,
                           letterSpacing: 1,
@@ -104,7 +108,7 @@ class _AboutWebState extends ConsumerState<AboutWeb> {
                         Row(
                           children: [
                             Icon(Icons.arrow_right),
-                            Text(AppStrings.TECH1.localize(context),
+                            Text('TECH1'.tr,
                                 style: GoogleFonts.robotoFlex(
                                   color: AppColors().textLight,
                                   letterSpacing: 1,
@@ -116,7 +120,7 @@ class _AboutWebState extends ConsumerState<AboutWeb> {
                         Row(
                           children: [
                             Icon(Icons.arrow_right),
-                            Text(AppStrings.TECH2.localize(context),
+                            Text('TECH2'.tr,
                                 style: GoogleFonts.robotoFlex(
                                   color: AppColors().textLight,
                                   letterSpacing: 1,
@@ -128,7 +132,7 @@ class _AboutWebState extends ConsumerState<AboutWeb> {
                         Row(
                           children: [
                             Icon(Icons.arrow_right),
-                            Text(AppStrings.TECH3.localize(context),
+                            Text('TECH3'.tr,
                                 style: GoogleFonts.robotoFlex(
                                   color: AppColors().textLight,
                                   letterSpacing: 1,
@@ -140,7 +144,7 @@ class _AboutWebState extends ConsumerState<AboutWeb> {
                         Row(
                           children: [
                             Icon(Icons.arrow_right),
-                            Text(AppStrings.TECH4.localize(context),
+                            Text('TECH4'.tr,
                                 style: GoogleFonts.robotoFlex(
                                   color: AppColors().textLight,
                                   letterSpacing: 1,

@@ -5,8 +5,7 @@ import 'package:peach_black/resource/appClass.dart';
 
 import '../../controller/generalController.dart';
 import '../../resource/colors.dart';
-import '../../resource/strings.dart';
-import 'contact.dart';
+import '../../services/translation_service.dart';
 
 class ContactMobile extends ConsumerStatefulWidget {
   const ContactMobile({Key? key}) : super(key: key);
@@ -19,10 +18,15 @@ class _ContactMobileState extends ConsumerState<ContactMobile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppClass().getMqHeight(context) - 100,
-      padding: EdgeInsets.only(top: 50),
+      margin: EdgeInsets.only(
+        left: 20,
+        right: 20,
+        top: AppClass().getMqHeight(context) * 0.03,
+        bottom: AppClass().getMqHeight(context) * 0.05
+      ),
+      padding: EdgeInsets.only(top: 30, bottom: 40),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             child: Column(
@@ -38,7 +42,7 @@ class _ContactMobileState extends ConsumerState<ContactMobile> {
                           style: TextStyle(color: AppColors().neonColor, fontSize: AppClass().getMqWidth(context) * 0.04, fontFamily: 'sfmono'),
                         ),
                         Text(
-                          ''' What's next?''',
+                          ' ${'WHATS_NEXT'.tr}',
                           style: TextStyle(color: AppColors().neonColor, fontSize: AppClass().getMqWidth(context) * 0.04, fontFamily: 'sfmono'),
                         ),
                       ],
@@ -46,7 +50,7 @@ class _ContactMobileState extends ConsumerState<ContactMobile> {
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Text(
-                        'Get In Touch',
+                        'GET_IN_TOUCH'.tr,
                         style: GoogleFonts.robotoSlab(color: AppColors().textColor, fontWeight: FontWeight.bold, letterSpacing: 3, fontSize: AppClass().getMqWidth(context) * 0.06),
                       ),
                     ),
@@ -55,7 +59,7 @@ class _ContactMobileState extends ConsumerState<ContactMobile> {
                       child: Container(
                         width: AppClass().getMqWidth(context) * 0.8,
                         child: Text(
-                          Strings.endTxt,
+                          'END_TXT'.tr,
                           textAlign: TextAlign.center,
                           style: GoogleFonts.roboto(color: AppColors().textLight, letterSpacing: 1, height: 1.5, fontSize: AppClass().getMqWidth(context) * 0.045),
                         ),
@@ -72,7 +76,7 @@ class _ContactMobileState extends ConsumerState<ContactMobile> {
                           width: AppClass().getMqWidth(context) * 0.5,
                           decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.all(Radius.circular(3.0)), border: Border.all(color: AppColors().neonColor, width: 1.5)),
                           child: Center(
-                            child: Text('Say Hello!',
+                            child: Text('SAY_HELLO'.tr,
                                 style: TextStyle(color: AppColors().neonColor, fontSize: AppClass().getMqWidth(context) * 0.03, letterSpacing: 1, fontWeight: FontWeight.bold, fontFamily: 'sfmono')),
                           ),
                         ),
@@ -86,15 +90,8 @@ class _ContactMobileState extends ConsumerState<ContactMobile> {
           Column(
             children: [
               Text(
-                '''Built & Developed by Jeevanandham''',
+                'BUILT_BY'.tr,
                 style: TextStyle(color: AppColors().textColor, fontSize: 12, fontFamily: 'sfmono'),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  '''ref - Britney C''',
-                  style: TextStyle(color: AppColors().neonColor, fontSize: 12, fontFamily: 'sfmono'),
-                ),
               ),
             ],
           )
