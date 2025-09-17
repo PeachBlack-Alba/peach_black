@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import '../simple_plasma_background.dart';
 import '../ui/retro/crt_overlay.dart';
-import '../ui/retro/retro_panel.dart';
 import '../ui/retro/retro_button.dart';
+import '../ui/retro/blinking_cursor.dart';
+import '../ui/retro/code_panel.dart';
+import '../ui/windows/retro_window.dart';
+import '../ui/windows/about_window.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -15,6 +18,8 @@ class _PortfolioScreenState extends State<PortfolioScreen>
     with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late Animation<double> _fadeAnimation;
+  
+  final List<Widget> _windows = [];
   
   @override
   void initState() {
@@ -42,6 +47,30 @@ class _PortfolioScreenState extends State<PortfolioScreen>
   void dispose() {
     _fadeController.dispose();
     super.dispose();
+  }
+  
+  void _openAboutWindow() {
+    setState(() {
+      _windows.add(
+        RetroWindow(
+          key: UniqueKey(),
+          title: 'About Alba',
+          initialPosition: Offset(
+            MediaQuery.of(context).size.width * 0.3,
+            MediaQuery.of(context).size.height * 0.2,
+          ),
+          initialSize: const Size(520, 360),
+          minSize: const Size(400, 300),
+          onClose: () {
+            setState(() {
+              _windows.removeWhere((window) => 
+                (window as RetroWindow).title == 'About Alba');
+            });
+          },
+          child: const AboutWindow(),
+        ),
+      );
+    });
   }
 
   @override
@@ -107,116 +136,120 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                               const Spacer(),
                               
                               // Navigation buttons
-                              ...['ABOUT', 'WORK', 'CONTACT'].map((item) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(left: 20),
-                                  child: RetroButton(
-                                    text: item,
-                                    onPressed: () {},
-                                    fontSize: 14,
-                                    fontFamily: 'VT323',
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 15,
-                                      vertical: 8,
-                                    ),
-                                    borderWidth: 1,
-                                  ),
-                                );
-                              }).toList(),
+                              RetroButton(
+                                text: 'ABOUT',
+                                onPressed: _openAboutWindow,
+                                fontSize: 14,
+                                fontFamily: 'VT323',
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                  vertical: 8,
+                                ),
+                                borderWidth: 1,
+                              ),
+                              
+                              const SizedBox(width: 20),
+                              
+                              RetroButton(
+                                text: 'WORK',
+                                onPressed: () {},
+                                fontSize: 14,
+                                fontFamily: 'VT323',
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                  vertical: 8,
+                                ),
+                                borderWidth: 1,
+                              ),
+                              
+                              const SizedBox(width: 20),
+                              
+                              RetroButton(
+                                text: 'CONTACT',
+                                onPressed: () {},
+                                fontSize: 14,
+                                fontFamily: 'VT323',
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                  vertical: 8,
+                                ),
+                                borderWidth: 1,
+                              ),
                             ],
                           ),
                         ),
                         
                         // Main content area
                         Expanded(
-                          child: Center(
-                            child: SizedBox(
-                              width: 800,
-                              child: RetroPanel(
-                                padding: const EdgeInsets.all(40),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    // Welcome message
-                                    const Text(
-                                      'SYSTEM INITIALIZED',
-                                      style: TextStyle(
-                                        fontSize: 32,
-                                        fontFamily: 'VT323',
-                                        color: Colors.white,
-                                        shadows: [
-                                          Shadow(
-                                            offset: Offset(1, 1),
-                                            color: Colors.black,
-                                          ),
-                                        ],
+                          child: Stack(
+                            children: [
+                              // Header title centered near top
+                              Positioned(
+                                top: 60,
+                                left: 0,
+                                right: 0,
+                                child: Center(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                                    textBaseline: TextBaseline.alphabetic,
+                                    children: [
+                                      const Text(
+                                        'System initialised ',
+                                        style: TextStyle(
+                                          fontSize: 28,
+                                          fontFamily: 'VT323',
+                                          color: Colors.white,
+                                          shadows: [
+                                            Shadow(
+                                              offset: Offset(1, 1),
+                                              color: Colors.black,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    
-                                    const SizedBox(height: 30),
-                                    
-                                    const Text(
-                                      'Portfolio loaded successfully...',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontFamily: 'VT323',
-                                        color: Colors.white,
-                                        shadows: [
-                                          Shadow(
-                                            offset: Offset(1, 1),
-                                            color: Colors.black,
-                                          ),
-                                        ],
+                                      const BlinkingCursor(
+                                        width: 14,
+                                        height: 22,
+                                        blinkDuration: Duration(milliseconds: 650),
                                       ),
-                                    ),
-                                    
-                                    const SizedBox(height: 20),
-                                    
-                                    const Text(
-                                      'DOS-style interface active',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: 'VT323',
-                                        color: Colors.white70,
-                                        shadows: [
-                                          Shadow(
-                                            offset: Offset(1, 1),
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    
-                                    const SizedBox(height: 40),
-                                    
-                                    // Status indicators
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        _buildStatusIndicator('SYSTEM', 'READY'),
-                                        _buildStatusIndicator('CRT', 'ACTIVE'),
-                                        _buildStatusIndicator('DOS', 'ENABLED'),
-                                      ],
-                                    ),
-                                    
-                                    const SizedBox(height: 40),
-                                    
-                                    // Action button
-                                    RetroButton(
-                                      text: 'CONTINUE',
-                                      onPressed: () {},
-                                      fontSize: 16,
-                                      fontFamily: 'VT323',
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 30,
-                                        vertical: 12,
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
+                              
+                              // Bottom-left code panel
+                              Positioned(
+                                bottom: 40,
+                                left: 40,
+                                child: CodePanel(
+                                  fileName: 'main.js',
+                                  width: 450,
+                                  height: 280,
+                                  code: '''function initPortfolio() {^300
+    console.log("Loading Alba's portfolio...");^500
+    
+    const skills = [
+        "Flutter Development",^200
+        "Web Technologies",^200
+        "UI/UX Design",^200
+        "Problem Solving"^300
+    ];
+    
+    skills.forEach(skill => {^200
+        console.log(`✓ \${skill}`);^100
+    });^500
+    
+    return "Portfolio ready!";^800
+}
+
+initPortfolio();''',
+                                  typingSpeed: const Duration(milliseconds: 60),
+                                  loop: true,
+                                  loopDelay: const Duration(seconds: 4),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         
@@ -273,55 +306,12 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                 );
               },
             ),
+            
+            // Windows layer
+            ..._windows,
           ],
         ),
       ),
-    );
-  }
-  
-  Widget _buildStatusIndicator(String label, String status) {
-    return Column(
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 12,
-            fontFamily: 'VT323',
-            color: Colors.white70,
-            shadows: [
-              Shadow(
-                offset: Offset(1, 1),
-                color: Colors.black,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 5),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.white,
-              width: 1,
-            ),
-            color: Colors.transparent,
-          ),
-          child: Text(
-            status,
-            style: const TextStyle(
-              fontSize: 10,
-              fontFamily: 'VT323',
-              color: Colors.white,
-              shadows: [
-                Shadow(
-                  offset: Offset(1, 1),
-                  color: Colors.black,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
