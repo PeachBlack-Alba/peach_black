@@ -12,15 +12,92 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Alba Torres Rodríguez Portfolio \n Click start to begin',
+      title: 'Alba Torres Rodríguez Portfolio - DOS Style',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF00FF00), // Retro green
+          seedColor: Colors.white,
           brightness: Brightness.dark,
         ),
-        fontFamily: 'monospace', // 90s style monospace font
+        fontFamily: 'VT323', // Retro VT323 font
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          displayMedium: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          displaySmall: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          headlineLarge: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          headlineMedium: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          headlineSmall: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          titleLarge: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          titleMedium: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          titleSmall: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          bodyLarge: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          bodyMedium: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          bodySmall: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          labelLarge: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          labelMedium: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+          labelSmall: TextStyle(
+            fontFamily: 'VT323',
+            color: Colors.white,
+            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+          ),
+        ),
       ),
       home: const MainScreen(),
     );

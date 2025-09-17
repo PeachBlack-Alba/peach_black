@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../simple_plasma_background.dart';
+import '../ui/retro/crt_overlay.dart';
+import '../ui/retro/retro_panel.dart';
+import '../ui/retro/retro_button.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -43,222 +46,235 @@ class _PortfolioScreenState extends State<PortfolioScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        children: [
-          // Plasma background
-          const Positioned.fill(
-            child: SimplePlasmaBackground(
-              color: Color(0xFF00FF00), // Retro orange
-              speed: 0.8,
-              opacity: 0.9,
+    return CRTOverlay(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: Stack(
+          children: [
+            // Very subtle plasma background (barely visible under CRT overlay)
+            const Positioned.fill(
+              child: Opacity(
+                opacity: 0.03,
+                child: SimplePlasmaBackground(
+                  color: Colors.white,
+                  speed: 0.3,
+                  opacity: 0.1,
+                ),
+              ),
             ),
-          ),
-          
-          // Content overlay with fade-in effect
-          AnimatedBuilder(
-            animation: _fadeAnimation,
-            builder: (context, child) {
-              return Opacity(
-                opacity: _fadeAnimation.value,
-                child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: Column(
-                    children: [
-                      // Top bar with retro styling
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.8),
-                          border: const Border(
-                            bottom: BorderSide(
-                              color: Color(0xFF00FF00),
-                              width: 2,
-                            ),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            // Logo/Title
-                            const Text(
-                              'ALBA.EXE',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'monospace',
-                                color: Color(0xFF00FF00),
-                                letterSpacing: 2,
+            
+            // Content overlay with fade-in effect
+            AnimatedBuilder(
+              animation: _fadeAnimation,
+              builder: (context, child) {
+                return Opacity(
+                  opacity: _fadeAnimation.value,
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: Column(
+                      children: [
+                        // Top bar
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.8),
+                            border: const Border(
+                              bottom: BorderSide(
+                                color: Colors.white,
+                                width: 1,
                               ),
                             ),
-                            const Spacer(),
-                            
-                            // Navigation buttons (90s style)
-                            ...['ABOUT', 'WORK', 'CONTACT'].map((item) {
-                              return Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: MouseRegion(
-                                  cursor: SystemMouseCursors.click,
-                                  child: Container(
+                          ),
+                          child: Row(
+                            children: [
+                              // Logo/Title
+                              const Text(
+                                'ALBA.EXE',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontFamily: 'VT323',
+                                  color: Colors.white,
+                                  shadows: [
+                                    Shadow(
+                                      offset: Offset(1, 1),
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Spacer(),
+                              
+                              // Navigation buttons
+                              ...['ABOUT', 'WORK', 'CONTACT'].map((item) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: RetroButton(
+                                    text: item,
+                                    onPressed: () {},
+                                    fontSize: 14,
+                                    fontFamily: 'VT323',
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 15,
                                       vertical: 8,
                                     ),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: const Color(0xFF00FF00),
-                                        width: 1,
-                                      ),
-                                      color: Colors.transparent,
-                                    ),
-                                    child: Text(
-                                      item,
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: 'monospace',
-                                        color: Color(0xFF00FF00),
-                                        letterSpacing: 1,
-                                      ),
-                                    ),
+                                    borderWidth: 1,
                                   ),
-                                ),
-                              );
-                            }).toList(),
-                          ],
+                                );
+                              }).toList(),
+                            ],
+                          ),
                         ),
-                      ),
-                      
-                      // Main content area
-                      Expanded(
-                        child: Center(
-                          child: Container(
-                            padding: const EdgeInsets.all(40),
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.7),
-                              border: Border.all(
-                                color: const Color(0xFF00FF00),
-                                width: 2,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color(0xFF00FF00).withOpacity(0.3),
-                                  blurRadius: 20,
-                                  spreadRadius: 2,
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                // Welcome message
-                                ShaderMask(
-                                  shaderCallback: (bounds) => const LinearGradient(
-                                    colors: [
-                                      Color(0xFF00FF00),
-                                      Color(0xFFFFFF00),
-                                      Color(0xFF00FF00),
-                                    ],
-                                  ).createShader(bounds),
-                                  child: const Text(
-                                    'WELCOME TO THE MATRIX',
-                                    style: TextStyle(
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'monospace',
-                                      color: Colors.white,
-                                      letterSpacing: 3,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                
-                                const SizedBox(height: 30),
-                                
-                                const Text(
-                                  'Portfolio loaded successfully...',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: 'monospace',
-                                    color: Color(0xFF00FF00),
-                                    letterSpacing: 1,
-                                  ),
-                                ),
-                                
-                                const SizedBox(height: 20),
-                                
-                                const Text(
-                                  'Experience the retro plasma effect',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'monospace',
-                                    color: Color(0xFF00AA00),
-                                    letterSpacing: 1,
-                                  ),
-                                ),
-                                
-                                const SizedBox(height: 40),
-                                
-                                // Status indicators
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                        
+                        // Main content area
+                        Expanded(
+                          child: Center(
+                            child: SizedBox(
+                              width: 800,
+                              child: RetroPanel(
+                                padding: const EdgeInsets.all(40),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    _buildStatusIndicator('SYSTEM', 'ONLINE'),
-                                    const SizedBox(width: 40),
-                                    _buildStatusIndicator('PLASMA', 'ACTIVE'),
-                                    const SizedBox(width: 40),
-                                    _buildStatusIndicator('RETRO', 'ENABLED'),
+                                    // Welcome message
+                                    const Text(
+                                      'SYSTEM INITIALIZED',
+                                      style: TextStyle(
+                                        fontSize: 32,
+                                        fontFamily: 'VT323',
+                                        color: Colors.white,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(1, 1),
+                                            color: Colors.black,
+                                          ),
+                                        ],
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    
+                                    const SizedBox(height: 30),
+                                    
+                                    const Text(
+                                      'Portfolio loaded successfully...',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontFamily: 'VT323',
+                                        color: Colors.white,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(1, 1),
+                                            color: Colors.black,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    
+                                    const SizedBox(height: 20),
+                                    
+                                    const Text(
+                                      'DOS-style interface active',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: 'VT323',
+                                        color: Colors.white70,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(1, 1),
+                                            color: Colors.black,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    
+                                    const SizedBox(height: 40),
+                                    
+                                    // Status indicators
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        _buildStatusIndicator('SYSTEM', 'READY'),
+                                        _buildStatusIndicator('CRT', 'ACTIVE'),
+                                        _buildStatusIndicator('DOS', 'ENABLED'),
+                                      ],
+                                    ),
+                                    
+                                    const SizedBox(height: 40),
+                                    
+                                    // Action button
+                                    RetroButton(
+                                      text: 'CONTINUE',
+                                      onPressed: () {},
+                                      fontSize: 16,
+                                      fontFamily: 'VT323',
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 30,
+                                        vertical: 12,
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      
-                      // Bottom status bar
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.8),
-                          border: const Border(
-                            top: BorderSide(
-                              color: Color(0xFF00FF00),
-                              width: 2,
+                        
+                        // Bottom status bar
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.8),
+                            border: const Border(
+                              top: BorderSide(
+                                color: Colors.white,
+                                width: 1,
+                              ),
                             ),
                           ),
-                        ),
-                        child: const Row(
-                          children: [
-                            Text(
-                              'STATUS: READY',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: 'monospace',
-                                color: Color(0xFF00FF00),
+                          child: const Row(
+                            children: [
+                              Text(
+                                'STATUS: READY',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: 'VT323',
+                                  color: Colors.white,
+                                  shadows: [
+                                    Shadow(
+                                      offset: Offset(1, 1),
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Spacer(),
-                            Text(
-                              'PORTFOLIO.EXE v2.0',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: 'monospace',
-                                color: Color(0xFF00AA00),
+                              Spacer(),
+                              Text(
+                                'PORTFOLIO.EXE v2.0',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: 'VT323',
+                                  color: Colors.white70,
+                                  shadows: [
+                                    Shadow(
+                                      offset: Offset(1, 1),
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
-        ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -270,9 +286,14 @@ class _PortfolioScreenState extends State<PortfolioScreen>
           label,
           style: const TextStyle(
             fontSize: 12,
-            fontFamily: 'monospace',
-            color: Color(0xFF00AA00),
-            letterSpacing: 1,
+            fontFamily: 'VT323',
+            color: Colors.white70,
+            shadows: [
+              Shadow(
+                offset: Offset(1, 1),
+                color: Colors.black,
+              ),
+            ],
           ),
         ),
         const SizedBox(height: 5),
@@ -280,18 +301,23 @@ class _PortfolioScreenState extends State<PortfolioScreen>
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
           decoration: BoxDecoration(
             border: Border.all(
-              color: const Color(0xFF00FF00),
+              color: Colors.white,
               width: 1,
             ),
-            color: const Color(0xFF00FF00).withOpacity(0.1),
+            color: Colors.transparent,
           ),
           child: Text(
             status,
             style: const TextStyle(
               fontSize: 10,
-              fontFamily: 'monospace',
-              color: Color(0xFF00FF00),
-              letterSpacing: 1,
+              fontFamily: 'VT323',
+              color: Colors.white,
+              shadows: [
+                Shadow(
+                  offset: Offset(1, 1),
+                  color: Colors.black,
+                ),
+              ],
             ),
           ),
         ),
