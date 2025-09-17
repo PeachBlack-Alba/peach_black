@@ -61,13 +61,13 @@ class _StartScreenState extends State<StartScreen>
     });
     
     // Simulate loading delay
-    await Future.delayed(const Duration(milliseconds: 400));
+    await Future.delayed(const Duration(milliseconds: 700));
     
     setState(() {
       _loadingText = 'LOADING... DONE';
     });
     
-    await Future.delayed(const Duration(milliseconds: 400));
+    await Future.delayed(const Duration(milliseconds: 700));
     
     widget.onStart();
   }
@@ -109,7 +109,7 @@ class _StartScreenState extends State<StartScreen>
                           const Text(
                             'Alba Torres Rodríguez Portfolio Showcase',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 26,
                               fontFamily: 'VT323',
                               color: Colors.white,
                               height: 1.2,
@@ -130,7 +130,7 @@ class _StartScreenState extends State<StartScreen>
                               const Text(
                                 'Click start to begin',
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 20,
                                   fontFamily: 'VT323',
                                   color: Colors.white,
                                   shadows: [
@@ -150,9 +150,9 @@ class _StartScreenState extends State<StartScreen>
                                     child: const Text(
                                       '_',
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 20,
                                         fontFamily: 'VT323',
-                                        color: Colors.white,
+                                        color: Color(0xFF00FFFF),
                                         shadows: [
                                           Shadow(
                                             offset: Offset(1, 1),
@@ -174,7 +174,7 @@ class _StartScreenState extends State<StartScreen>
                             Text(
                               _loadingText,
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 20,
                                 fontFamily: 'VT323',
                                 color: Colors.white,
                                 shadows: [

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../retro/retro_button.dart';
 
-/// About window content for Alba's portfolio
 class AboutWindow extends StatelessWidget {
   const AboutWindow({super.key});
 
@@ -40,7 +39,7 @@ class AboutWindow extends StatelessWidget {
               'creating exceptional user experiences.',
               style: TextStyle(
                 fontFamily: 'VT323',
-                fontSize: 16,
+                fontSize: 18,
                 color: Colors.white,
                 height: 1.5,
                 shadows: [
@@ -61,7 +60,7 @@ class AboutWindow extends StatelessWidget {
               'desktop platforms.',
               style: TextStyle(
                 fontFamily: 'VT323',
-                fontSize: 16,
+                fontSize: 18,
                 color: Colors.white,
                 height: 1.5,
                 shadows: [
@@ -113,7 +112,7 @@ class AboutWindow extends StatelessWidget {
                   onPressed: () {
                     // TODO: Open CV link
                   },
-                  fontSize: 14,
+                  fontSize: 18,
                   fontFamily: 'VT323',
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
@@ -128,7 +127,7 @@ class AboutWindow extends StatelessWidget {
                   onPressed: () {
                     // TODO: Open GitHub link
                   },
-                  fontSize: 14,
+                  fontSize: 18,
                   fontFamily: 'VT323',
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
@@ -152,8 +151,8 @@ class AboutWindow extends StatelessWidget {
         skill,
         style: const TextStyle(
           fontFamily: 'VT323',
-          fontSize: 14,
-          color: Colors.white70,
+          fontSize: 18,
+          color: Color(0xFF00FFFF),
           shadows: [
             Shadow(
               offset: Offset(1, 1),

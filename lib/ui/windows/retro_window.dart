@@ -153,8 +153,8 @@ class _RetroWindowState extends State<RetroWindow> {
                         const SizedBox(width: 8),
                         // Window icon placeholder
                         Container(
-                          width: 16,
-                          height: 16,
+                          width: 18,
+                          height: 18,
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.1),
                             border: Border.all(
@@ -164,7 +164,7 @@ class _RetroWindowState extends State<RetroWindow> {
                           ),
                           child: const Icon(
                             Icons.terminal,
-                            size: 12,
+                            size: 18,
                             color: Colors.white70,
                           ),
                         ),
@@ -175,7 +175,7 @@ class _RetroWindowState extends State<RetroWindow> {
                             widget.title,
                             style: const TextStyle(
                               fontFamily: 'VT323',
-                              fontSize: 14,
+                              fontSize: 18,
                               color: Colors.white,
                               shadows: [
                                 Shadow(

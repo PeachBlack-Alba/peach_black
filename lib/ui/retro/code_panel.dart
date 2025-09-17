@@ -75,7 +75,7 @@ class CodePanel extends StatelessWidget {
               fileName,
               style: const TextStyle(
                 fontFamily: 'VT323',
-                fontSize: 14,
+                fontSize: 18,
                 color: Colors.white70,
                 shadows: [
                   Shadow(

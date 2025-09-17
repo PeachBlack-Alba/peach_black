@@ -55,11 +55,11 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
           key: UniqueKey(),
           title: 'About Alba',
           initialPosition: Offset(
-            MediaQuery.of(context).size.width * 0.3,
+            MediaQuery.of(context).size.width * 0.2,
             MediaQuery.of(context).size.height * 0.2,
           ),
-          initialSize: const Size(520, 360),
-          minSize: const Size(400, 300),
+          initialSize: const Size(800, 700),
+          minSize: const Size(450, 300),
           onClose: () {
             setState(() {
               _windows.removeWhere((window) => (window as RetroWindow).title == 'About Alba');
@@ -96,7 +96,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
               builder: (context, child) {
                 return Opacity(
                   opacity: _fadeAnimation.value,
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     height: double.infinity,
                     child: Column(
@@ -137,7 +137,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                               RetroButton(
                                 text: 'ABOUT',
                                 onPressed: _openAboutWindow,
-                                fontSize: 14,
+                                fontSize: 18,
                                 fontFamily: 'VT323',
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 15,
@@ -151,7 +151,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                               RetroButton(
                                 text: 'WORK',
                                 onPressed: () {},
-                                fontSize: 14,
+                                fontSize: 18,
                                 fontFamily: 'VT323',
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 15,
@@ -165,7 +165,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                               RetroButton(
                                 text: 'CONTACT',
                                 onPressed: () {},
-                                fontSize: 14,
+                                fontSize: 18,
                                 fontFamily: 'VT323',
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 15,
@@ -221,27 +221,33 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                                 bottom: 40,
                                 left: 40,
                                 child: CodePanel(
-                                  fileName: 'main.js',
+                                  fileName: 'main.java',
                                   width: 500,
-                                  height: 550,
-                                  code: '''function initPortfolio() {^300
-    console.log("Loading Alba's portfolio...");^500
-    
-    const skills = [
-        "Flutter Development",^200
-        "Web Technologies",^200
-        "UI/UX Design",^200
-        "Problem Solving"^300
-    ];
-    
-    skills.forEach(skill => {^200
-        console.log(`✓ \${skill}`);^100
-    });^500
-    
-    return "Portfolio ready!";^800
-}
+                                  height: 700,
+                                  code: '''public class Main {^300
+  public static void main(String[] args) {^200
+    System.out.println("Loading Alba's portfolio...");^500
 
-initPortfolio();''',
+    String[] skills = new String[]{^200
+      "Flutter Development",^200
+      "Web Technologies",^200
+      "UI/UX Design",^200
+      "Problem Solving"^300
+    };^200
+
+    for (String skill : skills) {^200
+      System.out.println("✓ " + skill);^100
+    }^300
+
+    String status = initPortfolio();^200
+    System.out.println(status);^800
+  }^300
+
+  private static String initPortfolio() {^300
+    // TODO: load projects, set up routes, prime caches...^300
+    return "Portfolio ready!";^300
+  }^300
+}''',
                                   typingSpeed: Duration(milliseconds: 60),
                                   loop: true,
                                   loopDelay: Duration(seconds: 4),
@@ -269,9 +275,9 @@ initPortfolio();''',
                               Text(
                                 'STATUS: READY',
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   fontFamily: 'VT323',
-                                  color: Colors.white,
+                                  color: Color(0xFF00FFFF),
                                   shadows: [
                                     Shadow(
                                       offset: Offset(1, 1),
@@ -284,7 +290,7 @@ initPortfolio();''',
                               Text(
                                 'PORTFOLIO.EXE v2.0',
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   fontFamily: 'VT323',
                                   color: Colors.white70,
                                   shadows: [
