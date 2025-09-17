@@ -1,59 +1,102 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:peach_black/providers/language_provider.dart';
-import 'package:peach_black/resource/app_localizations.dart';
-import 'package:peach_black/resource/colors.dart';
-import 'package:peach_black/services/translation_service.dart';
-import 'package:peach_black/view/root.dart';
-import 'package:peach_black/view/widget/aurora_background.dart';
+import 'screens/start_screen.dart';
+import 'screens/portfolio_screen.dart';
 
 void main() {
-  runApp(const ProviderScope(child: AppTheme()));
+  runApp(const MyApp());
 }
 
-class AppTheme extends ConsumerWidget {
-  const AppTheme({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final languageCode = ref.watch(languageProvider);
-    final locale = ref.watch(localeProvider);
-    final supportedLocales = ref.watch(supportedLocalesProvider);
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Alba Torres Rodríguez Portfolio \n Click start to begin',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF00FF00), // Retro green
+          brightness: Brightness.dark,
+        ),
+        fontFamily: 'monospace', // 90s style monospace font
+      ),
+      home: const MainScreen(),
+    );
+  }
+}
 
-    // Translations will be loaded in the FutureBuilder below
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
-    return FutureBuilder(
-      future: TranslationService.instance.loadTranslations(languageCode),
-      builder: (context, snapshot) {
-        return MaterialApp(
-          key: ValueKey(languageCode), // Force rebuild with new key when language changes
-          title: 'PORTFOLIO',
-          theme: ThemeData(
-            brightness: Brightness.dark,
-            primaryColor: AppColors().primaryColor,
-          ),
-          locale: locale,
-          supportedLocales: supportedLocales,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          home: Aurora(
-            colorStops: const [
-              Color(0xFF3A29FF), // #3A29FF - Deep blue
-              Color(0xFFFF94B4), // #FF94B4 - Pink
-              Color(0xFFFF3232), // #FF3232 - Red
-            ],
-            blend: 0.7,         // Increased blend for smoother transitions
-            amplitude: 1.2,     // Slightly increased amplitude for more pronounced effect
-            speed: 0.4,         // Adjusted speed for a nice flowing effect
-            child: const RootScreen(),
-          ),
-        );
-      },
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen>
+    with TickerProviderStateMixin {
+  bool _showPortfolio = false;
+  late AnimationController _transitionController;
+  late Animation<double> _slideAnimation;
+  
+  @override
+  void initState() {
+    super.initState();
+    
+    _transitionController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
+    
+    _slideAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _transitionController,
+      curve: Curves.easeInOutCubic,
+    ));
+  }
+
+  @override
+  void dispose() {
+    _transitionController.dispose();
+    super.dispose();
+  }
+
+  void _startPortfolio() {
+    setState(() {
+      _showPortfolio = true;
+    });
+    _transitionController.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: [
+          // Start screen
+          if (!_showPortfolio)
+            StartScreen(onStart: _startPortfolio),
+          
+          // Portfolio screen with transition
+          if (_showPortfolio)
+            AnimatedBuilder(
+              animation: _slideAnimation,
+              builder: (context, child) {
+                return Transform.translate(
+                  offset: Offset(
+                    0,
+                    (1 - _slideAnimation.value) * MediaQuery.of(context).size.height,
+                  ),
+                  child: const PortfolioScreen(),
+                );
+              },
+            ),
+        ],
+      ),
     );
   }
 }
