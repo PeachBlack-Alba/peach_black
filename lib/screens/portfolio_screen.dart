@@ -14,23 +14,22 @@ class PortfolioScreen extends StatefulWidget {
   State<PortfolioScreen> createState() => _PortfolioScreenState();
 }
 
-class _PortfolioScreenState extends State<PortfolioScreen>
-    with TickerProviderStateMixin {
+class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late Animation<double> _fadeAnimation;
-  
+
   final List<Widget> _windows = [];
-  
+
   @override
   void initState() {
     super.initState();
-    
+
     // Fade in animation when entering portfolio
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     );
-    
+
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -38,7 +37,7 @@ class _PortfolioScreenState extends State<PortfolioScreen>
       parent: _fadeController,
       curve: Curves.easeInOut,
     ));
-    
+
     // Start the fade in animation
     _fadeController.forward();
   }
@@ -48,7 +47,7 @@ class _PortfolioScreenState extends State<PortfolioScreen>
     _fadeController.dispose();
     super.dispose();
   }
-  
+
   void _openAboutWindow() {
     setState(() {
       _windows.add(
@@ -63,8 +62,7 @@ class _PortfolioScreenState extends State<PortfolioScreen>
           minSize: const Size(400, 300),
           onClose: () {
             setState(() {
-              _windows.removeWhere((window) => 
-                (window as RetroWindow).title == 'About Alba');
+              _windows.removeWhere((window) => (window as RetroWindow).title == 'About Alba');
             });
           },
           child: const AboutWindow(),
@@ -91,7 +89,7 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                 ),
               ),
             ),
-            
+
             // Content overlay with fade-in effect
             AnimatedBuilder(
               animation: _fadeAnimation,
@@ -134,7 +132,7 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                                 ),
                               ),
                               const Spacer(),
-                              
+
                               // Navigation buttons
                               RetroButton(
                                 text: 'ABOUT',
@@ -147,9 +145,9 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                                 ),
                                 borderWidth: 1,
                               ),
-                              
+
                               const SizedBox(width: 20),
-                              
+
                               RetroButton(
                                 text: 'WORK',
                                 onPressed: () {},
@@ -161,9 +159,9 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                                 ),
                                 borderWidth: 1,
                               ),
-                              
+
                               const SizedBox(width: 20),
-                              
+
                               RetroButton(
                                 text: 'CONTACT',
                                 onPressed: () {},
@@ -178,9 +176,9 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                             ],
                           ),
                         ),
-                        
+
                         // Main content area
-                        Expanded(
+                        const Expanded(
                           child: Stack(
                             children: [
                               // Header title centered near top
@@ -191,10 +189,10 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                                 child: Center(
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     textBaseline: TextBaseline.alphabetic,
                                     children: [
-                                      const Text(
+                                      Text(
                                         'System initialised ',
                                         style: TextStyle(
                                           fontSize: 28,
@@ -208,7 +206,7 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                                           ],
                                         ),
                                       ),
-                                      const BlinkingCursor(
+                                      BlinkingCursor(
                                         width: 14,
                                         height: 22,
                                         blinkDuration: Duration(milliseconds: 650),
@@ -217,15 +215,15 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                                   ),
                                 ),
                               ),
-                              
+
                               // Bottom-left code panel
                               Positioned(
                                 bottom: 40,
                                 left: 40,
                                 child: CodePanel(
                                   fileName: 'main.js',
-                                  width: 450,
-                                  height: 280,
+                                  width: 500,
+                                  height: 550,
                                   code: '''function initPortfolio() {^300
     console.log("Loading Alba's portfolio...");^500
     
@@ -244,15 +242,15 @@ class _PortfolioScreenState extends State<PortfolioScreen>
 }
 
 initPortfolio();''',
-                                  typingSpeed: const Duration(milliseconds: 60),
+                                  typingSpeed: Duration(milliseconds: 60),
                                   loop: true,
-                                  loopDelay: const Duration(seconds: 4),
+                                  loopDelay: Duration(seconds: 4),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        
+
                         // Bottom status bar
                         Container(
                           width: double.infinity,
@@ -306,7 +304,7 @@ initPortfolio();''',
                 );
               },
             ),
-            
+
             // Windows layer
             ..._windows,
           ],
