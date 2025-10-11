@@ -6,6 +6,8 @@ import '../ui/retro/blinking_cursor.dart';
 import '../ui/retro/code_panel.dart';
 import '../ui/windows/retro_window.dart';
 import '../ui/windows/about_window.dart';
+import '../ui/windows/work_window.dart';
+import '../ui/windows/contact_window.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -66,6 +68,52 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
             });
           },
           child: const AboutWindow(),
+        ),
+      );
+    });
+  }
+
+  void _openWorkWindow() {
+    setState(() {
+      _windows.add(
+        RetroWindow(
+          key: UniqueKey(),
+          title: 'My Work',
+          initialPosition: Offset(
+            MediaQuery.of(context).size.width * 0.2,
+            MediaQuery.of(context).size.height * 0.2,
+          ),
+          initialSize: const Size(800, 700),
+          minSize: const Size(450, 300),
+          onClose: () {
+            setState(() {
+              _windows.removeWhere((window) => (window as RetroWindow).title == 'My Work');
+            });
+          },
+          child: const WorkWindow(),
+        ),
+      );
+    });
+  }
+
+  void _openContactWindow() {
+    setState(() {
+      _windows.add(
+        RetroWindow(
+          key: UniqueKey(),
+          title: 'Contact',
+          initialPosition: Offset(
+            MediaQuery.of(context).size.width * 0.2,
+            MediaQuery.of(context).size.height * 0.2,
+          ),
+          initialSize: const Size(800, 700),
+          minSize: const Size(450, 300),
+          onClose: () {
+            setState(() {
+              _windows.removeWhere((window) => (window as RetroWindow).title == 'Contact');
+            });
+          },
+          child: const ContactWindow(),
         ),
       );
     });
@@ -148,31 +196,31 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
 
                               const SizedBox(width: 20),
 
-                              RetroButton(
-                                text: 'WORK',
-                                onPressed: () {},
-                                fontSize: 18,
-                                fontFamily: 'VT323',
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 15,
-                                  vertical: 8,
+                                RetroButton(
+                                  text: 'WORK',
+                                  onPressed: _openWorkWindow,
+                                  fontSize: 18,
+                                  fontFamily: 'VT323',
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 8,
+                                  ),
+                                  borderWidth: 1,
                                 ),
-                                borderWidth: 1,
-                              ),
 
-                              const SizedBox(width: 20),
+                                const SizedBox(width: 20),
 
-                              RetroButton(
-                                text: 'CONTACT',
-                                onPressed: () {},
-                                fontSize: 18,
-                                fontFamily: 'VT323',
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 15,
-                                  vertical: 8,
+                                RetroButton(
+                                  text: 'CONTACT',
+                                  onPressed: _openContactWindow,
+                                  fontSize: 18,
+                                  fontFamily: 'VT323',
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 8,
+                                  ),
+                                  borderWidth: 1,
                                 ),
-                                borderWidth: 1,
-                              ),
                             ],
                           ),
                         ),

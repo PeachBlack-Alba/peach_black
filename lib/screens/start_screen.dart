@@ -107,7 +107,7 @@ class _StartScreenState extends State<StartScreen>
                         children: [
                           // Title
                           const Text(
-                            'Alba Torres Rodríguez Portfolio Showcase',
+                            'Alba Torres Rodríguez Portfolio',
                             style: TextStyle(
                               fontSize: 26,
                               fontFamily: 'VT323',

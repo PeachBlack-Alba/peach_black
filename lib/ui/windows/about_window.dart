@@ -34,8 +34,8 @@ class AboutWindow extends StatelessWidget {
             
             // Bio paragraphs
             const Text(
-              'Welcome to my digital portfolio. I\'m a passionate developer '
-              'specializing in Flutter development, web technologies, and '
+              'Welcome to my digital portfolio. I\'m a senior software engineer '
+              'specializing in Mobile development, Fintech and '
               'creating exceptional user experiences.',
               style: TextStyle(
                 fontFamily: 'VT323',
@@ -54,10 +54,9 @@ class AboutWindow extends StatelessWidget {
             const SizedBox(height: 16),
             
             const Text(
-              'With expertise in modern development frameworks and a keen '
-              'eye for design, I build applications that are both functional '
-              'and visually appealing. My work spans across mobile, web, and '
-              'desktop platforms.',
+              'I\'m a product-first Engineer and an active speaker in the community '
+              'I love to share  my knowledge in conferences like FlutterCon/NextApp and meetups. '
+              'When I am not coding, I love to take analogic photography, travel and read books. ',
               style: TextStyle(
                 fontFamily: 'VT323',
                 fontSize: 18,
