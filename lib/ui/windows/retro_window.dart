@@ -69,6 +69,9 @@ class _RetroWindowState extends State<RetroWindow> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+    
     return Positioned(
       left: _position.dx,
       top: _position.dy,
@@ -111,11 +114,12 @@ class _RetroWindowState extends State<RetroWindow> {
               children: [
                 // Title bar
                 GestureDetector(
-                  onPanStart: (details) {
+                  // Disable dragging on mobile
+                  onPanStart: isMobile ? null : (details) {
                     _isDragging = true;
                     _bringToFront();
                   },
-                  onPanUpdate: (details) {
+                  onPanUpdate: isMobile ? null : (details) {
                     if (_isDragging) {
                       setState(() {
                         _position += details.delta;
@@ -129,12 +133,12 @@ class _RetroWindowState extends State<RetroWindow> {
                       });
                     }
                   },
-                  onPanEnd: (details) {
+                  onPanEnd: isMobile ? null : (details) {
                     _isDragging = false;
                   },
                   child: Container(
                     width: double.infinity,
-                    height: 28,
+                    height: isMobile ? 35 : 28,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: _isFocused 
@@ -150,11 +154,11 @@ class _RetroWindowState extends State<RetroWindow> {
                     ),
                     child: Row(
                       children: [
-                        const SizedBox(width: 8),
+                        SizedBox(width: isMobile ? 6 : 8),
                         // Window icon placeholder
                         Container(
-                          width: 18,
-                          height: 18,
+                          width: isMobile ? 20 : 18,
+                          height: isMobile ? 20 : 18,
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.1),
                             border: Border.all(
@@ -162,22 +166,22 @@ class _RetroWindowState extends State<RetroWindow> {
                               width: 1,
                             ),
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.terminal,
-                            size: 18,
+                            size: isMobile ? 20 : 18,
                             color: Colors.white70,
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: isMobile ? 6 : 8),
                         // Title
                         Expanded(
                           child: Text(
                             widget.title,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontFamily: 'VT323',
-                              fontSize: 18,
+                              fontSize: isMobile ? 20 : 18,
                               color: Colors.white,
-                              shadows: [
+                              shadows: const [
                                 Shadow(
                                   offset: Offset(1, 1),
                                   color: Colors.black,
@@ -192,20 +196,20 @@ class _RetroWindowState extends State<RetroWindow> {
                           child: GestureDetector(
                             onTap: _handleClose,
                             child: Container(
-                              width: 20,
-                              height: 20,
-                              margin: const EdgeInsets.only(right: 4),
+                              width: isMobile ? 28 : 20,
+                              height: isMobile ? 28 : 20,
+                              margin: EdgeInsets.only(right: isMobile ? 2 : 4),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white54,
                                   width: 1,
                                 ),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   '×',
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: isMobile ? 18 : 14,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                   ),

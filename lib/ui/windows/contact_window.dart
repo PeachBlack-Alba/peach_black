@@ -6,22 +6,25 @@ class ContactWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+    
     return Container(
       color: Colors.black,
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(isMobile ? 12 : 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Heading
-            const Text(
+            Text(
               'Get In Touch',
               style: TextStyle(
                 fontFamily: 'VT323',
-                fontSize: 24,
+                fontSize: isMobile ? 22 : 24,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                shadows: [
+                shadows: const [
                   Shadow(
                     offset: Offset(1, 1),
                     color: Colors.black,
@@ -230,32 +233,31 @@ class ContactWindow extends StatelessWidget {
             const SizedBox(height: 24),
             
             // Action buttons
-            Row(
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
               children: [
                 RetroButton(
                   text: 'Send Email',
                   onPressed: () {
                     // TODO: Open email client
                   },
-                  fontSize: 18,
+                  fontSize: isMobile ? 16 : 18,
                   fontFamily: 'VT323',
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isMobile ? 15 : 20,
                     vertical: 8,
                   ),
                 ),
-                
-                const SizedBox(width: 16),
-                
                 RetroButton(
                   text: 'Schedule Call',
                   onPressed: () {
                     // TODO: Open calendar/scheduling
                   },
-                  fontSize: 18,
+                  fontSize: isMobile ? 16 : 18,
                   fontFamily: 'VT323',
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isMobile ? 15 : 20,
                     vertical: 8,
                   ),
                 ),

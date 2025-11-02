@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOOM - Shareware</title>
+    
+    <!-- Self-hosted js-dos library -->
+    <link rel="stylesheet" href="jsdos/js-dos.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+            font-family: 'VT323', monospace;
+        }
+        
+        #jsdos {
+            width: 100vw;
+            height: calc(100vh - 40px);
+            position: relative;
+        }
+        
+        #loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        #loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        #loading p {
+            color: #fff;
+            margin-top: 16px;
+            font-size: 18px;
+        }
+        
+        #error {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(139, 0, 0, 0.9);
+            border: 2px solid #ff0000;
+            padding: 24px;
+            border-radius: 4px;
+            max-width: 500px;
+            display: none;
+            z-index: 200;
+        }
+        
+        #error.show {
+            display: block;
+        }
+        
+        #error p {
+            color: #fff;
+            margin: 8px 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        #error-message {
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        #mobile-warning {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #fff;
+            padding: 24px;
+            text-align: center;
+            display: none;
+            z-index: 300;
+        }
+        
+        #mobile-warning.show {
+            display: block;
+        }
+        
+        #mobile-warning p {
+            color: #fff;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+        
+        #mobile-warning button {
+            background: #fff;
+            color: #000;
+            border: 2px solid #fff;
+            padding: 8px 24px;
+            font-family: 'VT323', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        #mobile-warning button:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        #controls-help {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 8px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 50;
+        }
+        
+        #controls-help p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin: 2px 0;
+        }
+        
+        .attribution {
+            font-size: 12px !important;
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="jsdos"></div>
+    
+    <div id="loading" class="show">
+        <div class="spinner"></div>
+        <p>Loading DOOM...</p>
+    </div>
+    
+    <div id="error">
+        <p id="error-message"></p>
+        <p>Please ensure 'doom-shareware.jsdos' is in the 'web/doom/' folder.</p>
+    </div>
+    
+    <div id="mobile-warning">
+        <p>DOOM is best played on desktop.</p>
+        <button onclick="hideMobileWarning()">Continue Anyway</button>
+    </div>
+    
+    <div id="controls-help">
+        <p>Controls: ESC (Menu) ↑↓←→ (Move) Ctrl (Fire) Alt (Strafe) Space (Use)</p>
+        <p class="attribution">Powered by js-dos & DOSBox</p>
+    </div>
+
+    <!-- Self-hosted js-dos script -->
+    <script src="jsdos/js-dos.js"></script>
+    
+    <script>
+        // Mobile detection
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (isMobile) {
+            document.getElementById('mobile-warning').classList.add('show');
+        }
+        
+        function hideMobileWarning() {
+            document.getElementById('mobile-warning').classList.remove('show');
+            initDoom();
+        }
+        
+        function showError(message) {
+            document.getElementById('error-message').textContent = message;
+            document.getElementById('error').classList.add('show');
+            document.getElementById('loading').classList.add('hidden');
+        }
+        
+        async function initDoom() {
+            try {
+                // Check if Dos is loaded
+                if (typeof Dos === 'undefined') {
+                    throw new Error('js-dos library failed to load. Check that jsdos/ files exist.');
+                }
+                
+                const dosContainer = document.getElementById('jsdos');
+                // Use absolute path from the root
+                const bundleUrl = '/doom/doom-shareware.jsdos';
+                
+                console.log('Initializing js-dos v7 (self-hosted)...');
+                console.log('Bundle URL:', bundleUrl);
+                
+                // Test if the bundle is accessible
+                const testResponse = await fetch(bundleUrl, { method: 'HEAD' });
+                console.log('Bundle fetch test:', testResponse.status, testResponse.headers.get('content-type'));
+                
+                if (!testResponse.ok) {
+                    throw new Error('Bundle file not accessible: ' + testResponse.status);
+                }
+                
+                // Initialize Dos with the container
+                const dos = Dos(dosContainer);
+                
+                console.log('Loading DOOM bundle...');
+                
+                // Run the bundle
+                await dos.run(bundleUrl);
+                
+                console.log('DOOM started successfully!');
+                document.getElementById('loading').classList.add('hidden');
+                
+            } catch (error) {
+                document.getElementById('loading').classList.add('hidden');
+                console.error('Failed to load DOOM:', error);
+                showError('Failed to load DOOM: ' + error.message);
+            }
+        }
+        
+        // Auto-start if not mobile
+        if (!isMobile) {
+            initDoom();
+        }
+    </script>
+</body>
+</html>
+

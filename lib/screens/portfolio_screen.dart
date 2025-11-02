@@ -8,6 +8,8 @@ import '../ui/windows/retro_window.dart';
 import '../ui/windows/about_window.dart';
 import '../ui/windows/work_window.dart';
 import '../ui/windows/contact_window.dart';
+import '../ui/desktop/desktop_icon.dart';
+import '../apps/doom_app.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -51,17 +53,23 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
   }
 
   void _openAboutWindow() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isMobile = screenWidth < 600;
+    
     setState(() {
       _windows.add(
         RetroWindow(
           key: UniqueKey(),
           title: 'About Alba',
           initialPosition: Offset(
-            MediaQuery.of(context).size.width * 0.2,
-            MediaQuery.of(context).size.height * 0.2,
+            isMobile ? 10 : screenWidth * 0.2,
+            isMobile ? 10 : screenHeight * 0.2,
           ),
-          initialSize: const Size(800, 700),
-          minSize: const Size(450, 300),
+          initialSize: isMobile 
+              ? Size(screenWidth - 20, screenHeight - 20)
+              : const Size(800, 700),
+          minSize: const Size(300, 300),
           onClose: () {
             setState(() {
               _windows.removeWhere((window) => (window as RetroWindow).title == 'About Alba');
@@ -74,17 +82,23 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
   }
 
   void _openWorkWindow() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isMobile = screenWidth < 600;
+    
     setState(() {
       _windows.add(
         RetroWindow(
           key: UniqueKey(),
           title: 'My Work',
           initialPosition: Offset(
-            MediaQuery.of(context).size.width * 0.2,
-            MediaQuery.of(context).size.height * 0.2,
+            isMobile ? 10 : screenWidth * 0.2,
+            isMobile ? 10 : screenHeight * 0.2,
           ),
-          initialSize: const Size(800, 700),
-          minSize: const Size(450, 300),
+          initialSize: isMobile 
+              ? Size(screenWidth - 20, screenHeight - 20)
+              : const Size(800, 700),
+          minSize: const Size(300, 300),
           onClose: () {
             setState(() {
               _windows.removeWhere((window) => (window as RetroWindow).title == 'My Work');
@@ -97,17 +111,23 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
   }
 
   void _openContactWindow() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isMobile = screenWidth < 600;
+    
     setState(() {
       _windows.add(
         RetroWindow(
           key: UniqueKey(),
           title: 'Contact',
           initialPosition: Offset(
-            MediaQuery.of(context).size.width * 0.2,
-            MediaQuery.of(context).size.height * 0.2,
+            isMobile ? 10 : screenWidth * 0.2,
+            isMobile ? 10 : screenHeight * 0.2,
           ),
-          initialSize: const Size(800, 700),
-          minSize: const Size(450, 300),
+          initialSize: isMobile 
+              ? Size(screenWidth - 20, screenHeight - 20)
+              : const Size(800, 700),
+          minSize: const Size(300, 300),
           onClose: () {
             setState(() {
               _windows.removeWhere((window) => (window as RetroWindow).title == 'Contact');
@@ -119,8 +139,53 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
     });
   }
 
+  void _openDoomWindow() {
+    // Check if DOOM window is already open
+    final hasDoomWindow = _windows.any((window) => 
+      window is RetroWindow && (window as RetroWindow).title == 'DOOM'
+    );
+    
+    if (hasDoomWindow) {
+      return; // Don't open duplicate windows
+    }
+    
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isMobile = screenWidth < 600;
+    
+    setState(() {
+      _windows.add(
+        RetroWindow(
+          key: UniqueKey(),
+          title: 'DOOM',
+          initialPosition: Offset(
+            isMobile ? 10 : screenWidth * 0.15,
+            isMobile ? 10 : screenHeight * 0.1,
+          ),
+          initialSize: isMobile 
+              ? Size(screenWidth - 20, screenHeight - 20)
+              : const Size(900, 700),
+          minSize: const Size(320, 240),
+          onClose: () {
+            setState(() {
+              _windows.removeWhere((window) => 
+                window is RetroWindow && (window as RetroWindow).title == 'DOOM'
+              );
+            });
+          },
+          child: const DoomApp(),
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isMobile = screenWidth < 600;
+    final isTablet = screenWidth >= 600 && screenWidth < 900;
+    
     return CRTOverlay(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -152,7 +217,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                         // Top bar
                         Container(
                           width: double.infinity,
-                          padding: const EdgeInsets.all(20),
+                          padding: EdgeInsets.all(isMobile ? 10 : 20),
                           decoration: BoxDecoration(
                             color: Colors.black.withOpacity(0.8),
                             border: const Border(
@@ -162,76 +227,138 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                               ),
                             ),
                           ),
-                          child: Row(
-                            children: [
-                              // Logo/Title
-                              const Text(
-                                'ALBA.EXE',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontFamily: 'VT323',
-                                  color: Colors.white,
-                                  shadows: [
-                                    Shadow(
-                                      offset: Offset(1, 1),
-                                      color: Colors.black,
+                          child: isMobile 
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Logo/Title
+                                  const Text(
+                                    'ALBA.EXE',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: 'VT323',
+                                      color: Colors.white,
+                                      shadows: [
+                                        Shadow(
+                                          offset: Offset(1, 1),
+                                          color: Colors.black,
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                              const Spacer(),
-
-                              // Navigation buttons
-                              RetroButton(
-                                text: 'ABOUT',
-                                onPressed: _openAboutWindow,
-                                fontSize: 18,
-                                fontFamily: 'VT323',
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 15,
-                                  vertical: 8,
-                                ),
-                                borderWidth: 1,
-                              ),
-
-                              const SizedBox(width: 20),
-
-                                RetroButton(
-                                  text: 'WORK',
-                                  onPressed: _openWorkWindow,
-                                  fontSize: 18,
-                                  fontFamily: 'VT323',
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                    vertical: 8,
                                   ),
-                                  borderWidth: 1,
-                                ),
-
-                                const SizedBox(width: 20),
-
-                                RetroButton(
-                                  text: 'CONTACT',
-                                  onPressed: _openContactWindow,
-                                  fontSize: 18,
-                                  fontFamily: 'VT323',
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                    vertical: 8,
+                                  const SizedBox(height: 10),
+                                  // Navigation buttons stacked
+                                  Wrap(
+                                    spacing: 10,
+                                    runSpacing: 8,
+                                    children: [
+                                      RetroButton(
+                                        text: 'ABOUT',
+                                        onPressed: _openAboutWindow,
+                                        fontSize: 16,
+                                        fontFamily: 'VT323',
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 6,
+                                        ),
+                                        borderWidth: 1,
+                                      ),
+                                      RetroButton(
+                                        text: 'WORK',
+                                        onPressed: _openWorkWindow,
+                                        fontSize: 16,
+                                        fontFamily: 'VT323',
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 6,
+                                        ),
+                                        borderWidth: 1,
+                                      ),
+                                      RetroButton(
+                                        text: 'CONTACT',
+                                        onPressed: _openContactWindow,
+                                        fontSize: 16,
+                                        fontFamily: 'VT323',
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 6,
+                                        ),
+                                        borderWidth: 1,
+                                      ),
+                                    ],
                                   ),
-                                  borderWidth: 1,
-                                ),
-                            ],
-                          ),
+                                ],
+                              )
+                            : Row(
+                                children: [
+                                  // Logo/Title
+                                  const Text(
+                                    'ALBA.EXE',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontFamily: 'VT323',
+                                      color: Colors.white,
+                                      shadows: [
+                                        Shadow(
+                                          offset: Offset(1, 1),
+                                          color: Colors.black,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Spacer(),
+
+                                  // Navigation buttons
+                                  RetroButton(
+                                    text: 'ABOUT',
+                                    onPressed: _openAboutWindow,
+                                    fontSize: isTablet ? 16 : 18,
+                                    fontFamily: 'VT323',
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 15,
+                                      vertical: 8,
+                                    ),
+                                    borderWidth: 1,
+                                  ),
+
+                                  const SizedBox(width: 20),
+
+                                  RetroButton(
+                                    text: 'WORK',
+                                    onPressed: _openWorkWindow,
+                                    fontSize: isTablet ? 16 : 18,
+                                    fontFamily: 'VT323',
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 15,
+                                      vertical: 8,
+                                    ),
+                                    borderWidth: 1,
+                                  ),
+
+                                  const SizedBox(width: 20),
+
+                                  RetroButton(
+                                    text: 'CONTACT',
+                                    onPressed: _openContactWindow,
+                                    fontSize: isTablet ? 16 : 18,
+                                    fontFamily: 'VT323',
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 15,
+                                      vertical: 8,
+                                    ),
+                                    borderWidth: 1,
+                                  ),
+                                ],
+                              ),
                         ),
 
                         // Main content area
-                        const Expanded(
+                        Expanded(
                           child: Stack(
                             children: [
                               // Header title centered near top
                               Positioned(
-                                top: 60,
+                                top: isMobile ? 20 : 60,
                                 left: 0,
                                 right: 0,
                                 child: Center(
@@ -243,10 +370,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                                       Text(
                                         'System initialised ',
                                         style: TextStyle(
-                                          fontSize: 28,
+                                          fontSize: isMobile ? 20.0 : 28.0,
                                           fontFamily: 'VT323',
                                           color: Colors.white,
-                                          shadows: [
+                                          shadows: const [
                                             Shadow(
                                               offset: Offset(1, 1),
                                               color: Colors.black,
@@ -255,24 +382,26 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                                         ),
                                       ),
                                       BlinkingCursor(
-                                        width: 14,
-                                        height: 22,
-                                        blinkDuration: Duration(milliseconds: 650),
+                                        width: isMobile ? 10 : 14,
+                                        height: isMobile ? 16 : 22,
+                                        blinkDuration: const Duration(milliseconds: 650),
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
 
-                              // Bottom-left code panel
-                              Positioned(
-                                bottom: 40,
-                                left: 40,
-                                child: CodePanel(
-                                  fileName: 'main.java',
-                                  width: 500,
-                                  height: 700,
-                                  code: '''public class Main {^300
+                              // Bottom-left code panel (render first, so it's behind icons)
+                              // Hide on mobile, show on tablet and desktop
+                              if (!isMobile)
+                                Positioned(
+                                  bottom: isTablet ? 20 : 40,
+                                  left: isTablet ? 20 : 40,
+                                  child: CodePanel(
+                                    fileName: 'main.java',
+                                    width: isTablet ? 350 : 500,
+                                    height: isTablet ? 500 : 700,
+                                    code: '''public class Main {^300
   public static void main(String[] args) {^200
     System.out.println("Loading Alba's portfolio...");^500
 
@@ -296,19 +425,34 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
     return "Portfolio ready!";^300
   }^300
 }''',
-                                  typingSpeed: Duration(milliseconds: 60),
-                                  loop: true,
-                                  loopDelay: Duration(seconds: 4),
+                                    typingSpeed: const Duration(milliseconds: 60),
+                                    loop: true,
+                                    loopDelay: const Duration(seconds: 4),
+                                  ),
+                                ),
+
+                              // Desktop icons (render last, so they're on top)
+                              Positioned(
+                                top: isMobile ? 80 : 120,
+                                right: isMobile ? 10 : (isTablet ? 20 : 40),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 10),
+                                    DesktopIcon(
+                                      label: 'DOOM',
+                                      imagePath: 'assets/images/doom-icon.png',
+                                      onTap: _openDoomWindow,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-
-                        // Bottom status bar
                         Container(
                           width: double.infinity,
-                          padding: const EdgeInsets.all(15),
+                          padding: EdgeInsets.all(isMobile ? 8 : 15),
                           decoration: BoxDecoration(
                             color: Colors.black.withOpacity(0.8),
                             border: const Border(
@@ -318,15 +462,15 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                               ),
                             ),
                           ),
-                          child: const Row(
+                          child: Row(
                             children: [
                               Text(
                                 'STATUS: READY',
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: isMobile ? 12 : 14,
                                   fontFamily: 'VT323',
-                                  color: Color(0xFF00FFFF),
-                                  shadows: [
+                                  color: const Color(0xFF00FFFF),
+                                  shadows: const [
                                     Shadow(
                                       offset: Offset(1, 1),
                                       color: Colors.black,
@@ -334,14 +478,14 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                                   ],
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Text(
-                                'PORTFOLIO.EXE v2.0',
+                                isMobile ? 'v2.0' : 'PORTFOLIO.EXE v2.0',
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: isMobile ? 12 : 14,
                                   fontFamily: 'VT323',
                                   color: Colors.white70,
-                                  shadows: [
+                                  shadows: const [
                                     Shadow(
                                       offset: Offset(1, 1),
                                       color: Colors.black,
