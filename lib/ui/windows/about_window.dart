@@ -42,12 +42,11 @@ class AboutWindow extends StatelessWidget {
                 ),
                 const SizedBox(width: 20),
                 Image.asset(
-                  'assets/images/sparkles_gif.gif',
+                  'assets/gif/sparkles_gif.gif',
                   width: 48,
                   height: 48,
                   fit: BoxFit.contain,
                 ),
-
               ],
             ),
 

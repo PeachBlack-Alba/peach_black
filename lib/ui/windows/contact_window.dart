@@ -2,8 +2,98 @@ import 'package:flutter/material.dart';
 import '../retro/retro_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ContactWindow extends StatelessWidget {
+class ContactWindow extends StatefulWidget {
   const ContactWindow({super.key});
+
+  @override
+  State<ContactWindow> createState() => _ContactWindowState();
+}
+
+class _ContactWindowState extends State<ContactWindow> {
+  void _showEasterEgg(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black87,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: Stack(
+            children: [
+              // Easter egg image
+              Container(
+                constraints: const BoxConstraints(
+                  maxWidth: 600,
+                  maxHeight: 600,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(color: const Color(0xFF4AF626), width: 3),
+                  color: Colors.black,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Title bar
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      color: const Color(0xFF4AF626),
+                      child: Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              '🎉 Easter Egg Found!',
+                              style: TextStyle(
+                                fontFamily: 'VT323',
+                                fontSize: 18,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () => Navigator.of(context).pop(),
+                              child: Container(
+                                width: 24,
+                                height: 24,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black, width: 1),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    '×',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Image
+                    Flexible(
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        child: Image.asset(
+                          'assets/images/ee.jpg',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,71 +107,67 @@ class ContactWindow extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Heading
-            Text(
-              'Get In Touch',
-              style: TextStyle(
-                fontFamily: 'VT323',
-                fontSize: isMobile ? 22 : 24,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                shadows: const [
-                  Shadow(
-                    offset: Offset(1, 1),
-                    color: Colors.black,
+            // Heading with computer icon
+            Row(
+              children: [
+                Text(
+                  'Get In Touch',
+                  style: TextStyle(
+                    fontFamily: 'VT323',
+                    fontSize: isMobile ? 22 : 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    shadows: const [
+                      Shadow(
+                        offset: Offset(1, 1),
+                        color: Colors.black,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // Contact info section
-            const Text(
-              'Contact Information:',
-              style: TextStyle(
-                fontFamily: 'VT323',
-                fontSize: 18,
-                color: Color(0xFF4AF626),
-                fontWeight: FontWeight.bold,
-                shadows: [
-                  Shadow(
-                    offset: Offset(1, 1),
-                    color: Colors.black,
+                ),
+                const SizedBox(width: 20),
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => _showEasterEgg(context),
+                    child: Image.asset(
+                      'assets/images/my_computer.png',
+                      width: 48,
+                      height: 48,
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
 
             const SizedBox(height: 16),
 
-            _buildContactItem(
-              Icons.email,
-              'Email',
-              'albatdr@gmail.com',
-              'Send me an email',
+            RetroButton(
+              text: 'Send Email',
+              onPressed: () async {
+                final uri = Uri(
+                  scheme: 'mailto',
+                  path: 'albatdr@gmail.com',
+                  queryParameters: {
+                    'subject': 'Hello Alba',
+                    'body': 'Hi Alba,\n\n',
+                  },
+                );
+
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                }
+              },
+              fontSize: isMobile ? 16 : 18,
+              fontFamily: 'VT323',
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile ? 15 : 20,
+                vertical: 8,
+              ),
             ),
 
             const SizedBox(height: 24),
-
-            // Social links section
-            const Text(
-              'Social & Professional:',
-              style: TextStyle(
-                fontFamily: 'VT323',
-                fontSize: 18,
-                color: Color(0xFF4AF626),
-                fontWeight: FontWeight.bold,
-                shadows: [
-                  Shadow(
-                    offset: Offset(1, 1),
-                    color: Colors.black,
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
 
             _buildSocialLink(
               'GitHub',
@@ -98,7 +184,6 @@ class ContactWindow extends StatelessWidget {
               iconPath: 'assets/images/contact_in.png',
               url: 'https://www.linkedin.com/in/albatorresrodriguez/',
             ),
-
 
             const SizedBox(height: 24),
 
@@ -127,116 +212,87 @@ class ContactWindow extends StatelessWidget {
                 border: Border.all(color: const Color(0xFF4AF626), width: 1),
                 color: Colors.transparent,
               ),
-              child: const Column(
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Currently Available for:',
-                    style: TextStyle(
-                      fontFamily: 'VT323',
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          offset: Offset(1, 1),
-                          color: Colors.black,
+                  // LEFT: text content
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Currently Available for:',
+                          style: TextStyle(
+                            fontFamily: 'VT323',
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(1, 1),
+                                color: Colors.black,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          '• Mobile Development Projects',
+                          style: TextStyle(
+                            fontFamily: 'VT323',
+                            fontSize: 16,
+                            color: Colors.white70,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(1, 1),
+                                color: Colors.black,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Text(
+                          '• Mobile App Consulting',
+                          style: TextStyle(
+                            fontFamily: 'VT323',
+                            fontSize: 16,
+                            color: Colors.white70,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(1, 1),
+                                color: Colors.black,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Text(
+                          '• Code Reviews & Mentoring',
+                          style: TextStyle(
+                            fontFamily: 'VT323',
+                            fontSize: 16,
+                            color: Colors.white70,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(1, 1),
+                                color: Colors.black,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    '• Mobile Development Projects',
-                    style: TextStyle(
-                      fontFamily: 'VT323',
-                      fontSize: 16,
-                      color: Colors.white70,
-                      shadows: [
-                        Shadow(
-                          offset: Offset(1, 1),
-                          color: Colors.black,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    '• Mobile App Consulting',
-                    style: TextStyle(
-                      fontFamily: 'VT323',
-                      fontSize: 16,
-                      color: Colors.white70,
-                      shadows: [
-                        Shadow(
-                          offset: Offset(1, 1),
-                          color: Colors.black,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    '• Code Reviews & Mentoring',
-                    style: TextStyle(
-                      fontFamily: 'VT323',
-                      fontSize: 16,
-                      color: Colors.white70,
-                      shadows: [
-                        Shadow(
-                          offset: Offset(1, 1),
-                          color: Colors.black,
-                        ),
-                      ],
-                    ),
+
+                  const SizedBox(width: 16),
+
+                  Image.asset(
+                    'assets/gif/for_hire_gif.gif',
+                    width: isMobile ? 72 : 96,
+                    height: isMobile ? 72 : 96,
+                    fit: BoxFit.contain,
                   ),
                 ],
               ),
             ),
-
-            const SizedBox(height: 24),
-
-            // Action buttons
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                RetroButton(
-                  text: 'Send Email',
-                  onPressed: () async {
-                    final uri = Uri(
-                      scheme: 'mailto',
-                      path: 'albatdr@gmail.com',
-                      queryParameters: {
-                        'subject': 'Hello Alba',
-                        'body': 'Hi Alba,\n\n',
-                      },
-                    );
-
-                    if (await canLaunchUrl(uri)) {
-                      await launchUrl(uri, mode: LaunchMode.externalApplication);
-                    }
-                  },
-                  fontSize: isMobile ? 16 : 18,
-                  fontFamily: 'VT323',
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? 15 : 20,
-                    vertical: 8,
-                  ),
-                ),
-                RetroButton(
-                  text: 'Schedule Call',
-                  onPressed: () {
-                    // TODO: Open calendar/scheduling
-                  },
-                  fontSize: isMobile ? 16 : 18,
-                  fontFamily: 'VT323',
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? 15 : 20,
-                    vertical: 8,
-                  ),
-                ),
-              ],
-            ),
-
             const SizedBox(height: 20),
           ],
         ),
