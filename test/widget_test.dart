@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:plasma_background/main.dart';
+import 'package:peach_black/main.dart';
 
 void main() {
   testWidgets('Plasma background test', (WidgetTester tester) async {

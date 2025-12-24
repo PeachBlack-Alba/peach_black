@@ -159,17 +159,10 @@ class _RetroWindowState extends State<RetroWindow> {
                         Container(
                           width: isMobile ? 20 : 18,
                           height: isMobile ? 20 : 18,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            border: Border.all(
-                              color: Colors.white38,
-                              width: 1,
-                            ),
-                          ),
-                          child: Icon(
-                            Icons.terminal,
-                            size: isMobile ? 20 : 18,
-                            color: Colors.white70,
+                          padding: const EdgeInsets.all(2),
+                          child: Image.asset(
+                            'assets/images/windows_start_icon.png',
+                            fit: BoxFit.contain,
                           ),
                         ),
                         SizedBox(width: isMobile ? 6 : 8),

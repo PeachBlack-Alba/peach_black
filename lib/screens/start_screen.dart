@@ -169,7 +169,7 @@ class _StartScreenState extends State<StartScreen>
                                       style: TextStyle(
                                         fontSize: subtitleFontSize,
                                         fontFamily: 'VT323',
-                                        color: const Color(0xFF00FFFF),
+                                        color: const Color(0xFF4AF626),
                                         shadows: const [
                                           Shadow(
                                             offset: Offset(1, 1),

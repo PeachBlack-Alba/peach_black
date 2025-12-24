@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../retro/retro_button.dart';
 
 class AboutWindow extends StatelessWidget {
   const AboutWindow({super.key});
@@ -104,39 +103,6 @@ class AboutWindow extends StatelessWidget {
               '• Version Control (Git)',
             ]),
             
-            const SizedBox(height: 24),
-            
-            // Action buttons
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                RetroButton(
-                  text: 'Open CV',
-                  onPressed: () {
-                    // TODO: Open CV link
-                  },
-                  fontSize: isMobile ? 16 : 18,
-                  fontFamily: 'VT323',
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? 15 : 20,
-                    vertical: 8,
-                  ),
-                ),
-                RetroButton(
-                  text: 'GitHub',
-                  onPressed: () {
-                    // TODO: Open GitHub link
-                  },
-                  fontSize: isMobile ? 16 : 18,
-                  fontFamily: 'VT323',
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? 15 : 20,
-                    vertical: 8,
-                  ),
-                ),
-              ],
-            ),
             
             const SizedBox(height: 20),
           ],
@@ -153,7 +119,7 @@ class AboutWindow extends StatelessWidget {
         style: const TextStyle(
           fontFamily: 'VT323',
           fontSize: 18,
-          color: Color(0xFF00FFFF),
+          color: Color(0xFF4AF626),
           shadows: [
             Shadow(
               offset: Offset(1, 1),

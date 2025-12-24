@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../retro/retro_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactWindow extends StatelessWidget {
   const ContactWindow({super.key});
@@ -8,7 +9,7 @@ class ContactWindow extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 600;
-    
+
     return Container(
       color: Colors.black,
       child: SingleChildScrollView(
@@ -32,16 +33,16 @@ class ContactWindow extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 20),
-            
+
             // Contact info section
             const Text(
               'Contact Information:',
               style: TextStyle(
                 fontFamily: 'VT323',
                 fontSize: 18,
-                color: Color(0xFF00FFFF),
+                color: Color(0xFF4AF626),
                 fontWeight: FontWeight.bold,
                 shadows: [
                   Shadow(
@@ -51,39 +52,39 @@ class ContactWindow extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             _buildContactItem(
               Icons.email,
               'Email',
               'alba.torres@example.com',
               'Send me an email',
             ),
-            
+
             _buildContactItem(
               Icons.phone,
               'Phone',
               '+1 (555) 123-4567',
               'Call or text me',
             ),
-            
+
             _buildContactItem(
               Icons.location_on,
               'Location',
               'San Francisco, CA',
               'Based in the Bay Area',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Social links section
             const Text(
               'Social & Professional:',
               style: TextStyle(
                 fontFamily: 'VT323',
                 fontSize: 18,
-                color: Color(0xFF00FFFF),
+                color: Color(0xFF4AF626),
                 fontWeight: FontWeight.bold,
                 shadows: [
                   Shadow(
@@ -93,46 +94,48 @@ class ContactWindow extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             _buildSocialLink(
               'GitHub',
-              'github.com/alba-torres',
+              'github.com/albatorresrodriguez',
               'View my code repositories',
-              Icons.code,
+              iconPath: 'assets/images/contact_github.png',
+              url: 'https://github.com/albatorresrodriguez',
             ),
-            
+
             _buildSocialLink(
               'LinkedIn',
-              'linkedin.com/in/alba-torres',
+              'linkedin.com/in/alba-torres-rodriguez',
               'Connect professionally',
-              Icons.work,
+              iconPath: 'assets/images/contact_in.png',
+              url: 'https://linkedin.com/in/alba-torres-rodriguez',
             ),
-            
+
             _buildSocialLink(
               'Twitter',
               '@alba_dev',
               'Follow for updates',
-              Icons.alternate_email,
+              icon: Icons.alternate_email,
             ),
-            
+
             _buildSocialLink(
               'Portfolio',
               'alba-torres.dev',
               'Visit my website',
-              Icons.web,
+              icon: Icons.web,
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Availability section
             const Text(
               'Availability:',
               style: TextStyle(
                 fontFamily: 'VT323',
                 fontSize: 18,
-                color: Color(0xFF00FFFF),
+                color: Color(0xFF4AF626),
                 fontWeight: FontWeight.bold,
                 shadows: [
                   Shadow(
@@ -142,13 +145,13 @@ class ContactWindow extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 12),
-            
+
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xFF00FFFF), width: 1),
+                border: Border.all(color: const Color(0xFF4AF626), width: 1),
                 color: Colors.transparent,
               ),
               child: const Column(
@@ -229,9 +232,9 @@ class ContactWindow extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Action buttons
             Wrap(
               spacing: 10,
@@ -263,14 +266,14 @@ class ContactWindow extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
-  
+
   Widget _buildContactItem(IconData icon, String label, String value, String description) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
@@ -280,12 +283,12 @@ class ContactWindow extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              border: Border.all(color: const Color(0xFF00FFFF), width: 1),
+              border: Border.all(color: const Color(0xFF4AF626), width: 1),
               color: Colors.transparent,
             ),
             child: Icon(
               icon,
-              color: const Color(0xFF00FFFF),
+              color: const Color(0xFF4AF626),
               size: 20,
             ),
           ),
@@ -299,7 +302,7 @@ class ContactWindow extends StatelessWidget {
                   style: const TextStyle(
                     fontFamily: 'VT323',
                     fontSize: 16,
-                    color: Color(0xFF00FFFF),
+                    color: Color(0xFF4AF626),
                     fontWeight: FontWeight.bold,
                     shadows: [
                       Shadow(
@@ -344,15 +347,27 @@ class ContactWindow extends StatelessWidget {
       ),
     );
   }
-  
-  Widget _buildSocialLink(String platform, String handle, String description, IconData icon) {
+
+  Widget _buildSocialLink(
+    String platform,
+    String handle,
+    String description, {
+    IconData? icon,
+    String? iconPath,
+    String? url,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
-          onTap: () {
-            // TODO: Open social link
+          onTap: () async {
+            if (url != null) {
+              final uri = Uri.parse(url);
+              if (await canLaunchUrl(uri)) {
+                await launchUrl(uri);
+              }
+            }
           },
           child: Container(
             padding: const EdgeInsets.all(12),
@@ -362,11 +377,19 @@ class ContactWindow extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(
-                  icon,
-                  color: const Color(0xFF00FFFF),
-                  size: 20,
-                ),
+                if (iconPath != null)
+                  Image.asset(
+                    iconPath,
+                    width: 32,
+                    height: 32,
+                    fit: BoxFit.contain,
+                  )
+                else if (icon != null)
+                  Icon(
+                    icon,
+                    color: const Color(0xFF4AF626),
+                    size: 20,
+                  ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -392,7 +415,7 @@ class ContactWindow extends StatelessWidget {
                         style: const TextStyle(
                           fontFamily: 'VT323',
                           fontSize: 14,
-                          color: Color(0xFF00FFFF),
+                          color: Color(0xFF4AF626),
                           shadows: [
                             Shadow(
                               offset: Offset(1, 1),
@@ -420,7 +443,7 @@ class ContactWindow extends StatelessWidget {
                 ),
                 const Icon(
                   Icons.open_in_new,
-                  color: Colors.white54,
+                  color: Color(0xFF4AF626),
                   size: 16,
                 ),
               ],
@@ -431,4 +454,3 @@ class ContactWindow extends StatelessWidget {
     );
   }
 }
-

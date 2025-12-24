@@ -1,4 +1,4 @@
-name: plasma_background
+name: peach_black
 description: "A minimal Flutter project with plasma background."
 publish_to: 'none'
 version: 1.0.0+1
@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_shaders: ^0.1.2
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:

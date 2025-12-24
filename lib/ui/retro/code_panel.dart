@@ -18,7 +18,7 @@ class CodePanel extends StatelessWidget {
     required this.code,
     this.width = 400,
     this.height = 300,
-    this.glowColor = const Color(0xFF00FFFF), // Cyan
+    this.glowColor = const Color(0xFF4AF626),
     this.typingSpeed = const Duration(milliseconds: 60),
     this.loop = true,
     this.loopDelay = const Duration(seconds: 3),

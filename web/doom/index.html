@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOOM - Shareware</title>
     
-    <!-- Self-hosted js-dos library -->
-    <link rel="stylesheet" href="jsdos/js-dos.css">
+    <!-- Load js-dos from local files -->
+    <link rel="stylesheet" href="./jsdos/js-dos.css">
+    <script src="./jsdos/js-dos.js"></script>
     
     <style>
         * {
@@ -77,7 +78,7 @@
             border: 2px solid #ff0000;
             padding: 24px;
             border-radius: 4px;
-            max-width: 500px;
+            max-width: 600px;
             display: none;
             z-index: 200;
         }
@@ -159,6 +160,12 @@
             font-size: 12px !important;
             color: rgba(255, 255, 255, 0.5) !important;
         }
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -171,7 +178,7 @@
     
     <div id="error">
         <p id="error-message"></p>
-        <p>Please ensure 'doom-shareware.jsdos' is in the 'web/doom/' folder.</p>
+        <p id="error-details"></p>
     </div>
     
     <div id="mobile-warning">
@@ -184,65 +191,88 @@
         <p class="attribution">Powered by js-dos & DOSBox</p>
     </div>
 
-    <!-- Self-hosted js-dos script -->
-    <script src="jsdos/js-dos.js"></script>
-    
     <script>
         // Mobile detection
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
         if (isMobile) {
             document.getElementById('mobile-warning').classList.add('show');
+            document.getElementById('loading').classList.add('hidden');
         }
         
         function hideMobileWarning() {
             document.getElementById('mobile-warning').classList.remove('show');
+            document.getElementById('loading').classList.remove('hidden');
             initDoom();
         }
         
-        function showError(message) {
+        function showError(message, details) {
             document.getElementById('error-message').textContent = message;
+            document.getElementById('error-details').innerHTML = details || '';
             document.getElementById('error').classList.add('show');
             document.getElementById('loading').classList.add('hidden');
         }
         
         async function initDoom() {
             try {
-                // Check if Dos is loaded
+                // Check if Dos object is available
                 if (typeof Dos === 'undefined') {
-                    throw new Error('js-dos library failed to load. Check that jsdos/ files exist.');
+                    throw new Error('js-dos library failed to load. Check that all files are in the jsdos/ folder.');
                 }
                 
                 const dosContainer = document.getElementById('jsdos');
-                // Use absolute path from the root
-                const bundleUrl = '/doom/doom-shareware.jsdos';
+                // Cache-bust to ensure latest bundle is fetched after updates
+                const bundleUrl = './DOOM-game.jsdos?v=2';
                 
-                console.log('Initializing js-dos v7 (self-hosted)...');
+                console.log('Initializing js-dos v7...');
                 console.log('Bundle URL:', bundleUrl);
                 
                 // Test if the bundle is accessible
                 const testResponse = await fetch(bundleUrl, { method: 'HEAD' });
-                console.log('Bundle fetch test:', testResponse.status, testResponse.headers.get('content-type'));
+                console.log('Bundle fetch test:', testResponse.status);
                 
                 if (!testResponse.ok) {
-                    throw new Error('Bundle file not accessible: ' + testResponse.status);
+                    throw new Error(`Bundle file not accessible: ${testResponse.status}`);
                 }
                 
-                // Initialize Dos with the container
-                const dos = Dos(dosContainer);
-                
-                console.log('Loading DOOM bundle...');
-                
-                // Run the bundle
-                await dos.run(bundleUrl);
+                // Initialize js-dos v7
+                const dos = Dos(dosContainer, {
+                    // point to files now placed in the doom/ folder (wdosbox.js + wasm beside index.html)
+                    wdosboxUrl: "./wdosbox.js",
+                    locateFile: (path) => `./${path}`,
+                });
+
+                // Force a minimal autoexec that directly runs DOOM, bypassing installers
+                const autoexec = [
+                    "@echo off",
+                    "mount c .",
+                    "c:",
+                    "DOOM.EXE",
+                ].join("\\n");
+
+                console.log('Running DOOM bundle with custom autoexec...');
+                const ci = await dos.run(bundleUrl, {
+                    conf: `[autoexec]\\n${autoexec}\\n`,
+                });
                 
                 console.log('DOOM started successfully!');
                 document.getElementById('loading').classList.add('hidden');
                 
             } catch (error) {
-                document.getElementById('loading').classList.add('hidden');
                 console.error('Failed to load DOOM:', error);
-                showError('Failed to load DOOM: ' + error.message);
+                
+                const details = `
+                    <p style="margin-top: 12px;">Possible solutions:</p>
+                    <ul style="text-align: left; margin-left: 20px; margin-top: 8px;">
+                        <li>Ensure all files in jsdos/ folder are present</li>
+                        <li>Check that DOOM-game.jsdos is in the doom/ folder</li>
+                        <li>Try refreshing the page</li>
+                        <li>Check browser console for more details</li>
+                    </ul>
+                    <p style="margin-top: 12px;">Technical details: ${error.message}</p>
+                `;
+                
+                showError('Failed to load DOOM', details);
             }
         }
         
@@ -253,4 +283,3 @@
     </script>
 </body>
 </html>
-

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../retro/retro_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WorkWindow extends StatelessWidget {
   const WorkWindow({super.key});
@@ -41,7 +41,7 @@ class WorkWindow extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'VT323',
                 fontSize: 18,
-                color: Color(0xFF00FFFF),
+                      color: Color(0xFF4AF626),
                 fontWeight: FontWeight.bold,
                 shadows: [
                   Shadow(
@@ -83,7 +83,7 @@ class WorkWindow extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'VT323',
                 fontSize: 18,
-                color: Color(0xFF00FFFF),
+                      color: Color(0xFF4AF626),
                 fontWeight: FontWeight.bold,
                 shadows: [
                   Shadow(
@@ -125,7 +125,7 @@ class WorkWindow extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'VT323',
                 fontSize: 18,
-                color: Color(0xFF00FFFF),
+                      color: Color(0xFF4AF626),
                 fontWeight: FontWeight.bold,
                 shadows: [
                   Shadow(
@@ -152,36 +152,103 @@ class WorkWindow extends StatelessWidget {
             
             const SizedBox(height: 24),
             
-            // Action buttons
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                RetroButton(
-                  text: 'View GitHub',
-                  onPressed: () {
-                    // TODO: Open GitHub link
-                  },
-                  fontSize: isMobile ? 16 : 18,
-                  fontFamily: 'VT323',
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? 15 : 20,
-                    vertical: 8,
+            // Download CV section with printer gif
+            const Text(
+              'Download CV:',
+              style: TextStyle(
+                fontFamily: 'VT323',
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                shadows: [
+                  Shadow(
+                    offset: Offset(1, 1),
+                    color: Colors.black,
+                  ),
+                ],
+              ),
+            ),
+            
+            const SizedBox(height: 16),
+            
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () async {
+                  final url = Uri.parse('https://docs.google.com/document/d/13_7UvOE_gPIbA9gFBtiTanUEQJMbJ4H68kXFtysIX1Y/edit?usp=sharing');
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                  }
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFF4AF626), width: 2),
+                    color: Colors.transparent,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        'assets/images/printer-gif-icon.gif',
+                        width: 48,
+                        height: 48,
+                        fit: BoxFit.contain,
+                      ),
+                      const SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            'Download Resume',
+                            style: TextStyle(
+                              fontFamily: 'VT323',
+                              fontSize: 18,
+                              color: Color(0xFF4AF626),
+                              fontWeight: FontWeight.bold,
+                              shadows: [
+                                Shadow(
+                                  offset: Offset(1, 1),
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Text(
+                            'Click to view/download my CV',
+                            style: TextStyle(
+                              fontFamily: 'VT323',
+                              fontSize: 14,
+                              color: Colors.white70,
+                              shadows: [
+                                Shadow(
+                                  offset: Offset(1, 1),
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                RetroButton(
-                  text: 'Download CV',
-                  onPressed: () {
-                    // TODO: Download CV
-                  },
-                  fontSize: isMobile ? 16 : 18,
-                  fontFamily: 'VT323',
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? 15 : 20,
-                    vertical: 8,
-                  ),
-                ),
-              ],
+              ),
+            ),
+            
+            const SizedBox(height: 24),
+            
+            // GitHub button
+            _buildActionButton(
+              'View GitHub',
+              'assets/images/contact_github.png',
+              () async {
+                final url = Uri.parse('https://github.com/albatorresrodriguez');
+                if (await canLaunchUrl(url)) {
+                  await launchUrl(url);
+                }
+              },
+              isMobile,
             ),
             
             const SizedBox(height: 20),
@@ -296,7 +363,7 @@ class WorkWindow extends StatelessWidget {
             children: technologies.map((tech) => Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xFF00FFFF), width: 1),
+                border: Border.all(color: const Color(0xFF4AF626), width: 1),
                 color: Colors.transparent,
               ),
               child: Text(
@@ -304,7 +371,7 @@ class WorkWindow extends StatelessWidget {
                 style: const TextStyle(
                   fontFamily: 'VT323',
                   fontSize: 12,
-                  color: Color(0xFF00FFFF),
+                      color: Color(0xFF4AF626),
                   shadows: [
                     Shadow(
                       offset: Offset(1, 1),
@@ -328,7 +395,7 @@ class WorkWindow extends StatelessWidget {
         style: const TextStyle(
           fontFamily: 'VT323',
           fontSize: 18,
-          color: Color(0xFF00FFFF),
+                      color: Color(0xFF4AF626),
           shadows: [
             Shadow(
               offset: Offset(1, 1),
@@ -338,6 +405,51 @@ class WorkWindow extends StatelessWidget {
         ),
       ),
     )).toList();
+  }
+  
+  Widget _buildActionButton(String text, String iconPath, VoidCallback onPressed, bool isMobile) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 15 : 20,
+            vertical: 12,
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.white, width: 2),
+            color: Colors.transparent,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                iconPath,
+                width: 24,
+                height: 24,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(width: 12),
+              Text(
+                text,
+                style: TextStyle(
+                  fontFamily: 'VT323',
+                  fontSize: isMobile ? 16 : 18,
+                  color: Colors.white,
+                  shadows: const [
+                    Shadow(
+                      offset: Offset(1, 1),
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

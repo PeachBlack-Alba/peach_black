@@ -21,7 +21,7 @@ class RetroButton extends StatefulWidget {
     this.borderWidth = 2.0,
     this.borderColor = Colors.white,
     this.textColor = Colors.white,
-    this.hoverBackgroundColor = const Color(0xFF00FFFF),
+    this.hoverBackgroundColor = const Color(0xFF4AF626),
     this.hoverTextColor = Colors.black,
     this.fontSize = 16,
     this.fontFamily,

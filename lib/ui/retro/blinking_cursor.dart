@@ -11,7 +11,7 @@ class BlinkingCursor extends StatefulWidget {
     super.key,
     this.width = 12,
     this.height = 20,
-    this.color = const Color(0xFF00FFFF),
+    this.color = const Color(0xFF4AF626),
     this.blinkDuration = const Duration(milliseconds: 650),
   });
 

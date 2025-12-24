@@ -1,15 +1,15 @@
 // Web-specific implementation for DOOM iframe
 import 'dart:html' as html;
-import 'dart:ui' as ui;
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:ui_web' as ui_web;
 
 void registerDoomIframe(String viewId) {
   // Register the iframe view factory
-  // ignore: undefined_prefixed_name
-  ui.platformViewRegistry.registerViewFactory(
+  ui_web.platformViewRegistry.registerViewFactory(
     viewId,
     (int viewId) {
       final iframe = html.IFrameElement()
-        ..src = 'doom/index.html'  // Updated to correct path
+        ..src = 'doom/index.html'
         ..style.border = 'none'
         ..style.width = '100%'
         ..style.height = '100%'
