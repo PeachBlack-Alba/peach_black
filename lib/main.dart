@@ -1,178 +1,51 @@
 import 'package:flutter/material.dart';
-import 'screens/start_screen.dart';
-import 'screens/portfolio_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/constants/app_constants.dart';
+import 'core/theme/app_theme.dart';
+import 'presentation/bloc/navigation/navigation_bloc.dart';
+import 'presentation/bloc/window_management/window_management_bloc.dart';
+import 'presentation/pages/main_page.dart';
+
+/// Entry point of the 90's DOS-style Portfolio Application
+/// 
+/// This application demonstrates CLEAN architecture principles with:
+/// - **Presentation Layer**: BLoCs, Pages, Widgets
+/// - **Domain Layer**: Entities, Use Cases
+/// - **Core**: Constants, Theme, Utilities
+/// 
+/// **State Management**: flutter_bloc (BLoC pattern)
+/// **Architecture**: CLEAN Architecture
+/// **Design Principles**: SOLID
 void main() {
-  runApp(const MyApp());
+  runApp(const PortfolioApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+/// Root widget of the application
+/// 
+/// Provides BLoC instances and MaterialApp configuration with
+/// retro 90's DOS-style theme.
+class PortfolioApp extends StatelessWidget {
+  const PortfolioApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Alba Torres Rodríguez Portfolio - DOS Style',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.white,
-          brightness: Brightness.dark,
+    return MultiBlocProvider(
+      providers: [
+        // Navigation BLoC - manages screen transitions
+        BlocProvider<NavigationBloc>(
+          create: (context) => NavigationBloc(),
         ),
-        fontFamily: 'VT323', // Retro VT323 font
-        textTheme: const TextTheme(
-          displayLarge: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          displayMedium: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          displaySmall: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          headlineLarge: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          headlineMedium: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          headlineSmall: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          titleLarge: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          titleMedium: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          titleSmall: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          bodyLarge: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          bodyMedium: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          bodySmall: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          labelLarge: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          labelMedium: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
-          labelSmall: TextStyle(
-            fontFamily: 'VT323',
-            color: Colors.white,
-            shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-          ),
+        // Window Management BLoC - manages open windows state
+        BlocProvider<WindowManagementBloc>(
+          create: (context) => WindowManagementBloc(),
         ),
-      ),
-      home: const MainScreen(),
-    );
-  }
-}
-
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen>
-    with TickerProviderStateMixin {
-  bool _showPortfolio = false;
-  late AnimationController _transitionController;
-  late Animation<double> _slideAnimation;
-  
-  @override
-  void initState() {
-    super.initState();
-    
-    _transitionController = AnimationController(
-      duration: const Duration(milliseconds: 1500),
-      vsync: this,
-    );
-    
-    _slideAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _transitionController,
-      curve: Curves.easeInOutCubic,
-    ));
-  }
-
-  @override
-  void dispose() {
-    _transitionController.dispose();
-    super.dispose();
-  }
-
-  void _startPortfolio() {
-    setState(() {
-      _showPortfolio = true;
-    });
-    _transitionController.forward();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        children: [
-          // Start screen
-          if (!_showPortfolio)
-            StartScreen(onStart: _startPortfolio),
-          
-          // Portfolio screen with transition
-          if (_showPortfolio)
-            AnimatedBuilder(
-              animation: _slideAnimation,
-              builder: (context, child) {
-                return Transform.translate(
-                  offset: Offset(
-                    0,
-                    (1 - _slideAnimation.value) * MediaQuery.of(context).size.height,
-                  ),
-                  child: const PortfolioScreen(),
-                );
-              },
-            ),
-        ],
+      ],
+      child: MaterialApp(
+        title: 'Alba Torres Rodríguez - Retro Portfolio',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.darkTheme,
+        home: const MainPage(),
       ),
     );
   }

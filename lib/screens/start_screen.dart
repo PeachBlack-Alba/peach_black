@@ -74,21 +74,6 @@ class _StartScreenState extends State<StartScreen>
   
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 600;
-    final isTablet = screenWidth >= 600 && screenWidth < 900;
-    
-    // Responsive sizing
-    final panelWidth = isMobile 
-        ? screenWidth * 0.9 
-        : isTablet 
-            ? screenWidth * 0.7 
-            : 600.0;
-    
-    final titleFontSize = isMobile ? 22.0 : 26.0;
-    final subtitleFontSize = isMobile ? 18.0 : 20.0;
-    final padding = isMobile ? 20.0 : 30.0;
-    
     return CRTOverlay(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -113,22 +98,22 @@ class _StartScreenState extends State<StartScreen>
                 // Main panel
                 Center(
                   child: SizedBox(
-                    width: panelWidth,
+                    width: 600,
                     child: RetroPanel(
-                      padding: EdgeInsets.all(padding),
+                      padding: const EdgeInsets.all(30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           // Title
-                          Text(
+                          const Text(
                             'Alba Torres Rodríguez Portfolio',
                             style: TextStyle(
-                              fontSize: titleFontSize,
+                              fontSize: 26,
                               fontFamily: 'VT323',
                               color: Colors.white,
                               height: 1.2,
-                              shadows: const [
+                              shadows: [
                                 Shadow(
                                   offset: Offset(1, 1),
                                   color: Colors.black,
@@ -137,25 +122,23 @@ class _StartScreenState extends State<StartScreen>
                             ),
                           ),
                           
-                          SizedBox(height: isMobile ? 15 : 20),
+                          const SizedBox(height: 20),
                           
                           // Subtitle with blinking cursor
                           Row(
                             children: [
-                              Flexible(
-                                child: Text(
-                                  'Click start to begin',
-                                  style: TextStyle(
-                                    fontSize: subtitleFontSize,
-                                    fontFamily: 'VT323',
-                                    color: Colors.white,
-                                    shadows: const [
-                                      Shadow(
-                                        offset: Offset(1, 1),
-                                        color: Colors.black,
-                                      ),
-                                    ],
-                                  ),
+                              const Text(
+                                'Click start to begin',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'VT323',
+                                  color: Colors.white,
+                                  shadows: [
+                                    Shadow(
+                                      offset: Offset(1, 1),
+                                      color: Colors.black,
+                                    ),
+                                  ],
                                 ),
                               ),
                               const SizedBox(width: 4),
@@ -164,13 +147,13 @@ class _StartScreenState extends State<StartScreen>
                                 builder: (context, child) {
                                   return Opacity(
                                     opacity: _blinkAnimation.value,
-                                    child: Text(
-                                      '_',
+                                    child: const Text(
+                                      '|',
                                       style: TextStyle(
-                                        fontSize: subtitleFontSize,
+                                        fontSize: 20,
                                         fontFamily: 'VT323',
-                                        color: const Color(0xFF4AF626),
-                                        shadows: const [
+                                        color: Color(0xFF4AF626),
+                                        shadows: [
                                           Shadow(
                                             offset: Offset(1, 1),
                                             color: Colors.black,
@@ -184,17 +167,17 @@ class _StartScreenState extends State<StartScreen>
                             ],
                           ),
                           
-                          SizedBox(height: isMobile ? 20 : 30),
+                          const SizedBox(height: 30),
                           
                           // Loading text or START button
                           if (_isLoading)
                             Text(
                               _loadingText,
-                              style: TextStyle(
-                                fontSize: subtitleFontSize,
+                              style: const TextStyle(
+                                fontSize: 20,
                                 fontFamily: 'VT323',
                                 color: Colors.white,
-                                shadows: const [
+                                shadows: [
                                   Shadow(
                                     offset: Offset(1, 1),
                                     color: Colors.black,
@@ -208,8 +191,8 @@ class _StartScreenState extends State<StartScreen>
                               onPressed: _handleStart,
                               fontSize: 18,
                               fontFamily: 'VT323',
-                              padding: EdgeInsets.symmetric(
-                                horizontal: isMobile ? 20 : 30,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 30,
                                 vertical: 10,
                               ),
                             ),

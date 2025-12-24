@@ -58,22 +58,8 @@ class ContactWindow extends StatelessWidget {
             _buildContactItem(
               Icons.email,
               'Email',
-              'alba.torres@example.com',
+              'albatdr@gmail.com',
               'Send me an email',
-            ),
-
-            _buildContactItem(
-              Icons.phone,
-              'Phone',
-              '+1 (555) 123-4567',
-              'Call or text me',
-            ),
-
-            _buildContactItem(
-              Icons.location_on,
-              'Location',
-              'San Francisco, CA',
-              'Based in the Bay Area',
             ),
 
             const SizedBox(height: 24),
@@ -101,8 +87,8 @@ class ContactWindow extends StatelessWidget {
               'GitHub',
               'github.com/albatorresrodriguez',
               'View my code repositories',
-              iconPath: 'assets/images/contact_github.png',
-              url: 'https://github.com/albatorresrodriguez',
+              iconPath: 'assets/images/github_icon.png',
+              url: 'https://github.com/PeachBlack-Alba',
             ),
 
             _buildSocialLink(
@@ -110,22 +96,9 @@ class ContactWindow extends StatelessWidget {
               'linkedin.com/in/alba-torres-rodriguez',
               'Connect professionally',
               iconPath: 'assets/images/contact_in.png',
-              url: 'https://linkedin.com/in/alba-torres-rodriguez',
+              url: 'https://www.linkedin.com/in/albatorresrodriguez/',
             ),
 
-            _buildSocialLink(
-              'Twitter',
-              '@alba_dev',
-              'Follow for updates',
-              icon: Icons.alternate_email,
-            ),
-
-            _buildSocialLink(
-              'Portfolio',
-              'alba-torres.dev',
-              'Visit my website',
-              icon: Icons.web,
-            ),
 
             const SizedBox(height: 24),
 
@@ -174,7 +147,7 @@ class ContactWindow extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    '• Flutter Development Projects',
+                    '• Mobile Development Projects',
                     style: TextStyle(
                       fontFamily: 'VT323',
                       fontSize: 16,
@@ -189,20 +162,6 @@ class ContactWindow extends StatelessWidget {
                   ),
                   Text(
                     '• Mobile App Consulting',
-                    style: TextStyle(
-                      fontFamily: 'VT323',
-                      fontSize: 16,
-                      color: Colors.white70,
-                      shadows: [
-                        Shadow(
-                          offset: Offset(1, 1),
-                          color: Colors.black,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    '• UI/UX Design Collaboration',
                     style: TextStyle(
                       fontFamily: 'VT323',
                       fontSize: 16,
@@ -242,8 +201,19 @@ class ContactWindow extends StatelessWidget {
               children: [
                 RetroButton(
                   text: 'Send Email',
-                  onPressed: () {
-                    // TODO: Open email client
+                  onPressed: () async {
+                    final uri = Uri(
+                      scheme: 'mailto',
+                      path: 'albatdr@gmail.com',
+                      queryParameters: {
+                        'subject': 'Hello Alba',
+                        'body': 'Hi Alba,\n\n',
+                      },
+                    );
+
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    }
                   },
                   fontSize: isMobile ? 16 : 18,
                   fontFamily: 'VT323',

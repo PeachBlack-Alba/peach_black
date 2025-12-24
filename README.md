@@ -1,258 +1,244 @@
-# Plasma Background
+# 🎮 Retro DOS Portfolio - Alba Torres Rodríguez
 
-A Flutter widget that renders a real-time plasma background using fragment shaders, replicating the behavior and API of React + OGL plasma components.
+A 90's DOS-style portfolio built with Flutter, featuring authentic CRT effects, draggable windows, and playable retro games (DOOM!).
 
-![Plasma Background Demo](https://via.placeholder.com/600x300/6B46C1/FFFFFF?text=Plasma+Background+Demo)
+![Flutter](https://img.shields.io/badge/Flutter-3.0+-02569B?logo=flutter)
+![Dart](https://img.shields.io/badge/Dart-3.0+-0175C2?logo=dart)
+![Architecture](https://img.shields.io/badge/Architecture-CLEAN-green)
+![State Management](https://img.shields.io/badge/State-BLoC-blue)
 
-## Features
+## ✨ Features
 
-- 🎨 **Customizable Colors**: Full color control with intensity-based tinting
-- ⚡ **High Performance**: Hardware-accelerated fragment shader rendering
-- 🎮 **Interactive**: Mouse/touch interaction affects plasma flow
-- 📱 **Cross-Platform**: Works on iOS, Android, macOS, Windows, Linux, and Web (CanvasKit)
-- 🎛️ **Flexible API**: Multiple animation directions and parameters
-- 🔄 **Smooth Animation**: 60fps with proper vsync handling
+- 🖥️ **Authentic 90's DOS Aesthetic**: CRT effects, scanlines, vignette, and retro fonts
+- 🪟 **Draggable Retro Windows**: Multiple windows with focus management and z-ordering
+- ⌨️ **Typewriter Animations**: Character-by-character text rendering
+- 🎮 **Playable DOOM**: Run DOOM shareware via js-dos emulation
+- 📱 **Responsive Design**: Works on desktop and mobile devices
+- 🎯 **Clean Architecture**: SOLID principles with BLoC pattern
 
-## Quick Start
+## 🏗️ Architecture
 
-### 1. Add to pubspec.yaml
+This project follows **CLEAN Architecture** principles with clear separation of concerns:
 
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-
-flutter:
-  shaders:
-    - assets/shaders/plasma.frag
+```
+lib/
+├── core/                   # Core functionality
+│   ├── constants/          # App-wide constants
+│   └── theme/              # Theme configuration
+│
+├── domain/                 # Business logic layer
+│   └── entities/           # Domain entities (WindowEntity, etc.)
+│
+├── presentation/           # UI layer
+│   ├── bloc/               # State management (BLoC pattern)
+│   │   ├── navigation/     # Navigation BLoC
+│   │   └── window_management/ # Window state BLoC
+│   ├── pages/              # Full-screen pages
+│   └── widgets/            # Reusable UI components
+│
+├── apps/                   # External app integrations (DOOM)
+├── screens/                # Legacy screens (being refactored)
+└── ui/                     # UI components
+    ├── retro/              # Retro-styled widgets
+    ├── windows/            # Window content widgets
+    └── desktop/            # Desktop icons and elements
 ```
 
-### 2. Copy the shader file
+### Key Architectural Decisions
 
-Copy `assets/shaders/plasma.frag` to your project's `assets/shaders/` directory.
+1. **BLoC Pattern**: Used for state management instead of Cubit for more explicit event handling
+2. **Entity Separation**: Domain entities are isolated from UI concerns
+3. **Single Responsibility**: Each class has one clear purpose
+4. **Dependency Inversion**: High-level modules don't depend on low-level details
+5. **Open/Closed Principle**: Easy to extend without modifying existing code
 
-### 3. Basic usage
+## 🚀 Getting Started
 
-```dart
-import 'package:flutter/material.dart';
-import 'plasma_background.dart';
+### Prerequisites
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          PlasmaBackground(
-            color: Color(0xFFFF6B35),
-            speed: 0.6,
-            direction: PlasmaDirection.forward,
-            scale: 1.1,
-            opacity: 0.8,
-            mouseInteractive: true,
-          ),
-          // Your UI content here
-          Center(
-            child: Text(
-              'Hello, Plasma!',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-```
+- Flutter SDK 3.0 or higher
+- Dart SDK 3.0 or higher
+- FVM (Flutter Version Management) - optional but recommended
 
-## API Reference
+### Installation
 
-### PlasmaBackground
-
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `color` | `Color` | `Colors.white` | Color used to tint the plasma effect |
-| `speed` | `double` | `1.0` | Animation speed multiplier |
-| `direction` | `PlasmaDirection` | `forward` | Animation direction |
-| `scale` | `double` | `1.0` | Scale/zoom factor (>1.0 zooms in) |
-| `opacity` | `double` | `1.0` | Opacity of the effect (0.0-1.0) |
-| `mouseInteractive` | `bool` | `true` | Enable mouse/touch interaction |
-| `fit` | `BoxFit` | `cover` | How to fit within available space |
-| `lowPowerMode` | `bool` | `false` | Reduce iterations for better performance |
-
-### PlasmaDirection
-
-- `PlasmaDirection.forward` - Normal forward animation
-- `PlasmaDirection.reverse` - Reversed animation
-- `PlasmaDirection.pingpong` - Oscillating animation using sin(time * 0.5)
-
-## Advanced Usage
-
-### Custom Colors
-
-```dart
-// Use a custom color
-PlasmaBackground(color: Color(0xFF6B46C1))
-
-// Show native plasma colors
-PlasmaBackground(color: Colors.transparent)
-```
-
-### Animation Control
-
-```dart
-// Fast forward animation
-PlasmaBackground(
-  speed: 2.0,
-  direction: PlasmaDirection.forward,
-)
-
-// Slow pingpong animation
-PlasmaBackground(
-  speed: 0.3,
-  direction: PlasmaDirection.pingpong,
-)
-```
-
-### As a Background Layer
-
-```dart
-SizedBox(
-  width: double.infinity,
-  height: 600,
-  child: Stack(
-    children: [
-      PlasmaBackground(
-        color: Color(0xFFFF6B35),
-        opacity: 0.7, // Semi-transparent
-      ),
-      // Your content here
-      YourContentWidget(),
-    ],
-  ),
-)
-```
-
-## Platform Support
-
-### Web Requirements
-
-This widget requires **CanvasKit** renderer for web. Add to your `web/index.html`:
-
-```html
-<script>
-  window.flutterConfiguration = {
-    canvasKitBaseUrl: "https://unpkg.com/canvaskit-wasm@0.37.2/bin/",
-    renderer: "canvaskit",
-  };
-</script>
-```
-
-### Mobile Performance
-
-On lower-end devices, you can enable low-power mode:
-
-```dart
-PlasmaBackground(
-  lowPowerMode: true, // Reduces shader iterations
-)
-```
-
-## Technical Details
-
-### Shader Uniforms
-
-The fragment shader receives uniforms in this order:
-
-| Index | Name | Type | Description |
-|-------|------|------|-------------|
-| 0-1 | `iResolution` | vec2 | Screen resolution in pixels |
-| 2 | `iTime` | float | Time in seconds |
-| 3-5 | `uCustomColor` | vec3 | RGB color (0.0-1.0, linearized) |
-| 6 | `uUseCustomColor` | float | Whether to use custom color (0.0/1.0) |
-| 7 | `uSpeed` | float | Speed multiplier |
-| 8 | `uDirection` | float | Direction value (-1.0 to 1.0) |
-| 9 | `uScale` | float | Scale factor |
-| 10 | `uOpacity` | float | Opacity multiplier |
-| 11-12 | `uMouse` | vec2 | Mouse position in local coordinates |
-| 13 | `uMouseInteractive` | float | Mouse interaction enabled (0.0/1.0) |
-
-### Color Space
-
-Input colors are converted from sRGB to linear space before passing to the shader:
-
-```dart
-double linearizeColor(double srgb) {
-  return srgb <= 0.04045 
-    ? srgb / 12.92 
-    : pow((srgb + 0.055) / 1.055, 2.4);
-}
-```
-
-### Performance Considerations
-
-- Uses `RepaintBoundary` to minimize repaints
-- Shader uniforms are clamped to safe ranges
-- Time is driven by `Ticker` with proper vsync
-- Device pixel ratio is handled correctly
-
-## Troubleshooting
-
-### Common Issues
-
-**Shader not loading:**
-- Ensure `assets/shaders/plasma.frag` is in your pubspec.yaml under `flutter.shaders`
-- Check that the shader file is copied to the correct location
-
-**Poor performance on web:**
-- Make sure you're using CanvasKit renderer, not HTML renderer
-- Consider enabling `lowPowerMode` for complex layouts
-
-**Black screen:**
-- Verify your shader compiles without errors
-- Check browser/device WebGL support
-- Ensure proper uniform values are being passed
-
-**Mouse interaction not working:**
-- Verify `mouseInteractive` is set to `true`
-- Check that the widget has proper size constraints
-- On mobile, touch events are treated as mouse events
-
-## Examples
-
-Run the example app to see all features in action:
-
+1. **Clone the repository**
 ```bash
-cd example
+git clone https://github.com/albatorresrodriguez/peach_black.git
+cd peach_black
+```
+
+2. **Install dependencies**
+```bash
+flutter pub get
+```
+
+3. **Run the app**
+```bash
+# For web
+flutter run -d chrome
+
+# For desktop (macOS)
+flutter run -d macos
+
+# For mobile
 flutter run
 ```
 
-The example includes:
-- Interactive controls for all parameters
-- Color picker with preset colors
-- Real-time parameter adjustment
-- Performance monitoring
+### Building for Production
 
-## License
+```bash
+# Web
+flutter build web --release
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+# macOS
+flutter build macos --release
 
-## Contributing
+# iOS
+flutter build ios --release
 
-Contributions are welcome! Please read the contributing guidelines before submitting PRs.
+# Android
+flutter build apk --release
+```
+
+## 📦 Dependencies
+
+### State Management
+- **flutter_bloc** (^8.1.3): BLoC pattern implementation
+- **equatable** (^2.0.5): Value equality for entities and states
+
+### Graphics & UI
+- **flutter_shaders** (^0.1.2): Custom plasma background shader
+
+### External Integration
+- **url_launcher** (^6.3.1): Open external links (CV, GitHub, LinkedIn)
+
+## 🎨 Design System
+
+### Colors
+- **Accent Color**: `#4AF626` (Neon green)
+- **Background**: `#000000` (Pure black)
+- **Text**: `#FFFFFF` (White with CRT shadow)
+- **Borders**: `#FFFFFF` (White, 2px)
+
+### Typography
+- **Font**: VT323 (Retro monospace terminal font)
+- **Shadow**: 1px offset black shadow for CRT effect
+
+### Spacing
+- Uses 8px grid system for consistent spacing
+- **Small**: 8px
+- **Medium**: 16px
+- **Large**: 24px
+- **XLarge**: 32px
+
+## 🎮 DOOM Integration
+
+The portfolio includes a playable version of DOOM shareware via js-dos emulation:
+
+1. **Location**: `web/doom/` directory
+2. **Engine**: js-dos v7 (DOSBox in browser)
+3. **Bundle**: Pre-installed DOOM shareware (5.3MB)
+4. **Controls**: 
+   - Arrow keys: Move
+   - Ctrl: Fire
+   - Alt: Strafe
+   - Space: Use/Open doors
+   - ESC: Menu
+
+### Technical Details
+- DOOM runs in an iframe isolated from the Flutter app
+- Assets are served locally (no CDN dependencies)
+- Custom `locateFile` configuration for WASM loading
+- Mobile fallback with touch controls
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+flutter test
+
+# Run with coverage
+flutter test --coverage
+
+# Run specific test file
+flutter test test/widget_test.dart
+```
+
+## 🔧 Configuration
+
+### Constants
+All configurable values are centralized in `lib/core/constants/app_constants.dart`:
+
+- Colors and themes
+- Animation durations
+- Window sizes
+- CRT effect parameters
+- External URLs
+- Asset paths
+
+### Theme
+Theme configuration is in `lib/core/theme/app_theme.dart`:
+
+- Typography settings
+- Button styles
+- AppBar theme
+- Text shadows
+
+## 📱 Responsive Breakpoints
+
+- **Desktop**: > 768px
+- **Tablet**: 600px - 768px
+- **Mobile**: < 600px
+
+## 🤝 Contributing
+
+This is a personal portfolio project, but suggestions and feedback are welcome!
 
 1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Acknowledgments
+## 📄 License
 
-- Inspired by the React + OGL plasma component
-- Fragment shader based on classic plasma effects
-- Built with Flutter's powerful shader system
+This project is for portfolio purposes. Feel free to use it as inspiration for your own projects!
+
+## 👤 Author
+
+**Alba Torres Rodríguez**
+- GitHub: [@albatorresrodriguez](https://github.com/albatorresrodriguez)
+- LinkedIn: [alba-torres-rodriguez](https://linkedin.com/in/alba-torres-rodriguez)
+- Portfolio: [Live Demo](https://albatorresrodriguez.github.io/peach_black)
+
+## 🙏 Acknowledgments
+
+- **VT323 Font**: Google Fonts
+- **js-dos**: [@caiiiycuk](https://github.com/caiiiycuk)
+- **DOOM**: id Software
+- **Flutter Community**: For amazing packages and support
+
+## 📝 Project Status
+
+🚧 **Active Development** - This project is continuously being improved and refactored to follow best practices.
+
+### Recent Updates
+- ✅ Migrated to CLEAN Architecture
+- ✅ Implemented BLoC pattern for state management
+- ✅ Added comprehensive documentation
+- ✅ Fixed DOOM integration
+- ✅ Improved code organization and naming
+
+### Roadmap
+- [ ] Complete refactoring of legacy screens
+- [ ] Add unit tests for BLoCs
+- [ ] Add widget tests for UI components
+- [ ] Implement additional retro games
+- [ ] Add sound effects
+- [ ] Improve mobile experience
+- [ ] Add accessibility features
+
+---
+
+Made with 💚 and Flutter by Alba Torres Rodríguez

@@ -61,7 +61,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
       _windows.add(
         RetroWindow(
           key: UniqueKey(),
-          title: 'About Alba',
+          title: 'About me',
           initialPosition: Offset(
             isMobile ? 10 : screenWidth * 0.2,
             isMobile ? 10 : screenHeight * 0.2,
@@ -72,7 +72,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
           minSize: const Size(300, 300),
           onClose: () {
             setState(() {
-              _windows.removeWhere((window) => (window as RetroWindow).title == 'About Alba');
+              _windows.removeWhere((window) => (window as RetroWindow).title == 'About me');
             });
           },
           child: const AboutWindow(),
@@ -159,8 +159,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
           key: UniqueKey(),
           title: 'DOOM',
           initialPosition: Offset(
-            isMobile ? 10 : screenWidth * 0.15,
-            isMobile ? 10 : screenHeight * 0.1,
+            isMobile ? 20 : screenWidth * 0.20,
+            isMobile ? 20 : screenHeight * 0.15,
           ),
           initialSize: isMobile 
               ? Size(screenWidth - 20, screenHeight - 20)
@@ -233,7 +233,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                                 children: [
                                   // Logo/Title
                                   const Text(
-                                    'ALBA.EXE',
+                                    'ALBA TORRES RODRÍGUEZ - LEAD SENIOR SOFTWARE ENGINEER',
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontFamily: 'VT323',
@@ -293,7 +293,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                                 children: [
                                   // Logo/Title
                                   const Text(
-                                    'ALBA.EXE',
+                                    'ALBA TORRES RODRÍGUEZ - LEAD SENIOR SOFTWARE ENGINEER',
                                     style: TextStyle(
                                       fontSize: 24,
                                       fontFamily: 'VT323',
@@ -406,8 +406,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
     System.out.println("Loading Alba's portfolio...");^500
 
     String[] skills = new String[]{^200
-      "Flutter Development",^200
-      "Web Technologies",^200
+      "Lead Senior Software Engineer",^200
+      "Mobile Technologies",^200
       "UI/UX Design",^200
       "Problem Solving"^300
     };^200

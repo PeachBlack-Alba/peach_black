@@ -1,20 +1,52 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import '../../core/constants/app_constants.dart';
 
-/// A CRT overlay that adds scanlines, vignette, and subtle flicker effects
-/// Compatible with Flutter web (no fragment shaders)
+/// CRT (Cathode Ray Tube) screen overlay effect widget
+/// 
+/// Adds authentic retro monitor effects over any content:
+/// - **Scanlines**: Horizontal lines mimicking CRT electron beam
+/// - **Vignette**: Darkened edges like curved CRT screens
+/// - **Flicker**: Subtle brightness variations at ~60Hz
+/// 
+/// **Compatibility:**
+/// Uses CustomPainter (Canvas API) instead of fragment shaders,
+/// making it fully compatible with Flutter web and all platforms.
+/// 
+/// **Performance:**
+/// - Runs at 60fps with AnimationController
+/// - Uses IgnorePointer to allow interaction with content below
+/// - Efficiently repaints only when flicker value changes
+/// 
+/// **Usage:**
+/// ```dart
+/// CRTOverlay(
+///   child: YourContent(),
+/// )
+/// ```
+/// 
+/// **Historical Context:**
+/// Recreates the visual characteristics of 80s-90s CRT monitors
+/// used with DOS systems, adding authenticity to the retro aesthetic.
 class CRTOverlay extends StatefulWidget {
+  /// Content to display with CRT effects applied
   final Widget child;
+  
+  /// Opacity of horizontal scanlines (0.0 = invisible, 1.0 = fully opaque)
   final double scanlineOpacity;
+  
+  /// Opacity of vignette darkening at edges
   final double vignetteOpacity;
+  
+  /// Intensity of brightness flicker effect
   final double flickerIntensity;
   
   const CRTOverlay({
     super.key,
     required this.child,
-    this.scanlineOpacity = 0.08,
-    this.vignetteOpacity = 0.28,
-    this.flickerIntensity = 0.02,
+    this.scanlineOpacity = AppConstants.scanlineOpacity,
+    this.vignetteOpacity = AppConstants.vignetteOpacity,
+    this.flickerIntensity = AppConstants.crtFlickerIntensity,
   });
 
   @override
@@ -30,9 +62,9 @@ class _CRTOverlayState extends State<CRTOverlay>
   void initState() {
     super.initState();
     
-    // 60Hz flicker simulation
+    // 60Hz flicker simulation (~60fps CRT refresh rate)
     _flickerController = AnimationController(
-      duration: const Duration(milliseconds: 16), // ~60fps
+      duration: AppConstants.crtFlickerDuration,
       vsync: this,
     )..repeat();
     
@@ -81,9 +113,24 @@ class _CRTOverlayState extends State<CRTOverlay>
   }
 }
 
+/// Custom painter for CRT screen effects
+/// 
+/// Draws three visual layers:
+/// 1. **Scanlines**: Horizontal dark lines every 4px
+/// 2. **Vignette**: Radial gradient darkening at edges
+/// 3. **Flicker**: Subtle white overlay varying with flicker animation
+/// 
+/// **Performance:**
+/// Only repaints when flicker offset changes (60 times per second).
+/// Scanlines and vignette are efficiently drawn using Canvas primitives.
 class CRTPainter extends CustomPainter {
+  /// Opacity of scanline effect
   final double scanlineOpacity;
+  
+  /// Opacity of vignette effect
   final double vignetteOpacity;
+  
+  /// Current flicker offset value from animation (-intensity to +intensity)
   final double flickerOffset;
   
   CRTPainter({
@@ -94,23 +141,22 @@ class CRTPainter extends CustomPainter {
   
   @override
   void paint(Canvas canvas, Size size) {
-    // Draw scanlines - 1px every 3-4px
     _drawScanlines(canvas, size);
-    
-    // Draw vignette effect
     _drawVignette(canvas, size);
-    
-    // Add subtle flicker overlay
     _drawFlicker(canvas, size);
   }
   
+  /// Draws horizontal scanlines across the screen
+  /// 
+  /// Scanlines simulate the horizontal electron beam traces on CRT monitors.
+  /// Drawn as 1px black lines with configurable spacing and opacity.
   void _drawScanlines(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = Colors.black.withOpacity(scanlineOpacity)
       ..strokeWidth = 1;
     
-    // Draw horizontal scanlines every 3-4 pixels
-    for (double y = 0; y < size.height; y += 4) {
+    // Draw horizontal line every N pixels (defined by spacing constant)
+    for (double y = 0; y < size.height; y += AppConstants.scanlineSpacing) {
       canvas.drawLine(
         Offset(0, y),
         Offset(size.width, y),
@@ -119,6 +165,10 @@ class CRTPainter extends CustomPainter {
     }
   }
   
+  /// Draws radial gradient vignette effect
+  /// 
+  /// Creates darkening at screen edges, mimicking the curved glass
+  /// and electron beam falloff of CRT monitors.
   void _drawVignette(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = math.max(size.width, size.height) * 0.8;
@@ -142,11 +192,18 @@ class CRTPainter extends CustomPainter {
     canvas.drawRect(Offset.zero & size, paint);
   }
   
+  /// Draws subtle brightness flicker overlay
+  /// 
+  /// Simulates the slight brightness variations in CRT displays caused by
+  /// power fluctuations and electron beam instability. Uses overlay blend
+  /// mode for subtle white layer that varies with animation.
+  /// 
+  /// Only draws if flicker is significant enough to be visible.
   void _drawFlicker(Canvas canvas, Size size) {
     if (flickerOffset.abs() > 0.005) {
       final paint = Paint()
         ..color = Colors.white.withOpacity(flickerOffset.abs() * 0.5)
-        ..blendMode = BlendMode.overlay;
+        ..blendMode = BlendMode.overlay; // Subtle brightness adjustment
       
       canvas.drawRect(Offset.zero & size, paint);
     }
