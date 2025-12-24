@@ -110,7 +110,7 @@ class _DesktopIconState extends State<DesktopIcon> {
                 widget.label,
                 style: TextStyle(
                   fontFamily: 'VT323',
-                  fontSize: 14,
+                  fontSize: 16,
                   color: _isSelected ? Colors.white : Colors.white70,
                   shadows: [
                     Shadow(

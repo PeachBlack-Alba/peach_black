@@ -178,7 +178,7 @@ class _TypewriterTextState extends State<TypewriterText> {
       style: widget.textStyle ?? const TextStyle(
         fontFamily: AppConstants.fontFamily,
         color: AppConstants.primaryTextColor,
-        fontSize: 14,
+        fontSize: 16,
         shadows: AppConstants.textShadow,
       ),
     );

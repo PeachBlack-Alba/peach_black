@@ -81,7 +81,7 @@ class WorkWindow extends StatelessWidget {
             const SizedBox(height: 12),
 
             _buildExperienceItem(
-              'Tech Lead — Cino (Fintech)',
+              'Lead Senior Software Engineer — Cino (Fintech)',
               'Jun 2024 - Present',
               'Leading end-to-end delivery for core payments experiences (architecture, execution, and quality) in a Flutter codebase at scale. '
                   'Own technical strategy for high-risk surfaces like Apple Pay, improving reliability, '
@@ -124,24 +124,6 @@ class WorkWindow extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // Apps section
-            const Text(
-              'Apps I Created and Maintained:',
-              style: TextStyle(
-                fontFamily: 'VT323',
-                fontSize: 18,
-                color: Color(0xFF4AF626),
-                fontWeight: FontWeight.bold,
-                shadows: [
-                  Shadow(
-                    offset: Offset(1, 1),
-                    color: Colors.black,
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 12),
 
             _buildAppsTable(isMobile),
 
@@ -178,7 +160,7 @@ class WorkWindow extends StatelessWidget {
                 title,
                 style: const TextStyle(
                   fontFamily: 'VT323',
-                  fontSize: 18,
+                  fontSize: 20,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   shadows: [
@@ -194,7 +176,7 @@ class WorkWindow extends StatelessWidget {
                 period,
                 style: const TextStyle(
                   fontFamily: 'VT323',
-                  fontSize: 16,
+                  fontSize: 18,
                   color: Colors.white70,
                   shadows: [
                     Shadow(
@@ -237,7 +219,7 @@ class WorkWindow extends StatelessWidget {
             title,
             style: const TextStyle(
               fontFamily: 'VT323',
-              fontSize: 18,
+              fontSize: 20,
               color: Colors.white,
               fontWeight: FontWeight.bold,
               shadows: [
@@ -253,7 +235,7 @@ class WorkWindow extends StatelessWidget {
             description,
             style: const TextStyle(
               fontFamily: 'VT323',
-              fontSize: 16,
+              fontSize: 18,
               color: Colors.white70,
               height: 1.4,
               shadows: [
@@ -279,7 +261,7 @@ class WorkWindow extends StatelessWidget {
                         tech,
                         style: const TextStyle(
                           fontFamily: 'VT323',
-                          fontSize: 12,
+                          fontSize: 18,
                           color: Color(0xFF4AF626),
                           shadows: [
                             Shadow(
@@ -325,7 +307,7 @@ class WorkWindow extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontFamily: 'VT323',
-                  fontSize: isMobile ? 16 : 18,
+                  fontSize: isMobile ? 18 : 20,
                   color: Colors.white,
                   shadows: const [
                     Shadow(
@@ -369,7 +351,7 @@ class WorkWindow extends StatelessWidget {
           // Table header
           Container(
             padding: EdgeInsets.symmetric(
-              horizontal: isMobile ? 8 : 12,
+              horizontal: isMobile ? 10 : 14,
               vertical: 8,
             ),
             decoration: const BoxDecoration(
@@ -383,7 +365,7 @@ class WorkWindow extends StatelessWidget {
                     'APP NAME',
                     style: TextStyle(
                       fontFamily: 'VT323',
-                      fontSize: isMobile ? 14 : 16,
+                      fontSize: isMobile ? 18 : 20,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
@@ -396,7 +378,7 @@ class WorkWindow extends StatelessWidget {
                       'STATUS',
                       style: TextStyle(
                         fontFamily: 'VT323',
-                        fontSize: isMobile ? 14 : 16,
+                        fontSize: isMobile ? 18 : 20,
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
@@ -443,7 +425,7 @@ class WorkWindow extends StatelessWidget {
                                 '> ',
                                 style: TextStyle(
                                   fontFamily: 'VT323',
-                                  fontSize: 16,
+                                  fontSize: 18,
                                   color: Color(0xFF4AF626),
                                 ),
                               ),
@@ -452,7 +434,7 @@ class WorkWindow extends StatelessWidget {
                                   app['name']!,
                                   style: TextStyle(
                                     fontFamily: 'VT323',
-                                    fontSize: isMobile ? 14 : 16,
+                                    fontSize: isMobile ? 16 : 18,
                                     color: Colors.white,
                                     decoration: TextDecoration.underline,
                                     shadows: const [
@@ -475,7 +457,7 @@ class WorkWindow extends StatelessWidget {
                               '✅ DONE',
                               style: TextStyle(
                                 fontFamily: 'VT323',
-                                fontSize: isMobile ? 12 : 14,
+                                fontSize: isMobile ? 16 : 18,
                                 color: const Color(0xFF4AF626),
                                 fontWeight: FontWeight.bold,
                                 shadows: const [

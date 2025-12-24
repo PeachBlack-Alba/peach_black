@@ -40,45 +40,45 @@ class AppTextStyles {
 
   // ============ HEADINGS ============
   
-  /// Extra large heading (48px) - for main titles
+  /// Extra large heading (50px) - for main titles
   /// 
   /// Use for: Screen titles, splash screens, hero text
   static const TextStyle headingXLarge = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 48,
+    fontSize: 50,
     fontWeight: FontWeight.bold,
     color: AppConstants.primaryTextColor,
     shadows: AppConstants.textShadow,
   );
 
-  /// Large heading (36px) - for section titles
+  /// Large heading (38px) - for section titles
   /// 
   /// Use for: Section headers, window titles
   static const TextStyle headingLarge = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 36,
+    fontSize: 38,
     fontWeight: FontWeight.bold,
     color: AppConstants.primaryTextColor,
     shadows: AppConstants.textShadow,
   );
 
-  /// Medium heading (28px) - for subsection titles
+  /// Medium heading (30px) - for subsection titles
   /// 
   /// Use for: Subsection headers, card titles
   static const TextStyle headingMedium = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: FontWeight.bold,
     color: AppConstants.primaryTextColor,
     shadows: AppConstants.textShadow,
   );
 
-  /// Small heading (24px) - for minor headings
+  /// Small heading (26px) - for minor headings
   /// 
   /// Use for: List headers, dialog titles
   static const TextStyle headingSmall = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: FontWeight.bold,
     color: AppConstants.primaryTextColor,
     shadows: AppConstants.textShadow,
@@ -86,10 +86,21 @@ class AppTextStyles {
 
   // ============ BODY TEXT ============
   
-  /// Large body text (20px) with proper line height
+  /// Large body text (22px) with proper line height
   /// 
   /// Use for: Main content, paragraphs, descriptions
   static const TextStyle bodyLarge = TextStyle(
+    fontFamily: AppConstants.fontFamily,
+    fontSize: 22,
+    color: AppConstants.primaryTextColor,
+    height: 1.5,
+    shadows: AppConstants.textShadow,
+  );
+
+  /// Medium body text (20px) - standard body
+  /// 
+  /// Use for: Standard content, list items
+  static const TextStyle bodyMedium = TextStyle(
     fontFamily: AppConstants.fontFamily,
     fontSize: 20,
     color: AppConstants.primaryTextColor,
@@ -97,23 +108,12 @@ class AppTextStyles {
     shadows: AppConstants.textShadow,
   );
 
-  /// Medium body text (18px) - standard body
-  /// 
-  /// Use for: Standard content, list items
-  static const TextStyle bodyMedium = TextStyle(
-    fontFamily: AppConstants.fontFamily,
-    fontSize: 18,
-    color: AppConstants.primaryTextColor,
-    height: 1.5,
-    shadows: AppConstants.textShadow,
-  );
-
-  /// Small body text (16px) - compact content
+  /// Small body text (18px) - compact content
   /// 
   /// Use for: Dense content, secondary text
   static const TextStyle bodySmall = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 16,
+    fontSize: 18,
     color: AppConstants.primaryTextColor,
     height: 1.5,
     shadows: AppConstants.textShadow,
@@ -121,10 +121,21 @@ class AppTextStyles {
 
   // ============ LABELS & UI ELEMENTS ============
   
-  /// Button label text (18px)
+  /// Button label text (20px)
   /// 
   /// Use for: Button text, action labels
   static const TextStyle button = TextStyle(
+    fontFamily: AppConstants.fontFamily,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: AppConstants.primaryTextColor,
+    shadows: AppConstants.textShadow,
+  );
+
+  /// Window title bar text (18px)
+  /// 
+  /// Use for: Window title bars, dialog headers
+  static const TextStyle windowTitle = TextStyle(
     fontFamily: AppConstants.fontFamily,
     fontSize: 18,
     fontWeight: FontWeight.bold,
@@ -132,67 +143,56 @@ class AppTextStyles {
     shadows: AppConstants.textShadow,
   );
 
-  /// Window title bar text (16px)
-  /// 
-  /// Use for: Window title bars, dialog headers
-  static const TextStyle windowTitle = TextStyle(
-    fontFamily: AppConstants.fontFamily,
-    fontSize: 16,
-    fontWeight: FontWeight.bold,
-    color: AppConstants.primaryTextColor,
-    shadows: AppConstants.textShadow,
-  );
-
-  /// Small label text (14px)
+  /// Small label text (16px)
   /// 
   /// Use for: Form labels, small UI text
   static const TextStyle label = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 14,
+    fontSize: 16,
     color: AppConstants.primaryTextColor,
     shadows: AppConstants.textShadow,
   );
 
-  /// Extra small label (12px)
+  /// Extra small label (14px)
   /// 
   /// Use for: Hints, captions, footnotes
   static const TextStyle caption = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 12,
+    fontSize: 14,
     color: AppConstants.secondaryTextColor,
     shadows: AppConstants.textShadow,
   );
 
   // ============ SPECIAL STYLES ============
   
-  /// Monospace code text (16px)
+  /// Monospace code text (18px)
   /// 
   /// Use for: Code snippets, terminal output, technical text
   static const TextStyle code = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 16,
+    fontSize: 18,
     color: AppConstants.accentColor,
     height: 1.4,
     shadows: AppConstants.textShadow,
   );
 
-  /// Terminal/console text (18px)
+  /// Terminal/console text (20px)
   /// 
   /// Use for: Command line interfaces, DOS prompts
   static const TextStyle terminal = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 18,
+    fontSize: 20,
     color: AppConstants.accentColor,
     height: 1.3,
     shadows: AppConstants.textShadow,
   );
 
-  /// Typewriter animation text (14px)
+  /// Typewriter animation text (16px)
   /// 
   /// Use for: Boot sequences, loading text, typewriter effects
   static const TextStyle typewriter = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 14,
+    fontSize: 16,
     color: AppConstants.primaryTextColor,
     shadows: AppConstants.textShadow,
   );
@@ -202,7 +202,7 @@ class AppTextStyles {
   /// Use for: Hyperlinks, clickable text
   static const TextStyle link = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 18,
+    fontSize: 20,
     color: AppConstants.accentColor,
     decoration: TextDecoration.underline,
     decorationColor: AppConstants.accentColor,
@@ -214,7 +214,7 @@ class AppTextStyles {
   /// Use for: Error messages, validation errors
   static const TextStyle error = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 16,
+    fontSize: 18,
     color: AppConstants.errorColor,
     shadows: AppConstants.textShadow,
   );
@@ -226,7 +226,7 @@ class AppTextStyles {
   /// Use for: Highlighted content, important text
   static const TextStyle bodyAccent = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 18,
+    fontSize: 20,
     color: AppConstants.accentColor,
     height: 1.5,
     shadows: AppConstants.textShadow,
@@ -237,7 +237,7 @@ class AppTextStyles {
   /// Use for: Important titles, highlighted headers
   static const TextStyle headingAccent = TextStyle(
     fontFamily: AppConstants.fontFamily,
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: FontWeight.bold,
     color: AppConstants.accentColor,
     shadows: AppConstants.textShadow,

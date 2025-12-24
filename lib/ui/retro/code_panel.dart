@@ -75,7 +75,7 @@ class CodePanel extends StatelessWidget {
               fileName,
               style: const TextStyle(
                 fontFamily: 'VT323',
-                fontSize: 18,
+                fontSize: 20,
                 color: Colors.white70,
                 shadows: [
                   Shadow(
@@ -100,7 +100,7 @@ class CodePanel extends StatelessWidget {
                   loopDelay: loopDelay,
                   textStyle: const TextStyle(
                     fontFamily: 'VT323',
-                    fontSize: 18,
+                    fontSize: 20,
                     color: Colors.white,
                     height: 1.4,
                     shadows: [

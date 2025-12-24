@@ -43,7 +43,7 @@ class _ContactWindowState extends State<ContactWindow> {
                               '🎉 Easter Egg Found!',
                               style: TextStyle(
                                 fontFamily: 'VT323',
-                                fontSize: 18,
+                                fontSize: 20,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -63,7 +63,7 @@ class _ContactWindowState extends State<ContactWindow> {
                                   child: Text(
                                     '×',
                                     style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -185,25 +185,6 @@ class _ContactWindowState extends State<ContactWindow> {
               url: 'https://www.linkedin.com/in/albatorresrodriguez/',
             ),
 
-            const SizedBox(height: 24),
-
-            // Availability section
-            const Text(
-              'Availability:',
-              style: TextStyle(
-                fontFamily: 'VT323',
-                fontSize: 18,
-                color: Color(0xFF4AF626),
-                fontWeight: FontWeight.bold,
-                shadows: [
-                  Shadow(
-                    offset: Offset(1, 1),
-                    color: Colors.black,
-                  ),
-                ],
-              ),
-            ),
-
             const SizedBox(height: 12),
 
             Container(
@@ -224,7 +205,7 @@ class _ContactWindowState extends State<ContactWindow> {
                           'Currently Available for:',
                           style: TextStyle(
                             fontFamily: 'VT323',
-                            fontSize: 16,
+                            fontSize: 20,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             shadows: [
@@ -240,7 +221,7 @@ class _ContactWindowState extends State<ContactWindow> {
                           '• Mobile Development Projects',
                           style: TextStyle(
                             fontFamily: 'VT323',
-                            fontSize: 16,
+                            fontSize: 20,
                             color: Colors.white70,
                             shadows: [
                               Shadow(
@@ -254,7 +235,7 @@ class _ContactWindowState extends State<ContactWindow> {
                           '• Mobile App Consulting',
                           style: TextStyle(
                             fontFamily: 'VT323',
-                            fontSize: 16,
+                            fontSize: 20,
                             color: Colors.white70,
                             shadows: [
                               Shadow(
@@ -268,7 +249,7 @@ class _ContactWindowState extends State<ContactWindow> {
                           '• Code Reviews & Mentoring',
                           style: TextStyle(
                             fontFamily: 'VT323',
-                            fontSize: 16,
+                            fontSize: 20,
                             color: Colors.white70,
                             shadows: [
                               Shadow(
@@ -327,7 +308,7 @@ class _ContactWindowState extends State<ContactWindow> {
                   label,
                   style: const TextStyle(
                     fontFamily: 'VT323',
-                    fontSize: 16,
+                    fontSize: 18,
                     color: Color(0xFF4AF626),
                     fontWeight: FontWeight.bold,
                     shadows: [
@@ -342,7 +323,7 @@ class _ContactWindowState extends State<ContactWindow> {
                   value,
                   style: const TextStyle(
                     fontFamily: 'VT323',
-                    fontSize: 16,
+                    fontSize: 18,
                     color: Colors.white,
                     shadows: [
                       Shadow(
@@ -356,7 +337,7 @@ class _ContactWindowState extends State<ContactWindow> {
                   description,
                   style: const TextStyle(
                     fontFamily: 'VT323',
-                    fontSize: 14,
+                    fontSize: 16,
                     color: Colors.white70,
                     shadows: [
                       Shadow(
@@ -425,7 +406,7 @@ class _ContactWindowState extends State<ContactWindow> {
                         platform,
                         style: const TextStyle(
                           fontFamily: 'VT323',
-                          fontSize: 16,
+                          fontSize: 18,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           shadows: [
@@ -440,7 +421,7 @@ class _ContactWindowState extends State<ContactWindow> {
                         handle,
                         style: const TextStyle(
                           fontFamily: 'VT323',
-                          fontSize: 14,
+                          fontSize: 16,
                           color: Color(0xFF4AF626),
                           shadows: [
                             Shadow(
@@ -454,7 +435,7 @@ class _ContactWindowState extends State<ContactWindow> {
                         description,
                         style: const TextStyle(
                           fontFamily: 'VT323',
-                          fontSize: 12,
+                          fontSize: 14,
                           color: Colors.white70,
                           shadows: [
                             Shadow(

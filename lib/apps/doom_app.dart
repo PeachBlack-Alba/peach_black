@@ -62,7 +62,7 @@ class _DoomAppState extends State<DoomApp> {
                       'DOOM',
                       style: TextStyle(
                         fontFamily: 'VT323',
-                        fontSize: 32,
+                        fontSize: 34,
                         color: Colors.white,
                         shadows: [
                           Shadow(offset: Offset(1, 1), color: Colors.black),
@@ -74,7 +74,7 @@ class _DoomAppState extends State<DoomApp> {
                       'This game is only available on Web platform.',
                       style: TextStyle(
                         fontFamily: 'VT323',
-                        fontSize: 16,
+                        fontSize: 18,
                         color: Colors.white70,
                         shadows: [
                           Shadow(offset: Offset(1, 1), color: Colors.black),
@@ -87,7 +87,7 @@ class _DoomAppState extends State<DoomApp> {
                       'Please visit this portfolio in a web browser to play.',
                       style: TextStyle(
                         fontFamily: 'VT323',
-                        fontSize: 14,
+                        fontSize: 16,
                         color: Color(0xFF00FFFF),
                         shadows: [
                           Shadow(offset: Offset(1, 1), color: Colors.black),
@@ -127,7 +127,7 @@ class _DoomAppState extends State<DoomApp> {
                       'Initializing DOOM...',
                       style: TextStyle(
                         fontFamily: 'VT323',
-                        fontSize: 18,
+                        fontSize: 20,
                         color: Colors.white,
                         shadows: [
                           Shadow(offset: Offset(1, 1), color: Colors.black),
@@ -139,7 +139,7 @@ class _DoomAppState extends State<DoomApp> {
                       'Click on the canvas to enable audio',
                       style: TextStyle(
                         fontFamily: 'VT323',
-                        fontSize: 14,
+                        fontSize: 16,
                         color: Color(0xFF00FFFF),
                         shadows: [
                           Shadow(offset: Offset(1, 1), color: Colors.black),

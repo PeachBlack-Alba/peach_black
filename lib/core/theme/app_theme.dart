@@ -64,7 +64,7 @@ class AppTheme {
         elevation: 0,
         titleTextStyle: TextStyle(
           fontFamily: AppConstants.fontFamily,
-          fontSize: 20,
+          fontSize: 22,
           color: AppConstants.primaryTextColor,
           shadows: AppConstants.textShadow,
         ),
@@ -87,29 +87,29 @@ class AppTheme {
 
     return TextTheme(
       // Display styles (largest text)
-      displayLarge: baseStyle.copyWith(fontSize: 57),
-      displayMedium: baseStyle.copyWith(fontSize: 45),
-      displaySmall: baseStyle.copyWith(fontSize: 36),
+      displayLarge: baseStyle.copyWith(fontSize: 59),
+      displayMedium: baseStyle.copyWith(fontSize: 47),
+      displaySmall: baseStyle.copyWith(fontSize: 38),
       
       // Headline styles (headers)
-      headlineLarge: baseStyle.copyWith(fontSize: 32),
-      headlineMedium: baseStyle.copyWith(fontSize: 28),
-      headlineSmall: baseStyle.copyWith(fontSize: 24),
+      headlineLarge: baseStyle.copyWith(fontSize: 34),
+      headlineMedium: baseStyle.copyWith(fontSize: 30),
+      headlineSmall: baseStyle.copyWith(fontSize: 26),
       
       // Title styles (section titles)
-      titleLarge: baseStyle.copyWith(fontSize: 22),
-      titleMedium: baseStyle.copyWith(fontSize: 16),
-      titleSmall: baseStyle.copyWith(fontSize: 14),
+      titleLarge: baseStyle.copyWith(fontSize: 24),
+      titleMedium: baseStyle.copyWith(fontSize: 18),
+      titleSmall: baseStyle.copyWith(fontSize: 16),
       
       // Body styles (main content)
-      bodyLarge: baseStyle.copyWith(fontSize: 16),
-      bodyMedium: baseStyle.copyWith(fontSize: 14),
-      bodySmall: baseStyle.copyWith(fontSize: 12),
+      bodyLarge: baseStyle.copyWith(fontSize: 18),
+      bodyMedium: baseStyle.copyWith(fontSize: 16),
+      bodySmall: baseStyle.copyWith(fontSize: 14),
       
       // Label styles (buttons, labels)
-      labelLarge: baseStyle.copyWith(fontSize: 14),
-      labelMedium: baseStyle.copyWith(fontSize: 12),
-      labelSmall: baseStyle.copyWith(fontSize: 11),
+      labelLarge: baseStyle.copyWith(fontSize: 16),
+      labelMedium: baseStyle.copyWith(fontSize: 14),
+      labelSmall: baseStyle.copyWith(fontSize: 13),
     );
   }
 }

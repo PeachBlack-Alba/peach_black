@@ -235,7 +235,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                                   const Text(
                                     'ALBA TORRES RODRÍGUEZ - LEAD SENIOR SOFTWARE ENGINEER',
                                     style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 22,
                                       fontFamily: 'VT323',
                                       color: Colors.white,
                                       shadows: [
@@ -255,7 +255,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                                       RetroButton(
                                         text: 'ABOUT',
                                         onPressed: _openAboutWindow,
-                                        fontSize: 16,
+                                        fontSize: 18,
                                         fontFamily: 'VT323',
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 12,
@@ -266,7 +266,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                                       RetroButton(
                                         text: 'WORK',
                                         onPressed: _openWorkWindow,
-                                        fontSize: 16,
+                                        fontSize: 18,
                                         fontFamily: 'VT323',
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 12,
@@ -277,7 +277,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                                       RetroButton(
                                         text: 'CONTACT',
                                         onPressed: _openContactWindow,
-                                        fontSize: 16,
+                                        fontSize: 18,
                                         fontFamily: 'VT323',
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 12,
@@ -295,7 +295,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                                   const Text(
                                     'ALBA TORRES RODRÍGUEZ - LEAD SENIOR SOFTWARE ENGINEER',
                                     style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 26,
                                       fontFamily: 'VT323',
                                       color: Colors.white,
                                       shadows: [

@@ -109,7 +109,7 @@ class _StartScreenState extends State<StartScreen>
                           const Text(
                             'Alba Torres Rodríguez Portfolio',
                             style: TextStyle(
-                              fontSize: 26,
+                              fontSize: 28,
                               fontFamily: 'VT323',
                               color: Colors.white,
                               height: 1.2,
@@ -130,7 +130,7 @@ class _StartScreenState extends State<StartScreen>
                               const Text(
                                 'Click start to begin',
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 22,
                                   fontFamily: 'VT323',
                                   color: Colors.white,
                                   shadows: [
@@ -150,7 +150,7 @@ class _StartScreenState extends State<StartScreen>
                                     child: const Text(
                                       '|',
                                       style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 22,
                                         fontFamily: 'VT323',
                                         color: Color(0xFF4AF626),
                                         shadows: [
@@ -174,7 +174,7 @@ class _StartScreenState extends State<StartScreen>
                             Text(
                               _loadingText,
                               style: const TextStyle(
-                                fontSize: 20,
+                                fontSize: 22,
                                 fontFamily: 'VT323',
                                 color: Colors.white,
                                 shadows: [
@@ -189,7 +189,7 @@ class _StartScreenState extends State<StartScreen>
                             RetroButton(
                               text: 'START',
                               onPressed: _handleStart,
-                              fontSize: 18,
+                              fontSize: 20,
                               fontFamily: 'VT323',
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 30,
