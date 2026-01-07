@@ -83,7 +83,7 @@ class WorkWindow extends StatelessWidget {
             _buildExperienceItem(
               'Lead Senior Software Engineer — Cino (Fintech)',
               'Jun 2024 - Present',
-              'Leading end-to-end delivery for core payments experiences (architecture, execution, and quality) in a Flutter codebase at scale. '
+              'Leading end-to-end delivery for core payments experiences (architecture, execution, and quality) in a codebase at scale. '
                   'Own technical strategy for high-risk surfaces like Apple Pay, improving reliability, '
                   'debuggability and testability of the app. Partner with Product/Design/Backend on roadmap and system contracts, and keep release velocity high '
                   'through CI/CD automation (Fastlane, GitHub Actions, Firebase Distribution) and strong engineering standards.',
@@ -101,7 +101,7 @@ class WorkWindow extends StatelessWidget {
             _buildExperienceItem(
               'Senior Software Engineer — Delivery Hero (AdTech & Vendor Tech)',
               'Oct 2017 - Sep 2022',
-              'Owned multi-country Flutter products and shared SDK components used across high-traffic food delivery ecosystems. '
+              'Owned multi-country products and shared SDK components used across high-traffic food delivery ecosystems. '
                   'Drove performance work (startup time, UI responsiveness, and app size), strengthened monitoring/analytics, and improved incident response '
                   'by building clearer failure modes and better tooling. Mentored engineers, influenced technical direction across teams, and shipped '
                   'user-facing features under high reliability and scalability constraints.',

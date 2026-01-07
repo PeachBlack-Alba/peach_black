@@ -153,7 +153,7 @@ class AboutWindow extends StatelessWidget {
                 // Caption / subtext
                 const Center(
                   child: Text(
-                    'Figure 1: A real photo of me now',
+                    'Figure 2: A real photo of me now',
                     textAlign: TextAlign.center,
                     style: AppTextStyles.caption,
                   ),
