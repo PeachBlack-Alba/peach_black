@@ -82,7 +82,7 @@ class WorkWindow extends StatelessWidget {
 
             _buildExperienceItem(
               'Lead Senior Software Engineer — Cino (Fintech)',
-              'Jun 2024 - Present',
+              'Jun 2025 - Present',
               'Leading end-to-end delivery for core payments experiences (architecture, execution, and quality) in a codebase at scale. '
                   'Own technical strategy for high-risk surfaces like Apple Pay, improving reliability, '
                   'debuggability and testability of the app. Partner with Product/Design/Backend on roadmap and system contracts, and keep release velocity high '
@@ -91,7 +91,7 @@ class WorkWindow extends StatelessWidget {
 
             _buildExperienceItem(
               'Senior Software Engineer — SeQura (Fintech)',
-              'Sep 2023 - May 2024',
+              'Sep 2024 - May 2025',
               'Delivered and stabilized critical checkout and post-purchase flows (postpone payments, card lifecycle, amortization, and resilient error states) '
                   'with a focus on correctness, observability, and user trust. Led release automation and reduced operational overhead by streamlining pipelines '
                   'with Fastlane + Firebase Distribution. Collaborated closely with Backend to improve GraphQL efficiency and reduce unnecessary network payloads '
@@ -100,7 +100,7 @@ class WorkWindow extends StatelessWidget {
 
             _buildExperienceItem(
               'Senior Software Engineer — Delivery Hero (AdTech & Vendor Tech)',
-              'Oct 2017 - Sep 2022',
+              'Oct 2020 - Sep 2024',
               'Owned multi-country products and shared SDK components used across high-traffic food delivery ecosystems. '
                   'Drove performance work (startup time, UI responsiveness, and app size), strengthened monitoring/analytics, and improved incident response '
                   'by building clearer failure modes and better tooling. Mentored engineers, influenced technical direction across teams, and shipped '
@@ -109,7 +109,7 @@ class WorkWindow extends StatelessWidget {
 
             _buildExperienceItem(
               'Software Engineer — theBASE FOL Group GmbH',
-              'Feb 2016 - Oct 2016',
+              'Feb 2020 - Oct 2020',
               'Built a production app from the ground up, establishing strong foundations early: architecture conventions, testing strategy, '
                   'and CI-friendly workflows. Increased test coverage from 0% → 90% and improved maintainability by standardizing patterns for navigation, '
                   'state management, and UI components. Worked directly with stakeholders to translate product needs into high-quality releases.',
@@ -117,7 +117,7 @@ class WorkWindow extends StatelessWidget {
 
             _buildExperienceItem(
               'Software Engineering Intern — Ubiqum Code Academy',
-              'Sep 2015 - Jan 2016',
+              'Sep 2019 - Jan 2020',
               'Built full-stack projects in React + MongoDB, practicing clean APIs, data modeling, and iterative delivery. '
                   'Gained hands-on experience with Agile execution, code reviews, and deploying customer-facing features with attention to performance and usability.',
             ),
