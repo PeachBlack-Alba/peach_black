@@ -40,7 +40,7 @@ class _ContactWindowState extends State<ContactWindow> {
                         children: [
                           const Expanded(
                             child: Text(
-                              '🎉 Easter Egg Found!',
+                              'Easter Egg Found!',
                               style: TextStyle(
                                 fontFamily: 'VT323',
                                 fontSize: 20,
